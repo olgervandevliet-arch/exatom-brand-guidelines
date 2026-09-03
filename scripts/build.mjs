@@ -67,6 +67,7 @@ const I = {
   check: '<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg>',
   caret: '<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M181.66,170.34a8,8,0,0,1,0,11.32l-48,48a8,8,0,0,1-11.32,0l-48-48a8,8,0,0,1,11.32-11.32L128,212.69l42.34-42.35A8,8,0,0,1,181.66,170.34Zm-96-84.68L128,43.31l42.34,42.35a8,8,0,0,0,11.32-11.32l-48-48a8,8,0,0,0-11.32,0l-48,48A8,8,0,0,0,85.66,85.66Z"/></svg>',
   brand: '<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M208,40H48A24,24,0,0,0,24,64V176a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V64A24,24,0,0,0,208,40Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V64a8,8,0,0,1,8-8H208a8,8,0,0,1,8,8Zm-48,48a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,224Z"/></svg>',
+  partners: '<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,80h31.81l27.21,54.41ZM41.53,64,62,74.22,36.43,125.27,16,115.06Zm116,119.13L99.42,168.61l-49.2-35.14,28-56L128,64.28l9.8,2.59-45,43.68-.08.09a16,16,0,0,0,2.72,24.81c20.56,13.13,45.37,11,64.91-5L188,152.66Zm62-57.87-25.52-51L214.47,64,240,115.06Zm-87.75,92.67a8,8,0,0,1-7.75,6.06,8.13,8.13,0,0,1-1.95-.24L80.41,213.33a7.89,7.89,0,0,1-2.71-1.25L51.35,193.26a8,8,0,0,1,9.3-13l25.11,17.94L126,208.24A8,8,0,0,1,131.82,217.94Z"/></svg>',
   presentations: '<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z"/></svg>',
   social: '<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M176,160a39.89,39.89,0,0,0-28.62,12.09l-46.1-29.63a39.8,39.8,0,0,0,0-28.92l46.1-29.63a40,40,0,1,0-8.66-13.45l-46.1,29.63a40,40,0,1,0,0,55.82l46.1,29.63A40,40,0,1,0,176,160Zm0-128a24,24,0,1,1-24,24A24,24,0,0,1,176,32ZM64,152a24,24,0,1,1,24-24A24,24,0,0,1,64,152Zm112,72a24,24,0,1,1,24-24A24,24,0,0,1,176,224Z"/></svg>',
   downloads: '<svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216,88H168V40a16,16,0,0,0-16-16H40A16,16,0,0,0,24,40V168a16,16,0,0,0,16,16H88v32a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V104A16,16,0,0,0,216,88ZM40,168V40H152V88H104a16,16,0,0,0-16,16v64Zm176,48H104V104H216V216Z"/></svg>',
@@ -77,6 +78,7 @@ const GUIDES = [
   { id: 'brand', name: 'Brand guidelines' },
   { id: 'presentations', name: 'Presentations' },
   { id: 'social', name: 'Social media' },
+  { id: 'partners', name: 'Partners' },
   { id: 'downloads', name: 'Downloads' },
 ];
 
@@ -110,7 +112,7 @@ for (const a of assets) {
   groups.get(group).push(a);
 }
 
-const TITLE = { logo: 'Logo', icons: 'Icons', team: 'Team', fonts: 'Fonts', decks: 'Deck templates', social: 'Social templates', print: 'Print' };
+const TITLE = { logo: 'Logo', icons: 'Icons', team: 'Team', fonts: 'Fonts', decks: 'Deck templates', social: 'Social templates', partners: 'Partners', print: 'Print' };
 const label = (g) => TITLE[g] || g.charAt(0).toUpperCase() + g.slice(1).replace(/[-_]/g, ' ');
 
 const assetRow = (a) => {
@@ -160,6 +162,7 @@ const downloadsNav = [...groups.keys()].map((g) => {
 const brandSrc = read('src/Brand.src.html');
 const presSrc = read('src/Presentations.src.html');
 const socSrc = read('src/Social.src.html');
+const partSrc = read('src/Partners.src.html');
 
 /**
  * One stray </div> closes <main> early and the browser reparents everything
@@ -183,6 +186,7 @@ const assertBalanced = (name, src) => {
 assertBalanced('src/Brand.src.html', brandSrc);
 assertBalanced('src/Presentations.src.html', presSrc);
 assertBalanced('src/Social.src.html', socSrc);
+assertBalanced('src/Partners.src.html', partSrc);
 
 let brandPane = contentOf(brandSrc)
   .replace('<h1 class="display">Web design</h1>', '<h1 class="display">Brand guidelines</h1>')
@@ -236,11 +240,24 @@ const fixImgs = (s) => s
 const presPane = fixImgs(contentOf(presSrc)).replace(/the seven layouts/, 'the eight layouts');
 const socPane = fixImgs(contentOf(socSrc));
 
+/* partner logo/icon SVGs live under assets/partners/<group>/<file> — map each
+   bare filename in the source to where it actually landed */
+const PARTNER_ASSET = new Map(
+  assets.filter((a) => a.rel.startsWith('partners/'))
+    .map((a) => [a.rel.split('/').pop(), a.rel])
+);
+const partPane = contentOf(partSrc).replace(/<img src="([^"]+\.svg)"/g, (m, f) => {
+  const rel = PARTNER_ASSET.get(f);
+  if (!rel) throw new Error('Partners.src.html: no matching asset for ' + f);
+  return `<img src="assets/${rel}"`;
+});
+
 /* strip the canvas {{ hole }} bindings — this site wires its own handlers */
 const cleanNav = (html) => html.replace(/\s*onClick="\{\{\s*(\w+)\s*\}\}"/g, (_m, name) => {
   const id = { goLogo: 'logo', goColor: 'color', goType: 'type', goFoundations: 'foundations', goUi: 'ui', goForms: 'forms', goIcons: 'icons', goTeam: 'team',
     goFormat: 'format', goLayouts: 'layouts', goSlideType: 'slide-type', goData: 'data', goBuilding: 'building',
-    goProfile: 'profile', goBanner: 'linkedin-banner', goWebinar: 'webinar' }[name];
+    goProfile: 'profile', goBanner: 'linkedin-banner', goWebinar: 'webinar',
+    goCaseStudies: 'clients-case-studies', goOtherClients: 'clients-other', goAgency: 'agency-partners', goTech: 'technology-partners' }[name];
   if (!id) throw new Error('unmapped handler: ' + name);
   return ` data-scroll="${id}"`;
 });
@@ -380,6 +397,11 @@ const PAGES = [
     id: 'social', file: 'social.html', href: '/social', name: 'Social media',
     nav: cleanNav(navOf(socSrc)), pane: socPane, css: scope(guideCss(socSrc), '[data-guide="social"]'),
     description: 'How Exatom shows up on LinkedIn: profile, banner, post formats, carousels and captions.',
+  },
+  {
+    id: 'partners', file: 'partners.html', href: '/partners', name: 'Partners',
+    nav: cleanNav(navOf(partSrc)), pane: partPane, css: scope(guideCss(partSrc), '[data-guide="partners"]'),
+    description: 'Every client, agency and technology partner logo Exatom is allowed to show — with downloadable SVGs.',
   },
   {
     id: 'downloads', file: 'downloads.html', href: '/downloads', name: 'Downloads',

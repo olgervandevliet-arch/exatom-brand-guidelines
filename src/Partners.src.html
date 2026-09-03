@@ -1,0 +1,583 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Inter+Tight:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;display=swap">
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --warm-white: #F7F4F2;
+      --blue-light: #E8EEFF;
+      --blue: #2A5AE9;
+      --dark: #18122D;
+      --gray-700: #464157;
+      --gray-500: #747181;
+      --gray-300: #A3A0AB;
+      --gray-100: #D1D0D5;
+      --border: #F7F4F2;
+
+      --s-1: 4px;  --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
+      --s-5: 24px; --s-6: 32px;  --s-7: 48px;  --s-8: 64px;
+      --s-9: 96px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: auto; overflow: visible; }
+    x-dc { display: block; }
+    body { margin: 0; background: var(--white); font-family: 'Inter', system-ui, sans-serif; color: var(--dark); -webkit-font-smoothing: antialiased; }
+    a { color: var(--blue); text-decoration: none; } a:hover { color: #1E46C4; }
+    h1, h2, h3, h4 { font-family: 'Inter Tight', 'Inter', system-ui, sans-serif; font-weight: 600; margin: 0; }
+    p { margin: 0; }
+    strong, b { font-weight: 600; }
+
+    .shell { display: flex; align-items: stretch; }
+
+    /* ---------- Sidebar ---------- */
+    .sidebar { flex: 0 0 264px; width: 264px; border-right: 1px solid var(--border); }
+    .sidebar-inner {
+      position: sticky; top: 0;
+      width: 264px; height: 100vh;
+      overflow-y: auto;
+      padding: var(--s-5) var(--s-4);
+      display: flex; flex-direction: column;
+    }
+    .sidebar-group-label {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.01em; color: var(--gray-500);
+      padding: var(--s-2) var(--s-3); margin-bottom: var(--s-1);
+    }
+    .guide-index { display: flex; flex-direction: column; gap: 2px; }
+    .guide-item {
+      display: flex; align-items: center; gap: 10px;
+      height: 36px; padding: 0 var(--s-3); border-radius: 4px;
+      font-size: 14px; letter-spacing: 0.01em; color: var(--gray-300);
+    }
+    .guide-item svg { width: 18px; height: 18px; flex: 0 0 18px; color: var(--gray-300); }
+    .guide-item.is-current { background: var(--blue-light); color: var(--blue); font-weight: 500; }
+    .guide-item.is-current svg { color: var(--blue); }
+    .guide-item.is-disabled { cursor: default; }
+    .guide-badge {
+      margin-left: auto; font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--gray-300); background: var(--warm-white);
+      border-radius: 999px; padding: 3px 7px; flex: 0 0 auto;
+    }
+    .guide-hint { font-size: 11px; line-height: 1.45; color: var(--gray-300); padding: var(--s-2) var(--s-3) 0; }
+    .sidebar-rule { height: 1px; background: var(--border); margin: var(--s-5) var(--s-3) var(--s-4); }
+
+    .menu { display: flex; flex-direction: column; gap: 2px; }
+    .menu-item {
+      display: flex; align-items: center; gap: 10px;
+      width: 100%; background: none; border: 0; font: inherit; text-align: left; cursor: pointer;
+      height: 36px; padding: 0 var(--s-3); border-radius: 4px;
+      font-size: 14px; letter-spacing: 0.01em; color: var(--dark);
+      transition: background 120ms ease, color 120ms ease;
+    }
+    .menu-item svg { width: 18px; height: 18px; flex: 0 0 18px; color: var(--gray-700); transition: color 120ms ease; }
+    .menu-item:hover { background: var(--warm-white); color: var(--dark); }
+    .menu-item:hover svg { color: var(--dark); }
+
+    .sidebar-footer { margin-top: auto; }
+    .user-block {
+      display: flex; align-items: center; gap: 10px;
+      height: 52px; padding: 0 var(--s-3); border-radius: 4px;
+      transition: background 120ms ease;
+    }
+    .user-block:hover { background: var(--warm-white); }
+    .user-block img { width: 26px; height: 26px; flex: 0 0 26px; border-radius: 4px; }
+    .user-text { display: flex; flex-direction: column; min-width: 0; }
+    .user-name { font-size: 14px; font-weight: 500; letter-spacing: -0.02em; color: var(--dark); }
+    .user-meta { font-size: 12px; color: var(--gray-500); }
+    .user-block > svg:last-child { width: 16px; height: 16px; flex: 0 0 16px; margin-left: auto; color: var(--gray-500); }
+
+    /* ---------- Content ---------- */
+    .content { flex: 1 1 auto; min-width: 0; padding: var(--s-6) var(--s-8) 160px; }
+    .content > * { max-width: 1120px; }
+
+    .masthead { margin: var(--s-6) 0 var(--s-9); }
+    .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; color: var(--blue); margin-bottom: var(--s-3); }
+    .display { font-size: 64px; letter-spacing: -0.028em; line-height: 1.02; margin-bottom: var(--s-4); }
+    .lede { font-size: 19px; line-height: 1.55; color: var(--gray-700); max-width: 62ch; }
+
+    .section { padding-top: var(--s-9); scroll-margin-top: var(--s-6); }
+    .section:first-of-type { padding-top: 0; }
+    .section + .section { border-top: 1px solid var(--border); }
+    .section-head { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-3); }
+    .section-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; flex: 0 0 34px; border-radius: 6px; background: var(--blue-light); color: var(--blue); }
+    .section-icon svg { width: 20px; height: 20px; }
+    .section-title { font-size: 38px; letter-spacing: -0.018em; line-height: 1.1; }
+    .section-intro { font-size: 16px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-7); }
+
+    .subsection { margin-top: var(--s-8); scroll-margin-top: var(--s-6); }
+    .subsection-title { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
+    .subsection-note { font-size: 14px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-5); }
+    .caption { font-size: 13px; line-height: 1.5; color: var(--gray-500); }
+    code { font-family: 'Inter', sans-serif; font-size: 0.92em; background: var(--warm-white); padding: 2px 6px; border-radius: 3px; }
+
+    /* @guide-css */
+    .btn {
+      font-family: 'Inter', sans-serif; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;
+      padding: 13px 24px; border-radius: 999px; border: 1px solid transparent; cursor: pointer;
+    }
+    .btn svg { width: 16px; height: 16px; flex: 0 0 16px; }
+    .btn-secondary { background: var(--white); color: var(--dark); border-color: var(--border); }
+    .btn-secondary:hover { background: var(--warm-white); }
+    .btn-sm { font-size: 13px; padding: 9px 18px; }
+
+    .partner-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-5); }
+    .partner-card { border: 1px solid var(--border); border-radius: 10px; padding: var(--s-5); display: flex; flex-direction: column; gap: var(--s-4); }
+    .partner-logo { height: 56px; display: flex; align-items: center; }
+    .partner-logo img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .partner-name-row { display: flex; align-items: center; gap: var(--s-3); }
+    .partner-name { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; }
+    .partner-badge {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+      color: var(--blue); background: var(--blue-light); border-radius: 999px; padding: 3px 8px; flex: 0 0 auto;
+    }
+    .partner-desc { font-size: 13px; line-height: 1.55; color: var(--gray-700); }
+    .partner-link { font-size: 13px; font-weight: 500; }
+    .partner-actions { display: flex; gap: var(--s-2); margin-top: auto; padding-top: var(--s-2); }
+
+    .awaiting {
+      border: 1px dashed var(--gray-300); border-radius: 6px; background: var(--white);
+      padding: var(--s-5) var(--s-6); margin-top: var(--s-5); max-width: 720px;
+    }
+    .awaiting-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: var(--gray-500); margin-bottom: var(--s-3); }
+    .awaiting-tag span { width: 6px; height: 6px; border-radius: 999px; background: var(--gray-300); }
+    .awaiting h4 { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
+    .awaiting p { font-size: 14px; line-height: 1.65; color: var(--gray-700); }
+  </style>
+</helmet>
+
+<div class="shell">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <p class="sidebar-group-label">Guides</p>
+      <div class="guide-index">
+        <div class="guide-item">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,40H48A24,24,0,0,0,24,64V176a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V64A24,24,0,0,0,208,40Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V64a8,8,0,0,1,8-8H208a8,8,0,0,1,8,8Zm-48,48a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,224Z"/></svg>
+          <span>Web design</span>
+        </div>
+        <div class="guide-item is-disabled" aria-disabled="true">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z"/></svg>
+          <span>Presentations</span>
+          <span class="guide-badge">Soon</span>
+        </div>
+        <div class="guide-item">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M176,160a39.89,39.89,0,0,0-28.62,12.09l-46.1-29.63a39.8,39.8,0,0,0,0-28.92l46.1-29.63a40,40,0,1,0-8.66-13.45l-46.1,29.63a40,40,0,1,0,0,55.82l46.1,29.63A40,40,0,1,0,176,160Zm0-128a24,24,0,1,1-24,24A24,24,0,0,1,176,32ZM64,152a24,24,0,1,1,24-24A24,24,0,0,1,64,152Zm112,72a24,24,0,1,1,24-24A24,24,0,0,1,176,224Z"/></svg>
+          <span>Social media</span>
+        </div>
+        <div class="guide-item is-current">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M254.3,107.91,228.78,56.85a16,16,0,0,0-21.47-7.15L182.44,62.13,130.05,48.27a8.14,8.14,0,0,0-4.1,0L73.56,62.13,48.69,49.7a16,16,0,0,0-21.47,7.15L1.7,107.9a16,16,0,0,0,7.15,21.47l27,13.51,55.49,39.63a8.06,8.06,0,0,0,2.71,1.25l64,16a8,8,0,0,0,7.6-2.1l55.07-55.08,26.42-13.21a16,16,0,0,0,7.15-21.46Zm-54.89,33.37L165,113.72a8,8,0,0,0-10.68.61C136.51,132.27,116.66,130,104,122L147.24,80h31.81l27.21,54.41ZM41.53,64,62,74.22,36.43,125.27,16,115.06Zm116,119.13L99.42,168.61l-49.2-35.14,28-56L128,64.28l9.8,2.59-45,43.68-.08.09a16,16,0,0,0,2.72,24.81c20.56,13.13,45.37,11,64.91-5L188,152.66Zm62-57.87-25.52-51L214.47,64,240,115.06Zm-87.75,92.67a8,8,0,0,1-7.75,6.06,8.13,8.13,0,0,1-1.95-.24L80.41,213.33a7.89,7.89,0,0,1-2.71-1.25L51.35,193.26a8,8,0,0,1,9.3-13l25.11,17.94L126,208.24A8,8,0,0,1,131.82,217.94Z"/></svg>
+          <span>Partners</span>
+        </div>
+      </div>
+      <p class="guide-hint">Switch guides in the Pages menu.</p>
+
+      <div class="sidebar-rule"></div>
+
+      <p class="sidebar-group-label">Sections</p>
+      <nav class="menu">
+        <button type="button" class="menu-item" onClick="{{ goCaseStudies }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,136a8,8,0,0,1-8,8H72a8,8,0,0,1,0-16h48A8,8,0,0,1,128,136Zm-8-40H72a8,8,0,0,0,0,16h48a8,8,0,0,0,0-16Zm112,65.47V224A8,8,0,0,1,220,231l-24-13.74L172,231A8,8,0,0,1,160,224V200H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216a16,16,0,0,1,16,16V86.53a51.88,51.88,0,0,1,0,74.94ZM160,184V161.47A52,52,0,0,1,216,76V56H40V184Zm56-12a51.88,51.88,0,0,1-40,0v38.22l16-9.16a8,8,0,0,1,7.94,0l16,9.16Zm16-48a36,36,0,1,0-36,36A36,36,0,0,0,232,124Z"/></svg>
+          <span>Clients — case studies</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goOtherClients }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M240,208H224V96a16,16,0,0,0-16-16H144V32a16,16,0,0,0-24.88-13.32L39.12,72A16,16,0,0,0,32,85.34V208H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM208,96V208H144V96ZM48,85.34,128,32V208H48ZM112,112v16a8,8,0,0,1-16,0V112a8,8,0,1,1,16,0Zm-32,0v16a8,8,0,0,1-16,0V112a8,8,0,1,1,16,0Zm0,56v16a8,8,0,0,1-16,0V168a8,8,0,0,1,16,0Zm32,0v16a8,8,0,0,1-16,0V168a8,8,0,0,1,16,0Z"/></svg>
+          <span>Other clients</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goAgency }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M248,120a48.05,48.05,0,0,0-48-48H160.2c-2.91-.17-53.62-3.74-101.91-44.24A16,16,0,0,0,32,40V200a16,16,0,0,0,26.29,12.25c37.77-31.68,77-40.76,93.71-43.3v31.72A16,16,0,0,0,159.12,214l11,7.33A16,16,0,0,0,194.5,212l11.77-44.36A48.07,48.07,0,0,0,248,120ZM48,199.93V40h0c42.81,35.91,86.63,45,104,47.24v65.48C134.65,155,90.84,164.07,48,199.93Zm131,8,0,.11-11-7.33V168h21.6ZM200,152H168V88h32a32,32,0,1,1,0,64Z"/></svg>
+          <span>Agency partners</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goTech }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M237.66,18.34a8,8,0,0,0-11.32,0l-52.4,52.41-5.37-5.38a32.05,32.05,0,0,0-45.26,0L100,88.69l-6.34-6.35A8,8,0,0,0,82.34,93.66L88.69,100,65.37,123.31a32,32,0,0,0,0,45.26l5.38,5.37-52.41,52.4a8,8,0,0,0,11.32,11.32l52.4-52.41,5.37,5.38a32,32,0,0,0,45.26,0L156,167.31l6.34,6.35a8,8,0,0,0,11.32-11.32L167.31,156l23.32-23.31a32,32,0,0,0,0-45.26l-5.38-5.37,52.41-52.4A8,8,0,0,0,237.66,18.34Zm-116.29,161a16,16,0,0,1-22.62,0L76.69,157.25a16,16,0,0,1,0-22.62L100,111.31,144.69,156Zm57.94-57.94L156,144.69,111.31,100l23.32-23.31a16,16,0,0,1,22.62,0l22.06,22A16,16,0,0,1,179.31,121.37ZM88.57,35A8,8,0,0,1,103.43,29l8,20A8,8,0,0,1,96.57,55ZM24.57,93A8,8,0,0,1,35,88.57l20,8A8,8,0,0,1,49,111.43l-20-8A8,8,0,0,1,24.57,93ZM231.43,163a8,8,0,0,1-10.4,4.46l-20-8A8,8,0,1,1,207,144.57l20,8A8,8,0,0,1,231.43,163Zm-64,58.06A8,8,0,0,1,152.57,227l-8-20A8,8,0,0,1,159.43,201Z"/></svg>
+          <span>Technology partners</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-block">
+          <img src="exatom-icon-full-color.svg" alt="">
+          <div class="user-text">
+            <span class="user-name">Exatom</span>
+            <span class="user-meta">Partners · v1</span>
+          </div>
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M231.65,194.55,198.46,36.75a16,16,0,0,0-19-12.39L132.65,34.42a16.08,16.08,0,0,0-12.3,19l33.19,157.8A16,16,0,0,0,169.16,224a16.25,16.25,0,0,0,3.38-.36l46.81-10.06A16.09,16.09,0,0,0,231.65,194.55ZM136,50.15c0-.06,0-.09,0-.09l46.8-10,3.33,15.87L139.33,66Zm6.62,31.47,46.82-10.05,3.34,15.9L146,97.53Zm6.64,31.57,46.82-10.06,13.3,63.24-46.82,10.06ZM216,197.94l-46.8,10-3.33-15.87L212.67,182,216,197.85C216,197.91,216,197.94,216,197.94ZM104,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V48A16,16,0,0,0,104,32ZM56,48h48V64H56Zm0,32h48v96H56Zm48,128H56V192h48v16Z"/></svg>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ CONTENT ============ -->
+  <main class="content">
+    <header class="masthead">
+      <h1 class="display">Partners</h1>
+      <p class="lede">Every logo Exatom is allowed to show: clients, agency partners and technology partners. Preview — 1 example per group while the full set gets built out.</p>
+    </header>
+
+    <!-- ---------- CLIENTS — CASE STUDIES ---------- -->
+    <section class="section" id="clients-case-studies">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,136a8,8,0,0,1-8,8H72a8,8,0,0,1,0-16h48A8,8,0,0,1,128,136Zm-8-40H72a8,8,0,0,0,0,16h48a8,8,0,0,0,0-16Zm112,65.47V224A8,8,0,0,1,220,231l-24-13.74L172,231A8,8,0,0,1,160,224V200H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216a16,16,0,0,1,16,16V86.53a51.88,51.88,0,0,1,0,74.94ZM160,184V161.47A52,52,0,0,1,216,76V56H40V184Zm56-12a51.88,51.88,0,0,1-40,0v38.22l16-9.16a8,8,0,0,1,7.94,0l16,9.16Zm16-48a36,36,0,1,0-36,36A36,36,0,0,0,232,124Z"/></svg></span>
+        <h2 class="section-title">Clients &mdash; case studies</h2>
+      </div>
+      <p class="section-intro">Clients Exatom has a published case study for. Their logo carries a "Case study" label; the link to the actual write-up comes later.</p>
+
+      <div class="partner-grid">
+        <div class="partner-card">
+          <div class="partner-logo"><img src="beter-duurzaam-logo.svg" alt="Beter Duurzaam"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Beter Duurzaam</p>
+            <span class="partner-badge">Case study</span>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/beter-duurzaam-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/beter-duurzaam-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="brooks-logo.svg" alt="Brooks"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Brooks</p>
+            <span class="partner-badge">Case study</span>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/brooks-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/brooks-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="bruna-logo.svg" alt="Bruna"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Bruna</p>
+            <span class="partner-badge">Case study</span>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/bruna-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/bruna-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="delta-fiber-logo.svg" alt="Delta Fiber"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Delta Fiber</p>
+            <span class="partner-badge">Case study</span>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/delta-fiber-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/delta-fiber-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="hyundai-logo.svg" alt="Hyundai"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Hyundai</p>
+            <span class="partner-badge">Case study</span>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/hyundai-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/hyundai-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="inno-logo.svg" alt="Inno"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Inno</p>
+            <span class="partner-badge">Case study</span>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/inno-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/inno-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="kia-logo.svg" alt="Kia"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Kia</p>
+            <span class="partner-badge">Case study</span>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/kia-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-case-studies/kia-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- OTHER CLIENTS ---------- -->
+    <section class="section" id="clients-other">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M240,208H224V96a16,16,0,0,0-16-16H144V32a16,16,0,0,0-24.88-13.32L39.12,72A16,16,0,0,0,32,85.34V208H16a8,8,0,0,0,0,16H240a8,8,0,0,0,0-16ZM208,96V208H144V96ZM48,85.34,128,32V208H48ZM112,112v16a8,8,0,0,1-16,0V112a8,8,0,1,1,16,0Zm-32,0v16a8,8,0,0,1-16,0V112a8,8,0,1,1,16,0Zm0,56v16a8,8,0,0,1-16,0V168a8,8,0,0,1,16,0Zm32,0v16a8,8,0,0,1-16,0V168a8,8,0,0,1,16,0Z"/></svg></span>
+        <h2 class="section-title">Other clients</h2>
+      </div>
+      <p class="section-intro">Clients without a published case study yet &mdash; logo only.</p>
+
+      <div class="partner-grid">
+        <div class="partner-card">
+          <div class="partner-logo"><img src="bmw-logo.svg" alt="BMW"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">BMW</p>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/bmw-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/bmw-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="dela-logo.svg" alt="DELA"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">DELA</p>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/dela-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/dela-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="fiat-logo.svg" alt="FIAT"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">FIAT</p>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/fiat-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/fiat-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="frank-energie-logo.svg" alt="Frank Energie"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Frank Energie</p>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/frank-energie-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/frank-energie-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="hema-logo.svg" alt="HEMA"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">HEMA</p>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/hema-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/hema-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="vgz-logo.svg" alt="VGZ"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">VGZ</p>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/vgz-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/vgz-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="vanmoof-logo.svg" alt="VanMoof"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">VanMoof</p>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/vanmoof-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/vanmoof-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="vandebron-logo.svg" alt="Vandebron"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Vandebron</p>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/vandebron-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/clients-other/vandebron-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- AGENCY PARTNERS ---------- -->
+    <section class="section" id="agency-partners">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M248,120a48.05,48.05,0,0,0-48-48H160.2c-2.91-.17-53.62-3.74-101.91-44.24A16,16,0,0,0,32,40V200a16,16,0,0,0,26.29,12.25c37.77-31.68,77-40.76,93.71-43.3v31.72A16,16,0,0,0,159.12,214l11,7.33A16,16,0,0,0,194.5,212l11.77-44.36A48.07,48.07,0,0,0,248,120ZM48,199.93V40h0c42.81,35.91,86.63,45,104,47.24v65.48C134.65,155,90.84,164.07,48,199.93Zm131,8,0,.11-11-7.33V168h21.6ZM200,152H168V88h32a32,32,0,1,1,0,64Z"/></svg></span>
+        <h2 class="section-title">Agency partners</h2>
+      </div>
+      <p class="section-intro">Copy and links straight from <code>exatom.io/agency-partners</code>.</p>
+
+      <div class="partner-grid">
+        <div class="partner-card">
+          <div class="partner-logo"><img src="fightclub-logo.svg" alt="Fightclub"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Fightclub</p>
+          </div>
+          <p class="partner-desc">Combines branding and performance with the goal of winning in brand awareness, market share, revenue or awards.</p>
+          <a class="partner-link" href="https://fightclub.nl/" target="_blank" rel="noopener">fightclub.nl ↗</a>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/fightclub-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/fightclub-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="envoker-logo.svg" alt="Envoker"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Envoker</p>
+          </div>
+          <p class="partner-desc">Specialists in improving your online marketing performance. Continuous striving for improvement is striving for the best.</p>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/envoker-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/envoker-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="yellowgrape-logo.svg" alt="Yellowgrape"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Yellowgrape</p>
+          </div>
+          <p class="partner-desc">E-commerce agency for parties ready for growth. Expertise in forecasting, creating and optimizing growth.</p>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/yellowgrape-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/yellowgrape-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="faceworks-logo.svg" alt="Faceworks"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Faceworks</p>
+          </div>
+          <p class="partner-desc">Full-service digital agency building web-based systems that automate business processes, combining custom software with existing systems.</p>
+          <a class="partner-link" href="https://www.faceworks.nl/" target="_blank" rel="noopener">www.faceworks.nl ↗</a>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/faceworks-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/faceworks-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="valantic-logo.svg" alt="Valantic"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Valantic</p>
+          </div>
+          <p class="partner-desc">Creates software and digital process solutions enabling customers to achieve strategic competitive advantages through flexible organizational structure.</p>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/valantic-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/valantic-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="clickvalue-logo.svg" alt="ClickValue"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">ClickValue</p>
+          </div>
+          <p class="partner-desc">Full service CRO agency since 2003. Improves CRO and user experience while creating a culture of experimentation.</p>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/clickvalue-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/clickvalue-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="dnz-logo.svg" alt="De Nieuwe Zaak"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">De Nieuwe Zaak</p>
+          </div>
+          <p class="partner-desc">Digital agency helping clients advance digital maturity and navigate transformation, e-commerce and marketing dilemmas.</p>
+          <a class="partner-link" href="https://www.denieuwezaak.nl/" target="_blank" rel="noopener">www.denieuwezaak.nl ↗</a>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/dnz-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/dnz-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="media-and-leads-logo.svg" alt="Media &amp; Leads"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Media &amp; Leads</p>
+          </div>
+          <p class="partner-desc">Operating in new media for over a dozen years, serving largest publishers and media houses, primarily in Poland and other European markets.</p>
+          <a class="partner-link" href="https://mediaandleads.com/" target="_blank" rel="noopener">mediaandleads.com ↗</a>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/media-and-leads-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/agency/media-and-leads-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- TECHNOLOGY PARTNERS ---------- -->
+    <section class="section" id="technology-partners">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M237.66,18.34a8,8,0,0,0-11.32,0l-52.4,52.41-5.37-5.38a32.05,32.05,0,0,0-45.26,0L100,88.69l-6.34-6.35A8,8,0,0,0,82.34,93.66L88.69,100,65.37,123.31a32,32,0,0,0,0,45.26l5.38,5.37-52.41,52.4a8,8,0,0,0,11.32,11.32l52.4-52.41,5.37,5.38a32,32,0,0,0,45.26,0L156,167.31l6.34,6.35a8,8,0,0,0,11.32-11.32L167.31,156l23.32-23.31a32,32,0,0,0,0-45.26l-5.38-5.37,52.41-52.4A8,8,0,0,0,237.66,18.34Zm-116.29,161a16,16,0,0,1-22.62,0L76.69,157.25a16,16,0,0,1,0-22.62L100,111.31,144.69,156Zm57.94-57.94L156,144.69,111.31,100l23.32-23.31a16,16,0,0,1,22.62,0l22.06,22A16,16,0,0,1,179.31,121.37ZM88.57,35A8,8,0,0,1,103.43,29l8,20A8,8,0,0,1,96.57,55ZM24.57,93A8,8,0,0,1,35,88.57l20,8A8,8,0,0,1,49,111.43l-20-8A8,8,0,0,1,24.57,93ZM231.43,163a8,8,0,0,1-10.4,4.46l-20-8A8,8,0,1,1,207,144.57l20,8A8,8,0,0,1,231.43,163Zm-64,58.06A8,8,0,0,1,152.57,227l-8-20A8,8,0,0,1,159.43,201Z"/></svg></span>
+        <h2 class="section-title">Technology partners</h2>
+      </div>
+      <p class="section-intro">Copy and links straight from <code>exatom.io/technology-partners</code>.</p>
+
+      <div class="partner-grid">
+        <div class="partner-card">
+          <div class="partner-logo"><img src="optimizely-logo.svg" alt="Optimizely"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Optimizely</p>
+          </div>
+          <p class="partner-desc">Leading digital experience platform (DXP) &mdash; helps companies orchestrate their entire content lifecycle and monetize every digital experience.</p>
+          <a class="partner-link" href="https://www.optimizely.com" target="_blank" rel="noopener">www.optimizely.com ↗</a>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/technology/optimizely-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/technology/optimizely-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="zeta-logo.svg" alt="Zeta Global"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Zeta Global</p>
+          </div>
+          <p class="partner-desc">AI-powered marketing cloud that leverages proprietary AI and trillions of consumer signals to make it easier to acquire, grow, and retain customers.</p>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/technology/zeta-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/technology/zeta-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="cloudsuite-logo.svg" alt="Cloudsuite"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Cloudsuite</p>
+          </div>
+          <p class="partner-desc">Helps wholesalers and brand manufacturers take the next step in eCommerce, for B2B and B2C multichannel operations.</p>
+          <a class="partner-link" href="https://www.cloudsuite.com" target="_blank" rel="noopener">www.cloudsuite.com ↗</a>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/technology/cloudsuite-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/technology/cloudsuite-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-logo"><img src="supermetrics-logo.svg" alt="Supermetrics"></div>
+          <div class="partner-name-row">
+            <p class="partner-name">Supermetrics</p>
+          </div>
+          <div class="partner-actions">
+            <a class="btn btn-secondary btn-sm" href="assets/partners/technology/supermetrics-logo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Logo</span></a>
+            <a class="btn btn-secondary btn-sm" href="assets/partners/technology/supermetrics-icon.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Icon</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const go = (id) => () => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    return {
+      goCaseStudies: go('clients-case-studies'),
+      goOtherClients: go('clients-other'),
+      goAgency: go('agency-partners'),
+      goTech: go('technology-partners'),
+    };
+  }
+}
+</script>
+</body>
+</html>
