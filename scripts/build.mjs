@@ -14,6 +14,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, copyFileSync, rmSync } from 'node:fs';
 import { join, relative, extname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { zipDirectory } from './zip.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const OUT = join(ROOT, 'site');
@@ -94,6 +95,12 @@ const walk = (dir, base = dir) => {
 
 const assets = walk(join(ROOT, 'assets'));
 
+/* The icon set ships as one archive: 6,000 loose SVGs is not a download, it is a
+   chore. Built here so dropping icons into icons/ is all it takes to update it. */
+const iconPack = zipDirectory(join(ROOT, 'icons'), { mtime: new Date('2026-01-01T12:00:00Z') });
+const ICON_ZIP = 'icons/exatom-icons.zip';
+assets.push({ rel: ICON_ZIP, size: iconPack.buffer.length });
+
 const groups = new Map();
 for (const a of assets) {
   const parts = a.rel.split('/');
@@ -102,7 +109,7 @@ for (const a of assets) {
   groups.get(group).push(a);
 }
 
-const TITLE = { logo: 'Logo', fonts: 'Fonts', decks: 'Deck templates', social: 'Social templates', print: 'Print' };
+const TITLE = { logo: 'Logo', icons: 'Icons', fonts: 'Fonts', decks: 'Deck templates', social: 'Social templates', print: 'Print' };
 const label = (g) => TITLE[g] || g.charAt(0).toUpperCase() + g.slice(1).replace(/[-_]/g, ' ');
 
 const assetRow = (a) => {
@@ -160,6 +167,9 @@ let brandPane = contentOf(brandSrc)
 
 /* keep the filename findable next to the rewritten src */
 brandPane = brandPane.replace(/<img src="([^"]+\.svg)"/g, '<img data-file="$1" src="logo/$1"');
+
+/* the source points at assets/exatom-icons.zip; the build files it under icons/ */
+brandPane = brandPane.replace('href="assets/exatom-icons.zip"', `href="assets/${ICON_ZIP}"`);
 
 const chip = (hex, extra = '') =>
   `<button type="button" class="copy-chip${extra}" data-copy="${hex}" title="Copy ${hex}">${hex}${I.copy}${I.check}</button>`;
@@ -475,13 +485,18 @@ for (const f of readdirSync(join(ROOT, 'logo'))) {
 }
 
 for (const a of assets) {
+  if (a.rel === ICON_ZIP) continue;
   const dest = join(OUT, 'assets', a.rel);
   mkdirSync(join(dest, '..'), { recursive: true });
   copyFileSync(join(ROOT, 'assets', a.rel), dest);
 }
 
+mkdirSync(join(OUT, 'assets', 'icons'), { recursive: true });
+writeFileSync(join(OUT, 'assets', ICON_ZIP), iconPack.buffer);
+
 console.log(
   `built site/ — ${PAGES.length} pages (${PAGES.map((p) => p.file).join(', ')}), ` +
   `${tiles} logo tiles, ${(brandPane.match(/copy-chip/g) || []).length} copy chips, ` +
-  `${assets.length} downloads in ${groups.size} group${groups.size === 1 ? '' : 's'}`
+  `${assets.length} downloads in ${groups.size} group${groups.size === 1 ? '' : 's'}, ` +
+  `icon pack ${(iconPack.buffer.length / 1048576).toFixed(1)} MB from ${iconPack.count} files`
 );
