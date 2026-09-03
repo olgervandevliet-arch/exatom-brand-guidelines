@@ -240,8 +240,7 @@ const socPane = fixImgs(contentOf(socSrc));
 const cleanNav = (html) => html.replace(/\s*onClick="\{\{\s*(\w+)\s*\}\}"/g, (_m, name) => {
   const id = { goLogo: 'logo', goColor: 'color', goType: 'type', goFoundations: 'foundations', goUi: 'ui', goForms: 'forms', goIcons: 'icons', goTeam: 'team',
     goFormat: 'format', goLayouts: 'layouts', goSlideType: 'slide-type', goData: 'data', goBuilding: 'building',
-    goProfile: 'profile', goFormats: 'formats', goCarousel: 'carousel', goCaptions: 'captions',
-    goWebinar: 'webinar', goInstagram: 'instagram', goYoutube: 'youtube' }[name];
+    goProfile: 'profile', goBanner: 'linkedin-banner', goWebinar: 'webinar' }[name];
   if (!id) throw new Error('unmapped handler: ' + name);
   return ` data-scroll="${id}"`;
 });

@@ -190,17 +190,21 @@
 
     /* ---------- LinkedIn company page mockup ---------- */
     .li-mock { max-width: 900px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--white); }
+    .li-banner { position: relative; }
+    .li-banner > img { display: block; width: 100%; height: auto; }
     .li-body { position: relative; padding: 0 5% 5%; }
+    .li-top { position: absolute; top: 56px; right: 12px; display: flex; justify-content: flex-end; }
+    .li-bell { width: 34px; height: 34px; border-radius: 999px; background: rgba(255,255,255,.94); backdrop-filter: blur(2px); display: flex; align-items: center; justify-content: center; color: var(--dark); flex: 0 0 auto; }
+    .li-bell svg { width: 16px; height: 16px; }
     .li-avatar {
-      width: 15%; aspect-ratio: 1; margin-top: -7.5%; background: var(--white);
-      border: 5px solid var(--white); border-radius: 12%; box-shadow: 0 1px 2px rgba(24,18,45,.12);
-      display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; overflow: hidden;
+      position: absolute; left: 5%; bottom: 0; width: 17%; aspect-ratio: 1; transform: translateY(38%);
+      background: var(--white); border: 5px solid var(--white); border-radius: 16%;
+      box-shadow: 0 1px 2px rgba(24,18,45,.12); display: flex; align-items: center; justify-content: center;
+      z-index: 1; overflow: hidden;
     }
     .li-avatar img { width: 100%; height: 100%; object-fit: contain; }
-    .li-top { display: flex; justify-content: flex-end; padding-top: 5%; }
-    .li-bell { width: 34px; height: 34px; border-radius: 999px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--dark); flex: 0 0 auto; }
-    .li-bell svg { width: 16px; height: 16px; }
-    .li-name { font-family: 'Inter Tight', sans-serif; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; margin-top: var(--s-4); }
+    .li-body { padding-top: calc(17% * .38 + var(--s-4)); }
+    .li-name { font-family: 'Inter Tight', sans-serif; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; }
     .li-desc { font-size: 15px; line-height: 1.5; color: #1a1a1a; max-width: 62ch; margin-top: var(--s-2); }
     .li-meta { font-size: 13px; color: var(--gray-500); margin-top: var(--s-3); }
     .li-conn { display: flex; align-items: center; gap: 8px; margin-top: var(--s-4); }
@@ -271,31 +275,15 @@
       <nav class="menu">
         <button type="button" class="menu-item" onClick="{{ goProfile }}">
           <svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"/></svg>
-          <span>Profile &amp; banner</span>
+          <span>Profile picture</span>
         </button>
-        <button type="button" class="menu-item" onClick="{{ goFormats }}">
-          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM48,48H208v77.38l-24.69-24.7a16,16,0,0,0-22.62,0L53.37,208H48ZM208,208H76l96-96,36,36v60ZM96,120A24,24,0,1,0,72,96,24,24,0,0,0,96,120Zm0-32a8,8,0,1,1-8,8A8,8,0,0,1,96,88Z"/></svg>
-          <span>Post formats</span>
-        </button>
-        <button type="button" class="menu-item" onClick="{{ goCarousel }}">
-          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,88H48a16,16,0,0,0-16,16v96a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V104A16,16,0,0,0,208,88Zm0,112H48V104H208v96ZM48,64a8,8,0,0,1,8-8H200a8,8,0,0,1,0,16H56A8,8,0,0,1,48,64ZM64,32a8,8,0,0,1,8-8H184a8,8,0,0,1,0,16H72A8,8,0,0,1,64,32Z"/></svg>
-          <span>Carousels</span>
-        </button>
-        <button type="button" class="menu-item" onClick="{{ goCaptions }}">
-          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M172,112a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h68A8,8,0,0,1,172,112Zm-8,24H96a8,8,0,0,0,0,16h68a8,8,0,0,0,0-16Zm68-12A100.11,100.11,0,0,1,132,224H48a16,16,0,0,1-16-16V124a100,100,0,0,1,200,0Zm-16,0a84,84,0,0,0-168,0v84h84A84.09,84.09,0,0,0,216,124Z"/></svg>
-          <span>Captions</span>
+        <button type="button" class="menu-item" onClick="{{ goBanner }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,48H40A16,16,0,0,0,24,64V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V64A16,16,0,0,0,216,48Zm0,16V148.69l-25.17-25.17a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.63,0L40,140.69V64H216ZM40,192V163.31l50-50,44,44a8,8,0,0,0,11.32,0l20-20L216,178.63V192H40Zm104-92a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"/></svg>
+          <span>LinkedIn banner</span>
         </button>
         <button type="button" class="menu-item" onClick="{{ goWebinar }}">
           <svg viewBox="0 0 256 256" fill="currentColor"><path d="M251.77,73a8,8,0,0,0-8.21.39L208,97.05V72a16,16,0,0,0-16-16H32A16,16,0,0,0,16,72V184a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V159l35.56,23.71A8,8,0,0,0,248,184a8,8,0,0,0,8-8V80A8,8,0,0,0,251.77,73ZM192,184H32V72H192V184Zm48-22.95-32-21.33V116.28L240,95Z"/></svg>
           <span>Webinar</span>
-        </button>
-        <button type="button" class="menu-item" onClick="{{ goInstagram }}">
-          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"/></svg>
-          <span>Instagram</span>
-        </button>
-        <button type="button" class="menu-item" onClick="{{ goYoutube }}">
-          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M164.44,121.34l-48-32A8,8,0,0,0,104,96v64a8,8,0,0,0,12.44,6.66l48-32a8,8,0,0,0,0-13.32ZM120,145.05V111l25.58,17ZM234.33,69.52a24,24,0,0,0-14.49-16.4C185.56,39.88,131,40,128,40s-57.56-.12-91.84,13.12a24,24,0,0,0-14.49,16.4C19.08,79.5,16,97.74,16,128s3.08,48.5,5.67,58.48a24,24,0,0,0,14.49,16.41C69,215.56,120.4,216,127.34,216h1.32c6.94,0,58.37-.44,91.18-13.11a24,24,0,0,0,14.49-16.41c2.59-10,5.67-28.22,5.67-58.48S236.92,79.5,234.33,69.52Zm-15.49,113a8,8,0,0,1-4.77,5.49c-31.65,12.22-85.48,12-86,12H128c-.54,0-54.33.2-86-12a8,8,0,0,1-4.77-5.49C34.8,173.39,32,156.57,32,128s2.8-45.39,5.16-54.47A8,8,0,0,1,41.93,68c30.52-11.79,81.66-12,85.85-12h.27c.54,0,54.38-.18,86,12a8,8,0,0,1,4.77,5.49C221.2,82.61,224,99.43,224,128S221.2,173.39,218.84,182.47Z"/></svg>
-          <span>YouTube</span>
         </button>
       </nav>
 
@@ -316,24 +304,23 @@
   <main class="content">
     <header class="masthead">
       <h1 class="display">Social media</h1>
-      <p class="lede">LinkedIn is the only channel Exatom posts on, so this guide is written for LinkedIn specifically: the profile, the banner, the three post formats, and how a caption sounds. Colors, type and logo rules come from the brand guidelines.</p>
+      <p class="lede">LinkedIn is the only channel Exatom posts on. Colors, type and logo rules come from the brand guidelines.</p>
     </header>
 
-    <!-- ---------- PROFILE ---------- -->
     <!-- ---------- PROFILE ---------- -->
     <section class="section" id="profile">
       <div class="section-head">
         <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"/></svg></span>
-        <h2 class="section-title">Profile &amp; banner</h2>
+        <h2 class="section-title">Profile picture</h2>
       </div>
       <p class="section-intro">The company page is the one place the mark is seen at 40 px. It has to survive being small and round &mdash; and it has to be the exact same file on every account, never a re-export.</p>
 
       <div class="subsection">
         <p class="subsection-title">Profile picture</p>
-        <p class="subsection-note">One square icon, on every account &mdash; LinkedIn, and anything that comes after it. Never the full lockup: the wordmark is unreadable at avatar size.</p>
+        <p class="subsection-note">One square logo file, on every account &mdash; LinkedIn, and anything that comes after it. The exact same file every time, never a re-export.</p>
         <div class="avatar-set">
           <div>
-            <div class="avatar a-lg"><img src="exatom-icon-full-color.svg" alt=""></div>
+            <div class="avatar a-lg"><img src="profile-icon.png" alt=""></div>
             <p class="avatar-note">Default</p>
           </div>
         </div>
@@ -343,28 +330,31 @@
       </div>
 
       <div class="rule-list">
-        <div class="rule"><div class="rule-key">Profile picture</div><div class="rule-val">Square PNG, icon centred. LinkedIn crops it to a circle &mdash; keep the icon well inside, don't design for the square corners.</div></div>
+        <div class="rule"><div class="rule-key">Profile picture</div><div class="rule-val">Square PNG, logo centred. LinkedIn crops it to a circle &mdash; keep it well inside, don't design for the square corners.</div></div>
         <div class="rule"><div class="rule-key">Page banner</div><div class="rule-val">4440 &times; 1056 px. Dark ground, one short claim, the mark top-left and top-right &mdash; the profile picture sits on top of it, bottom-left.</div></div>
         <div class="rule"><div class="rule-key">Personal banners</div><div class="rule-val">1584 &times; 396 px for team members' own profiles. Same ground, same claim, no job title.</div></div>
       </div>
+    </section>
 
-      <div class="subsection">
-        <p class="subsection-title">Banner</p>
-        <p class="subsection-note">The live banner, currently on the company page.</p>
-        <div class="banner-preview">
-          <img src="linkedin-banner-preview.jpg" alt="Exatom LinkedIn banner">
-          <a class="btn btn-secondary btn-sm banner-dl" href="assets/social/linkedin-banner.jpg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Banner</span><span aria-hidden="true">Banner</span></span></a>
-        </div>
+    <!-- ---------- LINKEDIN BANNER ---------- -->
+    <section class="section" id="linkedin-banner">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,48H40A16,16,0,0,0,24,64V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V64A16,16,0,0,0,216,48Zm0,16V148.69l-25.17-25.17a16,16,0,0,0-22.63,0l-20,20-44-44a16,16,0,0,0-22.63,0L40,140.69V64H216ZM40,192V163.31l50-50,44,44a8,8,0,0,0,11.32,0l20-20L216,178.63V192H40Zm104-92a12,12,0,1,1,12,12A12,12,0,0,1,144,100Z"/></svg></span>
+        <h2 class="section-title">LinkedIn banner</h2>
       </div>
+      <p class="section-intro">The banner and the profile picture are ours; everything else on the company page is LinkedIn's own interface &mdash; we don't skin it.</p>
 
       <div class="subsection">
         <p class="subsection-title">Company page, in place</p>
-        <p class="subsection-note">The banner and the mark are ours; everything else on this page is LinkedIn's own interface &mdash; we don't skin it.</p>
+        <p class="subsection-note">The profile picture sits on top of the banner, bottom-left, exactly as LinkedIn lays it out &mdash; not floating beside it.</p>
         <div class="li-mock">
-          <img src="linkedin-banner-preview.jpg" alt="">
-          <div class="li-body">
+          <div class="li-banner">
+            <img src="linkedin-banner.jpg" alt="Exatom LinkedIn banner">
+            <a class="btn btn-secondary btn-sm banner-dl" href="assets/social/linkedin-banner.jpg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Banner</span><span aria-hidden="true">Banner</span></span></a>
             <div class="li-top"><span class="li-bell"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M221.8,175.94C216.25,166.38,208,139.33,208,104a80,80,0,1,0-160,0c0,35.34-8.26,62.38-13.81,71.94A16,16,0,0,0,48,200H88.81a40,40,0,0,0,78.38,0H208a16,16,0,0,0,13.8-24.06ZM128,216a24,24,0,0,1-22.62-16h45.24A24,24,0,0,1,128,216ZM48,184c7.7-13.24,16-43.92,16-80a64,64,0,1,1,128,0c0,36.05,8.28,66.73,16,80Z"/></svg></span></div>
-            <div class="li-avatar"><img src="exatom-icon-full-color.svg" alt=""></div>
+            <div class="li-avatar"><img src="profile-icon.png" alt=""></div>
+          </div>
+          <div class="li-body">
             <p class="li-name">Exatom</p>
             <p class="li-desc">Cookieless form analytics, insights, alerts &amp; social proof messages. To make your forms perform consistently better.</p>
             <p class="li-meta">Information Technology &amp; Services &middot; Leuven, Flemish Region &middot; 894 followers &middot; 2-10 employees</p>
@@ -416,228 +406,6 @@
         <div class="rule"><div class="rule-key">Speaker photo</div><div class="rule-val">The same square crop as the Team section, circular here. Never a different crop for a webinar.</div></div>
       </div>
     </section>
-    <section class="section" id="formats">
-      <div class="section-head">
-        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM48,48H208v77.38l-24.69-24.7a16,16,0,0,0-22.62,0L53.37,208H48ZM208,208H76l96-96,36,36v60ZM96,120A24,24,0,1,0,72,96,24,24,0,0,0,96,120Zm0-32a8,8,0,1,1-8,8A8,8,0,0,1,96,88Z"/></svg></span>
-        <h2 class="section-title">Post formats</h2>
-      </div>
-      <p class="section-intro">Three image formats, each with one job. The image carries one idea; the caption carries the argument.</p>
-
-      <div class="post-grid">
-        <div class="post-card">
-          <div class="post square on-tint">
-            <p class="po-eyebrow">Kia Germany</p>
-            <div style="margin-top: auto">
-              <p class="po-metric">+55%</p>
-              <p class="po-body">more completed test-drive requests</p>
-            </div>
-            <div class="po-mark"><img src="exatom-logo-full-color.svg" alt=""></div>
-          </div>
-          <div class="post-meta">
-            <p class="post-name">Metric post</p>
-            <p class="post-size">1200 × 1200 px</p>
-            <p class="post-use">One result, one client, one line. The workhorse — most case-study posts are this.</p>
-          </div>
-        </div>
-
-        <div class="post-card">
-          <div class="post square on-gradient">
-            <p class="po-eyebrow light">Point of view</p>
-            <h3 class="po-title" style="margin: auto 0; color: #FFFFFF">Twenty friction points sit between intent and submit.</h3>
-            <div class="po-mark"><img src="exatom-logo-full-white.svg" alt=""></div>
-          </div>
-          <div class="post-meta">
-            <p class="post-name">Statement post</p>
-            <p class="post-size">1200 × 1200 px</p>
-            <p class="post-use">A claim on the gradient. Use sparingly — it works because it is rare.</p>
-          </div>
-        </div>
-
-        <div class="post-card">
-          <div class="post link">
-            <p class="po-eyebrow">Case study</p>
-            <h3 class="po-title sm" style="margin-top: 6px">How Brooks Running cut checkout friction</h3>
-            <div class="po-mark"><img src="exatom-logo-full-color.svg" alt=""></div>
-          </div>
-          <div class="post-meta">
-            <p class="post-name">Link card</p>
-            <p class="post-size">1200 × 627 px</p>
-            <p class="post-use">The Open Graph image for a blog post or case study. Title only, on white.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="rule-list">
-        <div class="rule"><div class="rule-key">Margin</div><div class="rule-val">8% of the width on all sides — 96 px on a 1200 px square. Same modular logic as the web and slide margins.</div></div>
-        <div class="rule"><div class="rule-key">Logo</div><div class="rule-val">Bottom-left, height 4% of the frame. Full color on light, white on dark and on the gradient.</div></div>
-        <div class="rule"><div class="rule-key">Backgrounds</div><div class="rule-val">White, blue light, dark, or the gradient. Never a color outside the core palette.</div></div>
-        <div class="rule"><div class="rule-key">Words on an image</div><div class="rule-val">Maximum 12. If it needs more, it is a carousel or it belongs in the caption.</div></div>
-        <div class="rule"><div class="rule-key">Export</div><div class="rule-val">PNG at exact pixel size. LinkedIn recompresses — never upload something already compressed twice.</div></div>
-      </div>
-    </section>
-
-    <!-- ---------- CAROUSELS ---------- -->
-    <section class="section" id="carousel">
-      <div class="section-head">
-        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,88H48a16,16,0,0,0-16,16v96a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V104A16,16,0,0,0,208,88Zm0,112H48V104H208v96ZM48,64a8,8,0,0,1,8-8H200a8,8,0,0,1,0,16H56A8,8,0,0,1,48,64ZM64,32a8,8,0,0,1,8-8H184a8,8,0,0,1,0,16H72A8,8,0,0,1,64,32Z"/></svg></span>
-        <h2 class="section-title">Carousels</h2>
-      </div>
-      <p class="section-intro">A carousel is a small deck. It uses the presentation layouts at 4:5, uploaded to LinkedIn as a PDF.</p>
-
-      <div class="post-grid">
-        <div class="post-card">
-          <div class="post portrait on-gradient">
-            <p class="po-eyebrow light">Exatom</p>
-            <h3 class="po-title" style="margin: auto 0; color: #FFFFFF">Five reasons your form loses people</h3>
-            <div class="po-mark"><img src="exatom-logo-full-white.svg" alt=""></div>
-            <p class="po-page light">1</p>
-          </div>
-          <div class="post-meta">
-            <p class="post-name">Cover</p>
-            <p class="post-size">1080 × 1350 px</p>
-          </div>
-        </div>
-
-        <div class="post-card">
-          <div class="post portrait">
-            <p class="po-eyebrow">02</p>
-            <h3 class="po-title sm" style="margin-top: 8px">The address field asks for what it could look up</h3>
-            <p class="po-body" style="margin-top: 12px; max-width: 30ch">Postcode lookup removes three fields and a spelling mistake. It is the cheapest fix on this list.</p>
-            <div class="po-mark"><img src="exatom-logo-full-color.svg" alt=""></div>
-            <p class="po-page">2</p>
-          </div>
-          <div class="post-meta">
-            <p class="post-name">Content page</p>
-            <p class="post-size">1080 × 1350 px</p>
-          </div>
-        </div>
-
-        <div class="post-card">
-          <div class="post portrait on-dark">
-            <h3 class="po-title" style="margin: auto 0; color: #FFFFFF">See where your own form leaks.</h3>
-            <p class="po-body light" style="margin-bottom: 32px">exatom.io</p>
-            <div class="po-mark"><img src="exatom-logo-full-white.svg" alt=""></div>
-          </div>
-          <div class="post-meta">
-            <p class="post-name">Closing</p>
-            <p class="post-size">1080 × 1350 px</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="rule-list">
-        <div class="rule"><div class="rule-key">Size</div><div class="rule-val">1080 × 1350 px (4:5) — the tallest LinkedIn shows without cropping.</div></div>
-        <div class="rule"><div class="rule-key">Length</div><div class="rule-val">6 to 10 pages. Cover, content, closing. Fewer than six is a single image post.</div></div>
-        <div class="rule"><div class="rule-key">Page numbers</div><div class="rule-val">Bottom-right, Inter Semibold, gray 300 on light and 60% white on dark. Cover counts as page 1.</div></div>
-        <div class="rule"><div class="rule-key">Upload</div><div class="rule-val">Export as a single PDF, one page per slide, and upload it as a document post.</div></div>
-      </div>
-    </section>
-
-    <!-- ---------- CAPTIONS ---------- -->
-    <section class="section" id="captions">
-      <div class="section-head">
-        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M172,112a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h68A8,8,0,0,1,172,112Zm-8,24H96a8,8,0,0,0,0,16h68a8,8,0,0,0,0-16Zm68-12A100.11,100.11,0,0,1,132,224H48a16,16,0,0,1-16-16V124a100,100,0,0,1,200,0Zm-16,0a84,84,0,0,0-168,0v84h84A84.09,84.09,0,0,0,216,124Z"/></svg></span>
-        <h2 class="section-title">Captions</h2>
-      </div>
-      <p class="section-intro">The voice is the one in the tone-of-voice document: bold, challenging, human, driven. On LinkedIn that mostly means starting with the finding, not with a greeting.</p>
-
-      <div class="caption-demo">
-        <div class="caption-head">
-          <div class="avatar"><img src="exatom-icon-full-color.svg" alt=""></div>
-          <div>
-            <p class="caption-org">Exatom</p>
-            <p class="caption-sub">1,240 followers · 2h</p>
-          </div>
-        </div>
-        <p class="caption-body">Kia Germany's test-drive form was losing more than half its visitors at the address step.
-
-We found it in week one. The fix shipped in week two: postcode lookup, three fields removed, error text rewritten.
-
-Completed requests went up 55%.
-
-Most teams are still reading heatmaps. <span class="fold">…see more</span></p>
-      </div>
-
-      <div class="rule-list">
-        <div class="rule"><div class="rule-key">First line</div><div class="rule-val">The finding, or the number. LinkedIn cuts the caption after roughly 140 characters — the hook has to survive the fold.</div></div>
-        <div class="rule"><div class="rule-key">Length</div><div class="rule-val">80 to 150 words. Short paragraphs, one idea each, a blank line between them.</div></div>
-        <div class="rule"><div class="rule-key">Numbers</div><div class="rule-val">One number carries the post, and it matches the number on the image and in the case study. Never a figure we cannot source.</div></div>
-        <div class="rule"><div class="rule-key">Hashtags</div><div class="rule-val">At most three, at the end, lowercase-readable: #cro #formanalytics #conversionrate</div></div>
-        <div class="rule"><div class="rule-key">Emoji</div><div class="rule-val">None in the body. A single one is allowed to open a hiring or event post, nowhere else.</div></div>
-        <div class="rule"><div class="rule-key">Links</div><div class="rule-val">In the first comment when the post is an image; inline when it is a link card.</div></div>
-      </div>
-
-      <div class="note-cards">
-        <div class="note-card">
-          <h4>Say</h4>
-          <p>"Their address step was losing 54% of visitors." Specific, sourced, and it names the thing that was broken.</p>
-        </div>
-        <div class="note-card">
-          <h4>Skip</h4>
-          <p>"Excited to share…", "Let's dive in", "game-changing", rhetorical questions as openers, and any claim without a number behind it.</p>
-        </div>
-      </div>
-
-      <div class="awaiting">
-        <p class="awaiting-tag"><span></span>AWAITING INPUT</p>
-        <h4>What this guide still needs from you</h4>
-        <ul>
-          <li>Five to ten real posts you consider on-brand, so the caption rules can be checked against what already works.</li>
-          <li>Whether dashboard screenshots go in posts, and if so how they are cropped and framed.</li>
-          <li>Whether there is photography — team, office, events — or whether social stays fully graphic.</li>
-          <li>Whether team members post from personal profiles under a shared voice, and how that differs from the company page.</li>
-        </ul>
-      </div>
-    </section>
-    <!-- ---------- INSTAGRAM ---------- -->
-    <section class="section" id="instagram">
-      <div class="section-head">
-        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"/></svg></span>
-        <h2 class="section-title">Instagram</h2>
-      </div>
-      <p class="section-intro">Not live yet. The formats below are Instagram's own platform specs &mdash; useful to build against once there's real content, not a design decision we've made.</p>
-
-      <div class="channel-specs">
-        <div class="channel-spec"><p class="channel-spec-label">Feed post</p><p class="channel-spec-val">1080 &times; 1350 px (4:5), the tallest crop the feed shows in full.</p></div>
-        <div class="channel-spec"><p class="channel-spec-label">Story / Reel</p><p class="channel-spec-val">1080 &times; 1920 px (9:16).</p></div>
-        <div class="channel-spec"><p class="channel-spec-label">Profile picture</p><p class="channel-spec-val">Same square icon as every other account &mdash; Instagram crops it to a circle.</p></div>
-        <div class="channel-spec"><p class="channel-spec-label">Grid</p><p class="channel-spec-val">Three columns; a busy grid reads worse than LinkedIn does &mdash; fewer, bolder posts.</p></div>
-      </div>
-
-      <div class="awaiting">
-        <p class="awaiting-tag"><span></span>AWAITING INPUT</p>
-        <h4>What this guide still needs from you</h4>
-        <ul>
-          <li>Whether Exatom is going to post on Instagram at all, or if this stays a reserved-but-unused channel.</li>
-          <li>A first real post, so the format above can turn into an actual visual rule.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ---------- YOUTUBE ---------- -->
-    <section class="section" id="youtube">
-      <div class="section-head">
-        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M164.44,121.34l-48-32A8,8,0,0,0,104,96v64a8,8,0,0,0,12.44,6.66l48-32a8,8,0,0,0,0-13.32ZM120,145.05V111l25.58,17ZM234.33,69.52a24,24,0,0,0-14.49-16.4C185.56,39.88,131,40,128,40s-57.56-.12-91.84,13.12a24,24,0,0,0-14.49,16.4C19.08,79.5,16,97.74,16,128s3.08,48.5,5.67,58.48a24,24,0,0,0,14.49,16.41C69,215.56,120.4,216,127.34,216h1.32c6.94,0,58.37-.44,91.18-13.11a24,24,0,0,0,14.49-16.41c2.59-10,5.67-28.22,5.67-58.48S236.92,79.5,234.33,69.52Zm-15.49,113a8,8,0,0,1-4.77,5.49c-31.65,12.22-85.48,12-86,12H128c-.54,0-54.33.2-86-12a8,8,0,0,1-4.77-5.49C34.8,173.39,32,156.57,32,128s2.8-45.39,5.16-54.47A8,8,0,0,1,41.93,68c30.52-11.79,81.66-12,85.85-12h.27c.54,0,54.38-.18,86,12a8,8,0,0,1,4.77,5.49C221.2,82.61,224,99.43,224,128S221.2,173.39,218.84,182.47Z"/></svg></span>
-        <h2 class="section-title">YouTube</h2>
-      </div>
-      <p class="section-intro">Not live yet. The formats below are YouTube's own platform specs.</p>
-
-      <div class="channel-specs">
-        <div class="channel-spec"><p class="channel-spec-label">Channel banner</p><p class="channel-spec-val">2560 &times; 1440 px, safe area 1546 &times; 423 px centred &mdash; the rest gets cropped on TV and mobile.</p></div>
-        <div class="channel-spec"><p class="channel-spec-label">Video thumbnail</p><p class="channel-spec-val">1280 &times; 720 px (16:9), under 2MB.</p></div>
-        <div class="channel-spec"><p class="channel-spec-label">Profile picture</p><p class="channel-spec-val">Same square icon as every other account &mdash; YouTube crops it to a circle.</p></div>
-        <div class="channel-spec"><p class="channel-spec-label">Intro / outro</p><p class="channel-spec-val">Not defined &mdash; no video has been produced yet.</p></div>
-      </div>
-
-      <div class="awaiting">
-        <p class="awaiting-tag"><span></span>AWAITING INPUT</p>
-        <h4>What this guide still needs from you</h4>
-        <ul>
-          <li>Whether Exatom is going to run a YouTube channel at all.</li>
-          <li>A first video or webinar recording, so a thumbnail template can be designed against something real.</li>
-        </ul>
-      </div>
-    </section>
   </main>
 </div>
 </x-dc>
@@ -650,9 +418,8 @@ class Component extends DCLogic {
     };
     return {
       goProfile: go('profile'),
-      goFormats: go('formats'),
-      goCarousel: go('carousel'),
-      goCaptions: go('captions'),
+      goBanner: go('linkedin-banner'),
+      goWebinar: go('webinar'),
     };
   }
 }
