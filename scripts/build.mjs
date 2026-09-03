@@ -15,6 +15,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, copyFile
 import { join, relative, extname, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { zipDirectory } from './zip.mjs';
+import { brandMarkdown } from './brand-md.mjs';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const OUT = join(ROOT, 'site');
@@ -498,6 +499,15 @@ rmSync(OUT, { recursive: true, force: true });
 mkdirSync(join(OUT, 'logo'), { recursive: true });
 
 for (const p of PAGES) writeFileSync(join(OUT, p.file), page(p));
+
+/* the guide as Markdown, for feeding to a tool rather than reading */
+const md = brandMarkdown(brandSrc, {
+  h1: 'Brand guidelines',
+  lede: "The working reference for how Exatom looks: logo, color, type, and the interface elements built from them. "
+      + "Every value here is the real brand value \u2014 copy it from this page, don't approximate. Presentations and "
+      + 'social media build on it, on their own pages.',
+});
+writeFileSync(join(OUT, 'brand-guidelines.md'), md);
 
 for (const f of readdirSync(join(ROOT, 'logo'))) {
   if (f.endsWith('.svg')) copyFileSync(join(ROOT, 'logo', f), join(OUT, 'logo', f));

@@ -12,6 +12,7 @@ script turns three source files into four pages, and Vercel serves them.
 | `/presentations` | Presentations |
 | `/social` | Social media |
 | `/downloads` | Every brand file, generated from `assets/` |
+| `/brand-guidelines.md` | The brand guidelines as Markdown, generated from the same source |
 
 ## Adding a file to the downloads
 
