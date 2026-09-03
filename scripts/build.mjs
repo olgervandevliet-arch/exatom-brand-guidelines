@@ -161,6 +161,29 @@ const brandSrc = read('src/Brand.src.html');
 const presSrc = read('src/Presentations.src.html');
 const socSrc = read('src/Social.src.html');
 
+/**
+ * One stray </div> closes <main> early and the browser reparents everything
+ * after it outside the flex row — the content jumps to full width and slides
+ * out from under the sidebar. It is invisible in the source and obvious on the
+ * page, so the build refuses to ship it.
+ */
+const assertBalanced = (name, src) => {
+  const a = src.indexOf('<main class="content"');
+  const body = src.slice(src.indexOf('>', a) + 1, src.indexOf('\n  </main>', a));
+  let depth = 0;
+  let line = 1;
+  for (const m of body.matchAll(/<(\/?)(div|section)\b|\n/g)) {
+    if (m[0] === '\n') { line++; continue; }
+    depth += m[1] ? -1 : 1;
+    if (depth < 0) throw new Error(`${name}: closing tag with nothing open, around line ${line} of <main>`);
+  }
+  if (depth !== 0) throw new Error(`${name}: ${depth} unclosed div/section in <main>`);
+};
+
+assertBalanced('src/Brand.src.html', brandSrc);
+assertBalanced('src/Presentations.src.html', presSrc);
+assertBalanced('src/Social.src.html', socSrc);
+
 let brandPane = contentOf(brandSrc)
   .replace('<h1 class="display">Web design</h1>', '<h1 class="display">Brand guidelines</h1>')
   .replace(/The working reference for how Exatom looks online:[\s\S]*?on their own pages\./,
