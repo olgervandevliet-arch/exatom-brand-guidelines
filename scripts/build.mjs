@@ -278,6 +278,13 @@ const siteCss = `
     .switch-opt[aria-current] { color: var(--blue); font-weight: 500; }
     .switch-opt[aria-current] > svg:first-child { color: var(--blue); }
     .switch-opt[aria-current] .tick { opacity: 1; }
+    .switch-opt.is-soon { cursor: default; }
+    .switch-opt.is-soon:hover { background: none; }
+    .switch-opt-badge {
+      margin-left: auto; font-size: 10px; font-weight: 600; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--gray-300); background: var(--warm-white);
+      border-radius: 999px; padding: 3px 7px; flex: 0 0 auto;
+    }
 
     /* ---------- Copy & download ---------- */
     .copy-chip {
@@ -367,6 +374,7 @@ const PAGES = [
     id: 'presentations', file: 'presentations.html', href: '/presentations', name: 'Presentations',
     nav: cleanNav(navOf(presSrc)), pane: presPane, css: scope(guideCss(presSrc), '[data-guide="presentations"]'),
     description: 'How an Exatom deck is built: slide format, margins, eight layouts, type and charts.',
+    soon: true,
   },
   {
     id: 'social', file: 'social.html', href: '/social', name: 'Social media',
@@ -380,9 +388,10 @@ const PAGES = [
   },
 ];
 
-const switchOpt = (page, current) =>
-  `            <a class="switch-opt" href="${page.href}"${page.id === current ? ' aria-current="page"' : ''}>` +
-  `${I[page.id]}<span>${page.name}</span><span class="tick">${I.check}</span></a>`;
+const switchOpt = (page, current) => page.soon
+  ? `            <span class="switch-opt is-soon" aria-disabled="true">${I[page.id]}<span>${page.name}</span><span class="switch-opt-badge">Soon</span></span>`
+  : `            <a class="switch-opt" href="${page.href}"${page.id === current ? ' aria-current="page"' : ''}>` +
+    `${I[page.id]}<span>${page.name}</span><span class="tick">${I.check}</span></a>`;
 
 const page = (p) => `<!doctype html>
 <html lang="en">
