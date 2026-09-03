@@ -225,7 +225,14 @@ const variants = brandPane.slice(vs, ve).replace(
 );
 brandPane = brandPane.slice(0, vs) + variants + brandPane.slice(ve);
 
-const fixImgs = (s) => s.replace(/<img src="([^"]+\.svg)"/g, '<img src="logo/$1"');
+/* team photos referenced from Social (the connections row) live in assets/team/;
+   everything else non-svg in a guide pane is a social asset in assets/social/ */
+const TEAM_PHOTOS = new Set(['bart.jpg', 'filip.jpg', 'kurt.jpg', 'marcelo.jpg', 'matthieu.jpg',
+  'michael.jpg', 'olger.jpg', 'oliver.jpg', 'sander.jpg', 'stephan.jpg']);
+const fixImgs = (s) => s
+  .replace(/<img src="([^"]+\.svg)"/g, '<img src="logo/$1"')
+  .replace(/<img src="([^"]+\.(?:jpe?g|png|webp))"/g, (_m, f) =>
+    `<img src="assets/${TEAM_PHOTOS.has(f) ? 'team' : 'social'}/${f}"`);
 const presPane = fixImgs(contentOf(presSrc)).replace(/the seven layouts/, 'the eight layouts');
 const socPane = fixImgs(contentOf(socSrc));
 
@@ -233,7 +240,8 @@ const socPane = fixImgs(contentOf(socSrc));
 const cleanNav = (html) => html.replace(/\s*onClick="\{\{\s*(\w+)\s*\}\}"/g, (_m, name) => {
   const id = { goLogo: 'logo', goColor: 'color', goType: 'type', goFoundations: 'foundations', goUi: 'ui', goForms: 'forms', goIcons: 'icons', goTeam: 'team',
     goFormat: 'format', goLayouts: 'layouts', goSlideType: 'slide-type', goData: 'data', goBuilding: 'building',
-    goProfile: 'profile', goFormats: 'formats', goCarousel: 'carousel', goCaptions: 'captions' }[name];
+    goProfile: 'profile', goFormats: 'formats', goCarousel: 'carousel', goCaptions: 'captions',
+    goWebinar: 'webinar', goInstagram: 'instagram', goYoutube: 'youtube' }[name];
   if (!id) throw new Error('unmapped handler: ' + name);
   return ` data-scroll="${id}"`;
 });
