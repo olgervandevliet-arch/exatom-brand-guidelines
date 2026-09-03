@@ -1,0 +1,35 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "files": [
+          "src/Social.src.html"
+        ],
+        "createdAt": "2026-09-03T16:53:35.736Z",
+        "reason": "Exatom brand typography, mandated across the whole style guide, not an incidental AI default"
+      },
+      {
+        "rule": "overused-font",
+        "value": "instrument sans",
+        "files": [
+          "src/Social.src.html"
+        ],
+        "createdAt": "2026-09-03T16:53:35.798Z",
+        "reason": "Exatom brand typography, mandated across the whole style guide, not an incidental AI default"
+      },
+      {
+        "rule": "em-dash-overuse",
+        "value": "*",
+        "files": [
+          "src/Social.src.html"
+        ],
+        "createdAt": "2026-09-03T16:53:54.660Z",
+        "reason": "Consistent with the guide's established editorial voice used throughout Main.dc.html and every other section, not AI slop introduced in this file"
+      }
+    ]
+  }
+}
