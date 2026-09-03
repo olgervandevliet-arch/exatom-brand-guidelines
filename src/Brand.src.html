@@ -147,11 +147,13 @@
     .swatch-list { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
     .swatch-row { display: flex; align-items: stretch; border-top: 1px solid var(--border); }
     .swatch-row:first-child { border-top: none; }
-    .swatch-chip { flex: 0 0 220px; min-height: 92px; }
-    .swatch-info { flex: 1 1 auto; display: flex; align-items: center; gap: var(--s-6); padding: var(--s-4) var(--s-5); min-width: 0; }
-    .swatch-info .swatch-name { flex: 0 0 160px; }
-    .swatch-values { flex: 0 0 200px; }
-    .swatch-info .swatch-role { flex: 1 1 auto; margin-top: 0; }
+    /* every part shrinks and the info wraps — with fixed bases the row could not
+       narrow, so it ran past the column and put the page into horizontal scroll */
+    .swatch-chip { flex: 0 1 220px; min-width: 96px; min-height: 92px; }
+    .swatch-info { flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-6); padding: var(--s-4) var(--s-5); min-width: 0; }
+    .swatch-info .swatch-name { flex: 1 1 150px; min-width: 0; }
+    .swatch-values { flex: 0 1 190px; min-width: 0; }
+    .swatch-info .swatch-role { flex: 1 1 190px; min-width: 0; margin-top: 0; }
     .swatch { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
     .swatch-fill { height: 108px; }
     .swatch-meta { padding: var(--s-3) var(--s-4); border-top: 1px solid var(--border); }
@@ -160,8 +162,8 @@
     .swatch-rgb { font-size: 11px; color: var(--gray-300); font-family: 'Inter', sans-serif; margin-top: 1px; }
     .swatch-role { font-size: 11px; color: var(--gray-500); margin-top: var(--s-2); line-height: 1.4; }
 
-    .scale-strip { display: flex; border-radius: 8px; overflow: hidden; }
-    .scale-cell { flex: 1; padding: var(--s-6) var(--s-4) var(--s-4); display: flex; flex-direction: column; justify-content: flex-end; min-height: 116px; }
+    .scale-strip { display: flex; flex-wrap: wrap; border-radius: 8px; overflow: hidden; }
+    .scale-cell { flex: 1 1 140px; min-width: 0; padding: var(--s-6) var(--s-4) var(--s-4); display: flex; flex-direction: column; justify-content: flex-end; min-height: 116px; }
     .scale-hex { font-size: 12px; font-family: 'Inter', sans-serif; }
     .scale-role { font-size: 11px; margin-top: 3px; opacity: 0.75; }
 
@@ -457,7 +459,7 @@
       <h1 class="display">Web design</h1>
       <p class="lede">The working reference for how Exatom looks online: logo, color, type, and the interface elements built from them. Every value here is the real brand value — copy from this page, don't approximate. Presentations and social media have their own guides, on their own pages.</p>
       <div class="btn-row" style="margin-top: var(--s-6)">
-        <a class="btn btn-secondary" href="brand-guidelines.md" data-brand-md download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Zm-32-80a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,136Zm0,32a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,168Z"/></svg><span class="btn-label"><span>Download as Markdown</span><span aria-hidden="true">Download as Markdown</span></span></a>
+        <a class="btn btn-secondary" href="brand-guidelines.md" data-brand-md download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,82.34l-56-56A8,8,0,0,0,152,24H56A16,16,0,0,0,40,40V216a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V88A8,8,0,0,0,213.66,82.34ZM160,51.31,188.69,80H160ZM200,216H56V40h88V88a8,8,0,0,0,8,8h48V216Zm-32-80a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,136Zm0,32a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,168Z"/></svg><span class="btn-label"><span>Download .MD file</span><span aria-hidden="true">Download .MD file</span></span></a>
       </div>
     </header>
 
