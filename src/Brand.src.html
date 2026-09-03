@@ -165,6 +165,11 @@
     .tp-title { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 56px; letter-spacing: -0.04em; line-height: 0.98; margin-top: -0.16em; max-width: 9ch; }
     .tp-body { position: absolute; left: 20px; bottom: 20px; width: 52%; font-size: 14px; line-height: 1.4; }
     .tp-btn { position: absolute; right: 20px; bottom: 20px; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13px; padding: 10px 18px; border-radius: 999px; }
+    /* when the card carries the mark, the body moves up under the headline so
+       the bottom margin stays a single row: mark left, action right */
+    .tp-body.under { position: static; width: 62%; margin-top: var(--s-5); }
+    .tp-mark { position: absolute; left: 20px; bottom: 20px; display: block; }
+    .tp-mark svg { width: 40px; height: 40px; display: block; }
 
     .layout-demo { position: relative; width: 925px; max-width: 100%; height: 420px; border-radius: 6px; padding: 37px; overflow: hidden; }
     .ld-headline { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 88px; letter-spacing: -0.04em; line-height: 0.98; max-width: 9ch; margin-top: -0.14em; }
@@ -392,6 +397,14 @@
         <button type="button" class="menu-item" onClick="{{ goUi }}">
           <svg viewBox="0 0 256 256" fill="currentColor"><path d="M104,40H56A16,16,0,0,0,40,56v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,104,40Zm0,64H56V56h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V56A16,16,0,0,0,200,40Zm0,64H152V56h48v48Zm-96,32H56a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,104,136Zm0,64H56V152h48v48Zm96-64H152a16,16,0,0,0-16,16v48a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V152A16,16,0,0,0,200,136Zm0,64H152V152h48v48Z"></path></svg>
           <span>UI elements</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goForms }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M112,40a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80v96a16,16,0,0,0,16,16h80v16a8,8,0,0,0,16,0V48A8,8,0,0,0,112,40ZM24,176V80h80v96ZM248,80v96a16,16,0,0,1-16,16H144a8,8,0,0,1,0-16h88V80H144a8,8,0,0,1,0-16h88A16,16,0,0,1,248,80ZM88,112a8,8,0,0,1-8,8H72v24a8,8,0,0,1-16,0V120H48a8,8,0,0,1,0-16H80A8,8,0,0,1,88,112Z"/></svg>
+          <span>Forms</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goIcons }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M172,76a44,44,0,1,0-44,44A44.05,44.05,0,0,0,172,76Zm-44,28a28,28,0,1,1,28-28A28,28,0,0,1,128,104Zm60,24a44,44,0,1,0,44,44A44.05,44.05,0,0,0,188,128Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,188,200ZM68,128a44,44,0,1,0,44,44A44.05,44.05,0,0,0,68,128Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,68,200Z"/></svg>
+          <span>Icons</span>
         </button>
       </nav>
 
@@ -678,7 +691,7 @@
 
       <div class="subsection" id="color-text">
         <h3 class="subsection-title">Text on color</h3>
-        <p class="subsection-note">The extended pairings carrying type, laid out as formats rather than text blocks: 400 tall, so the modular margin is 20px, the headline sits with its cap-height on the top margin, and the description and action close the bottom margin. Mint&nbsp;Light with Teal, Teal with Mint&nbsp;Light, Blush with Burgundy, Burgundy with Blush — the ink is always the lightest or darkest member of its own pair, never the accent.</p>
+        <p class="subsection-note">Pairings carrying type, laid out as formats rather than text blocks: 400 tall, so the modular margin is 20px, the headline sits with its cap-height on the top margin, and the action closes the bottom margin. The ink is always the lightest or darkest member of its own pair, never the accent. The two core-palette cards at the bottom — Blue&nbsp;Light with Dark, Dark with Blue&nbsp;Light — are the default; the four extended pairings above them are campaign work, and carry the mark on the bottom margin.</p>
         <div class="specimen-spec"><span class="spec-chip">400 tall</span><span class="spec-chip">20px modular margin</span><span class="spec-chip">headline 56px</span><span class="spec-chip">body 14px = 25%</span><span class="spec-chip">pill action</span></div>
         <div class="text-pair-grid" style="gap: 16px">
           <div class="text-pair" style="background:#E5FFF7">
@@ -700,6 +713,18 @@
             <p class="tp-title" style="color:#FEEFEF">Boost conversions.</p>
             <p class="tp-body" style="color:#FEEFEF">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
             <span class="tp-btn" style="background:#FEEFEF;color:#440020">Start free trial</span>
+          </div>
+          <div class="text-pair" style="background:#E8EEFF">
+            <p class="tp-title" style="color:#18122D">Your form is leaking revenue.</p>
+            <p class="tp-body under" style="color:#18122D">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
+            <span class="tp-mark"><svg viewBox="0 0 228 228" aria-hidden="true"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#18122D"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#E8EEFF"/></svg></span>
+            <span class="tp-btn" style="background:#18122D;color:#E8EEFF">Start free trial</span>
+          </div>
+          <div class="text-pair" style="background:#18122D">
+            <p class="tp-title" style="color:#E8EEFF">Your form is leaking revenue.</p>
+            <p class="tp-body under" style="color:#E8EEFF">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
+            <span class="tp-mark"><svg viewBox="0 0 228 228" aria-hidden="true"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#E8EEFF"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#18122D"/></svg></span>
+            <span class="tp-btn" style="background:#E8EEFF;color:#18122D">Start free trial</span>
           </div>
         </div>
       </div>
@@ -921,8 +946,53 @@
         </div>
       </div>
 
-      <div class="subsection" id="ui-fields">
-        <h3 class="subsection-title">Form fields</h3>
+      <div class="subsection" id="ui-cards">
+        <h3 class="subsection-title">Cards &amp; metrics</h3>
+        <div class="specimen-spec"><span class="spec-chip">6px radius</span><span class="spec-chip">17px modular margin</span><span class="spec-chip">Instrument Sans SemiBold 68px</span><span class="spec-chip">label 17px = 25%</span><span class="spec-chip">mark 34px</span></div>
+        <p class="subsection-note">Result figures are the proof this brand runs on, so they are set as a layout, not as a text block: the frame is 420 tall, giving a 17px modular margin, the figure sits with its cap-height on the top margin, the label runs at a quarter of the figure size along the bottom margin, and the mark closes the card bottom-right at twice the margin.</p>
+        <div class="card-grid">
+          <div class="ui-card">
+            <p class="metric blue">+28%</p>
+            <p class="metric-label">More completions on the Hyundai test-drive form</p>
+            <div class="card-mark"><svg viewBox="0 0 228 228" style="width:34px;height:34px;display:block"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#18122D"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#F7F4F2"/></svg></div>
+          </div>
+          <div class="ui-card on-tint">
+            <p class="metric">+22%</p>
+            <p class="metric-label" style="color:var(--gray-700)">Order conversion at DELTA Fiber</p>
+            <div class="card-mark"><svg viewBox="0 0 228 228" style="width:34px;height:34px;display:block"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#18122D"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#E8EEFF"/></svg></div>
+          </div>
+          <div class="ui-card on-dark">
+            <p class="metric on-dark">+55%</p>
+            <p class="metric-label on-dark">Test-drive requests at Kia Germany</p>
+            <div class="card-mark"><svg viewBox="0 0 228 228" style="width:34px;height:34px;display:block"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#FFFFFF"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#18122D"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="subsection" id="ui-pills">
+        <h3 class="subsection-title">Labels</h3>
+        <p class="subsection-note">Small, quiet, and never more than one accent colour in a single group. Labels are tags, so they take the fully pilled radius.</p>
+        <div class="specimen-spec"><span class="spec-chip">999px radius</span><span class="spec-chip">6 / 12px padding</span><span class="spec-chip">Inter 12px SemiBold</span><span class="spec-chip">no border</span></div>
+
+        <div class="pill-row">
+          <span class="pill pill-blue">Form analytics</span>
+          <span class="pill pill-neutral">Cookieless</span>
+          <span class="pill pill-dark">ISO 27001</span>
+          <span class="pill pill-mint">New</span>
+          <span class="pill pill-blush">Beta</span>
+        </div>
+      </div>
+    </section>
+    <!-- ---------- FORMS ---------- -->
+    <section class="section" id="forms">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M112,40a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80v96a16,16,0,0,0,16,16h80v16a8,8,0,0,0,16,0V48A8,8,0,0,0,112,40ZM24,176V80h80v96ZM248,80v96a16,16,0,0,1-16,16H144a8,8,0,0,1,0-16h88V80H144a8,8,0,0,1,0-16h88A16,16,0,0,1,248,80ZM88,112a8,8,0,0,1-8,8H72v24a8,8,0,0,1-16,0V120H48a8,8,0,0,1,0-16H80A8,8,0,0,1,88,112Z"/></svg></span>
+        <h2 class="section-title">Forms</h2>
+      </div>
+      <p class="section-intro">Exatom sells form conversion, so our own forms are the shortest argument we have. States, field types, a form in full, and the rules we hold ourselves to.</p>
+
+      <div class="subsection">
         <p class="subsection-note">Exatom sells form conversion, so our own forms are the shortest argument we have. Everything below is what we ask clients to do: labels above the field, one column, one question at a time, and error text that names the fix instead of the failure.</p>
         <div class="specimen-spec"><span class="spec-chip">10px radius</span><span class="spec-chip">12 / 16px padding</span><span class="spec-chip">Inter 15px</span><span class="spec-chip">1px #D1D0D5 border</span><span class="spec-chip">focus ring 3px rgba(42,90,233,.14)</span></div>
 
@@ -1058,33 +1128,17 @@
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="subsection" id="ui-cards">
-        <h3 class="subsection-title">Cards &amp; metrics</h3>
-        <div class="specimen-spec"><span class="spec-chip">6px radius</span><span class="spec-chip">17px modular margin</span><span class="spec-chip">Instrument Sans SemiBold 68px</span><span class="spec-chip">label 17px = 25%</span><span class="spec-chip">mark 34px</span></div>
-        <p class="subsection-note">Result figures are the proof this brand runs on, so they are set as a layout, not as a text block: the frame is 420 tall, giving a 17px modular margin, the figure sits with its cap-height on the top margin, the label runs at a quarter of the figure size along the bottom margin, and the mark closes the card bottom-right at twice the margin.</p>
-        <div class="card-grid">
-          <div class="ui-card">
-            <p class="metric blue">+28%</p>
-            <p class="metric-label">More completions on the Hyundai test-drive form</p>
-            <div class="card-mark"><svg viewBox="0 0 228 228" style="width:34px;height:34px;display:block"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#18122D"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#F7F4F2"/></svg></div>
-          </div>
-          <div class="ui-card on-tint">
-            <p class="metric">+22%</p>
-            <p class="metric-label" style="color:var(--gray-700)">Order conversion at DELTA Fiber</p>
-            <div class="card-mark"><svg viewBox="0 0 228 228" style="width:34px;height:34px;display:block"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#18122D"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#E8EEFF"/></svg></div>
-          </div>
-          <div class="ui-card on-dark">
-            <p class="metric on-dark">+55%</p>
-            <p class="metric-label on-dark">Test-drive requests at Kia Germany</p>
-            <div class="card-mark"><svg viewBox="0 0 228 228" style="width:34px;height:34px;display:block"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#FFFFFF"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#18122D"/></svg></div>
-          </div>
-        </div>
+    <!-- ---------- ICONS ---------- -->
+    <section class="section" id="icons">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M172,76a44,44,0,1,0-44,44A44.05,44.05,0,0,0,172,76Zm-44,28a28,28,0,1,1,28-28A28,28,0,0,1,128,104Zm60,24a44,44,0,1,0,44,44A44.05,44.05,0,0,0,188,128Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,188,200ZM68,128a44,44,0,1,0,44,44A44.05,44.05,0,0,0,68,128Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,68,200Z"/></svg></span>
+        <h2 class="section-title">Icons</h2>
       </div>
+      <p class="section-intro">Phosphor Regular, and nothing else. One weight, one grid, drawn on 256 so every glyph lines up at any size.</p>
 
-
-      <div class="subsection" id="ui-icons">
-        <h3 class="subsection-title">Icons</h3>
+      <div class="subsection">
         <div class="specimen-spec"><span class="spec-chip">Phosphor regular</span><span class="spec-chip">256 grid</span><span class="spec-chip">18px in menus</span><span class="spec-chip">26px in cells</span><span class="spec-chip">currentColor</span></div>
         <p class="subsection-note">Exatom uses <strong>Phosphor</strong> for every icon, regular weight, on a 256 grid. It is the only icon library in the system — no Lucide, no Heroicons, no emoji standing in for an icon. Where a third-party component ships with a different set, swap it for the Phosphor equivalent. Below is the working set for the platform's features, with the Phosphor name each one maps to.</p>
         <div class="icon-row">
@@ -1110,21 +1164,8 @@
           <a class="btn btn-secondary" href="assets/exatom-icons.zip" data-icon-pack download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Download the icon set</span></a>
         </div>
       </div>
-
-      <div class="subsection" id="ui-pills">
-        <h3 class="subsection-title">Labels</h3>
-        <p class="subsection-note">Small, quiet, and never more than one accent colour in a single group. Labels are tags, so they take the fully pilled radius.</p>
-        <div class="specimen-spec"><span class="spec-chip">999px radius</span><span class="spec-chip">6 / 12px padding</span><span class="spec-chip">Inter 12px SemiBold</span><span class="spec-chip">no border</span></div>
-
-        <div class="pill-row">
-          <span class="pill pill-blue">Form analytics</span>
-          <span class="pill pill-neutral">Cookieless</span>
-          <span class="pill pill-dark">ISO 27001</span>
-          <span class="pill pill-mint">New</span>
-          <span class="pill pill-blush">Beta</span>
-        </div>
-      </div>
     </section>
+
   </main>
 </div>
 </x-dc>

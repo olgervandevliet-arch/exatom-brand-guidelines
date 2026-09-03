@@ -206,7 +206,7 @@ const socPane = fixImgs(contentOf(socSrc));
 
 /* strip the canvas {{ hole }} bindings — this site wires its own handlers */
 const cleanNav = (html) => html.replace(/\s*onClick="\{\{\s*(\w+)\s*\}\}"/g, (_m, name) => {
-  const id = { goLogo: 'logo', goColor: 'color', goType: 'type', goFoundations: 'foundations', goUi: 'ui',
+  const id = { goLogo: 'logo', goColor: 'color', goType: 'type', goFoundations: 'foundations', goUi: 'ui', goForms: 'forms', goIcons: 'icons',
     goFormat: 'format', goLayouts: 'layouts', goSlideType: 'slide-type', goData: 'data', goBuilding: 'building',
     goProfile: 'profile', goFormats: 'formats', goCarousel: 'carousel', goCaptions: 'captions' }[name];
   if (!id) throw new Error('unmapped handler: ' + name);
