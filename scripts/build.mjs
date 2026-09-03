@@ -227,7 +227,7 @@ const siteCss = `
       display: flex; align-items: center; gap: 10px;
       width: 100%; background: none; border: 0; font: inherit; text-align: left; cursor: pointer;
       height: 36px; padding: 0 10px; border-radius: 8px;
-      font-size: 14px; letter-spacing: 0.01em; color: var(--dark);
+      font-size: 14px; letter-spacing: -0.02em; color: var(--dark);
       transition: background 120ms ease;
     }
     .switch-opt:hover { background: var(--warm-white); }
@@ -277,7 +277,7 @@ const siteCss = `
     .asset-row:hover { background: var(--warm-white); }
     .asset-icon { display: inline-flex; color: var(--gray-300); }
     .asset-icon svg { width: 18px; height: 18px; }
-    .asset-name { font-size: 14px; letter-spacing: 0.01em; flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+    .asset-name { font-size: 14px; letter-spacing: -0.02em; flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
     .asset-type { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--gray-500); background: var(--white); border: 1px solid var(--border); padding: 3px 7px; border-radius: 3px; flex: 0 0 auto; }
     .asset-size { font-size: 12px; color: var(--gray-500); flex: 0 0 68px; text-align: right; }
     .asset-get {
@@ -374,8 +374,8 @@ ${PAGES.map((x) => switchOpt(x, p.id)).join('\n')}
           <button type="button" class="user-block" aria-expanded="false" aria-haspopup="true">
             <img src="logo/exatom-icon-full-color.svg" alt="">
             <div class="user-text">
-              <span class="user-name">Exatom</span>
-              <span class="user-meta">${p.name}</span>
+              <span class="user-name">${p.name}</span>
+              <span class="user-meta">Exatom</span>
             </div>
             ${I.caret}
           </button>

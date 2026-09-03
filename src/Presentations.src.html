@@ -82,7 +82,7 @@
     .user-block:hover { background: var(--warm-white); }
     .user-block img { width: 26px; height: 26px; flex: 0 0 26px; border-radius: 4px; }
     .user-text { display: flex; flex-direction: column; min-width: 0; }
-    .user-name { font-size: 14px; font-weight: 500; letter-spacing: 0.01em; color: var(--dark); }
+    .user-name { font-size: 14px; font-weight: 500; letter-spacing: -0.02em; color: var(--dark); }
     .user-meta { font-size: 12px; color: var(--gray-500); }
     .user-block > svg:last-child { width: 16px; height: 16px; flex: 0 0 16px; margin-left: auto; color: var(--gray-500); }
 
@@ -105,7 +105,7 @@
     .section-intro { font-size: 16px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-7); }
 
     .subsection { margin-top: var(--s-8); scroll-margin-top: var(--s-6); }
-    .subsection-title { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .subsection-title { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
     .subsection-note { font-size: 14px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-5); }
     .caption { font-size: 13px; line-height: 1.5; color: var(--gray-500); }
     code { font-family: 'Inter', sans-serif; font-size: 0.92em; background: var(--warm-white); padding: 2px 6px; border-radius: 3px; }
@@ -114,7 +114,7 @@
     .rule-list { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: var(--s-5); }
     .rule { display: flex; gap: var(--s-5); padding: var(--s-4) var(--s-5); border-top: 1px solid var(--border); }
     .rule:first-child { border-top: none; }
-    .rule-key { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.01em; flex: 0 0 190px; }
+    .rule-key { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: -0.02em; flex: 0 0 190px; }
     .rule-val { font-size: 13px; line-height: 1.5; color: var(--gray-700); }
 
     /* ---------- Slides ---------- */
@@ -142,14 +142,14 @@
     .sl-eyebrow.on-dark, .sl-eyebrow.on-blue { color: rgba(255,255,255,0.7); }
     .sl-cols { display: flex; gap: 5%; margin-top: 14px; }
     .sl-col { flex: 1; font-size: 12px; line-height: 1.5; color: var(--gray-700); }
-    .sl-col-h { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: var(--dark); margin-bottom: 5px; }
+    .sl-col-h { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: -0.02em; color: var(--dark); margin-bottom: 5px; }
     .sl-metric { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 64px; letter-spacing: -0.04em; line-height: 1; color: var(--blue); }
     .sl-metric.on-dark { color: var(--white); }
     .sl-metric-label { font-size: 12px; line-height: 1.4; color: var(--gray-500); margin-top: 8px; max-width: 30ch; }
     .sl-num { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.01em; color: var(--blue); }
     .sl-num.on-dark { color: rgba(255,255,255,0.6); }
     .slide-meta { padding: var(--s-3) var(--s-4); border-top: 1px solid var(--border); }
-    .slide-name { font-size: 13px; font-weight: 600; letter-spacing: 0.01em; }
+    .slide-name { font-size: 13px; font-weight: 600; letter-spacing: -0.02em; }
     .slide-use { font-size: 12px; color: var(--gray-500); margin-top: 3px; line-height: 1.45; }
 
     /* Margin diagram */
@@ -176,13 +176,13 @@
     }
     .awaiting-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: var(--gray-500); margin-bottom: var(--s-3); }
     .awaiting-tag span { width: 6px; height: 6px; border-radius: 999px; background: var(--gray-300); }
-    .awaiting h4 { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .awaiting h4 { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
     .awaiting ul { margin: 0; padding-left: 18px; }
     .awaiting li { font-size: 14px; line-height: 1.65; color: var(--gray-700); }
 
     .note-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); margin-top: var(--s-5); }
     .note-card { border: 1px solid var(--border); border-radius: 6px; padding: var(--s-5); }
-    .note-card h4 { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .note-card h4 { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
     .note-card p { font-size: 13px; line-height: 1.6; color: var(--gray-500); }
   </style>
 </helmet>
@@ -250,7 +250,6 @@
   <!-- ============ CONTENT ============ -->
   <main class="content">
     <header class="masthead">
-      <p class="eyebrow">Exatom</p>
       <h1 class="display">Presentations</h1>
       <p class="lede">How an Exatom deck is built: the frame, the margins, the eight layouts, and how numbers are shown. Written as a specification, so it holds whether the deck is made in Claude Design or PowerPoint. Colors, type and logo rules come from the brand guidelines — this page only shows how they land on a slide.</p>
     </header>

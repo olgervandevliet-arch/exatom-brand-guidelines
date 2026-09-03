@@ -91,9 +91,9 @@
       transition: background 120ms ease;
     }
     .user-block:hover { background: var(--warm-white); }
-    .user-block img { width: 26px; height: 26px; flex: 0 0 26px; border-radius: 4px; }
+    .user-block img { width: 32px; height: 32px; flex: 0 0 32px; border-radius: 6px; }
     .user-text { display: flex; flex-direction: column; min-width: 0; }
-    .user-name { font-size: 14px; font-weight: 500; letter-spacing: 0.01em; color: var(--dark); }
+    .user-name { font-size: 14px; font-weight: 500; letter-spacing: -0.02em; color: var(--dark); }
     .user-meta { font-size: 12px; color: var(--gray-500); }
     .user-block > svg:last-child { width: 16px; height: 16px; flex: 0 0 16px; margin-left: auto; color: var(--gray-500); }
 
@@ -116,7 +116,7 @@
     .section-intro { font-size: 16px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-7); }
 
     .subsection { margin-top: var(--s-8); scroll-margin-top: var(--s-6); }
-    .subsection-title { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .subsection-title { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
     .subsection-note { font-size: 14px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-5); }
     .caption { font-size: 13px; line-height: 1.5; color: var(--gray-500); }
     code { font-family: 'Inter', sans-serif; font-size: 0.92em; background: var(--warm-white); padding: 2px 6px; border-radius: 3px; }
@@ -128,7 +128,7 @@
     .logo-stage img { max-height: 34px; width: auto; }
     .logo-stage.icon-stage img { max-height: 56px; }
     .tile-meta { padding: var(--s-3) var(--s-4); border-top: 1px solid var(--border); }
-    .tile-name { font-size: 13px; font-weight: 600; letter-spacing: 0.01em; }
+    .tile-name { font-size: 13px; font-weight: 600; letter-spacing: -0.02em; }
     .tile-sub { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
 
     .clearspace { display: flex; gap: var(--s-7); align-items: center; flex-wrap: wrap; }
@@ -143,7 +143,7 @@
     .swatch { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
     .swatch-fill { height: 108px; }
     .swatch-meta { padding: var(--s-3) var(--s-4); border-top: 1px solid var(--border); }
-    .swatch-name { font-size: 13px; font-weight: 600; letter-spacing: 0.01em; }
+    .swatch-name { font-size: 13px; font-weight: 600; letter-spacing: -0.02em; }
     .swatch-hex { font-size: 12px; color: var(--gray-500); font-family: 'Inter', sans-serif; margin-top: 3px; }
     .swatch-rgb { font-size: 11px; color: var(--gray-300); font-family: 'Inter', sans-serif; margin-top: 1px; }
     .swatch-role { font-size: 11px; color: var(--gray-500); margin-top: var(--s-2); line-height: 1.4; }
@@ -192,7 +192,7 @@
     .rule-list { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: var(--s-5); }
     .rule { display: flex; gap: var(--s-5); padding: var(--s-4) var(--s-5); border-top: 1px solid var(--border); }
     .rule:first-child { border-top: none; }
-    .rule-key { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.01em; flex: 0 0 150px; }
+    .rule-key { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: -0.02em; flex: 0 0 150px; }
     .rule-val { font-size: 13px; line-height: 1.5; color: var(--gray-700); }
     .specimen { padding: var(--s-7) 0; border-bottom: 1px solid var(--border); }
     .specimen:last-of-type { border-bottom: none; }
@@ -233,7 +233,7 @@
 
     .field-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-5); }
     .field { display: flex; flex-direction: column; gap: var(--s-2); }
-    .field-label { font-size: 13px; font-weight: 600; letter-spacing: 0.01em; color: var(--dark); }
+    .field-label { font-size: 13px; font-weight: 600; letter-spacing: -0.02em; color: var(--dark); }
     .field-input { font-family: 'Inter', sans-serif; font-size: 15px; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--gray-100); background: var(--white); color: var(--dark); }
     .field-input::placeholder { color: var(--gray-300); }
     .field-input.is-focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(42, 90, 233, 0.14); outline: none; }
@@ -254,7 +254,7 @@
 
     .icon-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-4); }
     .icon-cell { display: flex; flex-direction: column; gap: var(--s-3); border: 1px solid var(--border); border-radius: 6px; padding: var(--s-5); }
-    .icon-use { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.01em; color: var(--dark); }
+    .icon-use { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: -0.02em; color: var(--dark); }
     .icon-name { font-size: 11px; color: var(--gray-500); margin-top: -6px; }
     .icon-chip { display: inline-flex; color: var(--dark); }
     .icon-chip svg { width: 26px; height: 26px; }
@@ -669,7 +669,7 @@
         </div>
         <div class="rule-list">
           <div class="rule"><span class="rule-key">Maximum weight</span><span class="rule-val">SemiBold (600). Bold and Black are never used, in any family.</span></div>
-          <div class="rule"><span class="rule-key">Titles</span><span class="rule-val">Inter Tight, or Inter with −4% letter-spacing. Never looser.</span></div>
+          <div class="rule"><span class="rule-key">Titles</span><span class="rule-val">Inter Tight above 18px, or Inter with −4% letter-spacing. Small titles set in Inter — labels, card names, table keys — take −2%. Never looser.</span></div>
           <div class="rule"><span class="rule-key">Families</span><span class="rule-val">Inter and Instrument Sans only. No system fallbacks on show, no monospace, no third font.</span></div>
           <div class="rule"><span class="rule-key">Case</span><span class="rule-val">Sentence case. Titles are never set in full caps.</span></div>
         </div>

@@ -82,7 +82,7 @@
     .user-block:hover { background: var(--warm-white); }
     .user-block img { width: 26px; height: 26px; flex: 0 0 26px; border-radius: 4px; }
     .user-text { display: flex; flex-direction: column; min-width: 0; }
-    .user-name { font-size: 14px; font-weight: 500; letter-spacing: 0.01em; color: var(--dark); }
+    .user-name { font-size: 14px; font-weight: 500; letter-spacing: -0.02em; color: var(--dark); }
     .user-meta { font-size: 12px; color: var(--gray-500); }
     .user-block > svg:last-child { width: 16px; height: 16px; flex: 0 0 16px; margin-left: auto; color: var(--gray-500); }
 
@@ -105,7 +105,7 @@
     .section-intro { font-size: 16px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-7); }
 
     .subsection { margin-top: var(--s-8); scroll-margin-top: var(--s-6); }
-    .subsection-title { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .subsection-title { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
     .subsection-note { font-size: 14px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-5); }
     .caption { font-size: 13px; line-height: 1.5; color: var(--gray-500); }
     code { font-family: 'Inter', sans-serif; font-size: 0.92em; background: var(--warm-white); padding: 2px 6px; border-radius: 3px; }
@@ -114,7 +114,7 @@
     .rule-list { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: var(--s-5); }
     .rule { display: flex; gap: var(--s-5); padding: var(--s-4) var(--s-5); border-top: 1px solid var(--border); }
     .rule:first-child { border-top: none; }
-    .rule-key { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.01em; flex: 0 0 190px; }
+    .rule-key { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: -0.02em; flex: 0 0 190px; }
     .rule-val { font-size: 13px; line-height: 1.5; color: var(--gray-700); }
 
     /* ---------- Profile ---------- */
@@ -164,7 +164,7 @@
     .po-page { position: absolute; right: 8%; bottom: 8%; font-size: 11px; font-weight: 600; color: var(--gray-300); }
     .po-page.light { color: rgba(255,255,255,0.6); }
     .post-meta { padding: var(--s-3) var(--s-4); border-top: 1px solid var(--border); }
-    .post-name { font-size: 13px; font-weight: 600; letter-spacing: 0.01em; }
+    .post-name { font-size: 13px; font-weight: 600; letter-spacing: -0.02em; }
     .post-size { font-size: 12px; color: var(--gray-500); margin-top: 3px; }
     .post-use { font-size: 12px; color: var(--gray-500); margin-top: 6px; line-height: 1.45; }
 
@@ -173,7 +173,7 @@
     .caption-head { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-5); }
     .caption-head .avatar { width: 44px; height: 44px; flex: 0 0 44px; background: var(--blue-light); border-radius: 999px; }
     .caption-head .avatar img { width: 24px; }
-    .caption-org { font-size: 14px; font-weight: 600; letter-spacing: 0.01em; }
+    .caption-org { font-size: 14px; font-weight: 600; letter-spacing: -0.02em; }
     .caption-sub { font-size: 12px; color: var(--gray-500); }
     .caption-body { font-size: 15px; line-height: 1.6; color: var(--dark); white-space: pre-line; }
     .caption-body .fold { color: var(--gray-300); }
@@ -185,13 +185,13 @@
     }
     .awaiting-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: var(--gray-500); margin-bottom: var(--s-3); }
     .awaiting-tag span { width: 6px; height: 6px; border-radius: 999px; background: var(--gray-300); }
-    .awaiting h4 { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .awaiting h4 { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
     .awaiting ul { margin: 0; padding-left: 18px; }
     .awaiting li { font-size: 14px; line-height: 1.65; color: var(--gray-700); }
 
     .note-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); margin-top: var(--s-5); }
     .note-card { border: 1px solid var(--border); border-radius: 6px; padding: var(--s-5); }
-    .note-card h4 { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .note-card h4 { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
     .note-card p { font-size: 13px; line-height: 1.6; color: var(--gray-500); }
   </style>
 </helmet>
@@ -255,7 +255,6 @@
   <!-- ============ CONTENT ============ -->
   <main class="content">
     <header class="masthead">
-      <p class="eyebrow">Exatom</p>
       <h1 class="display">Social media</h1>
       <p class="lede">LinkedIn is the only channel Exatom posts on, so this guide is written for LinkedIn specifically: the profile, the banner, the three post formats, and how a caption sounds. Colors, type and logo rules come from the brand guidelines.</p>
     </header>
