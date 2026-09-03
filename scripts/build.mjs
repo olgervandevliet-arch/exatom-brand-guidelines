@@ -226,7 +226,7 @@ const siteCss = `
     .switch-opt {
       display: flex; align-items: center; gap: 10px;
       width: 100%; background: none; border: 0; font: inherit; text-align: left; cursor: pointer;
-      height: 36px; padding: 0 10px; border-radius: 4px;
+      height: 36px; padding: 0 10px; border-radius: 8px;
       font-size: 14px; letter-spacing: 0.01em; color: var(--dark);
       transition: background 120ms ease;
     }
