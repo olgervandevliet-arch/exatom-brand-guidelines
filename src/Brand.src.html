@@ -359,6 +359,13 @@
     .metric-label.on-dark { color: var(--gray-300); }
 
     .icon-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-4); }
+    /* ---------- Team ---------- */
+    .team-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--s-4); }
+    .team-card { border-radius: 8px; overflow: hidden; }
+    .team-photo { aspect-ratio: 1; background: var(--warm-white); }
+    .team-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .team-name { font-size: 13px; font-weight: 600; letter-spacing: -0.02em; margin-top: var(--s-2); }
+
     .icon-cell { position: relative; display: flex; flex-direction: column; gap: var(--s-3); border: 1px solid var(--border); border-radius: 8px; padding: var(--s-5); }
     .icon-get {
       position: absolute; top: 8px; right: 8px;
@@ -437,6 +444,10 @@
         <button type="button" class="menu-item" onClick="{{ goIcons }}">
           <svg viewBox="0 0 256 256" fill="currentColor"><path d="M172,76a44,44,0,1,0-44,44A44.05,44.05,0,0,0,172,76Zm-44,28a28,28,0,1,1,28-28A28,28,0,0,1,128,104Zm60,24a44,44,0,1,0,44,44A44.05,44.05,0,0,0,188,128Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,188,200ZM68,128a44,44,0,1,0,44,44A44.05,44.05,0,0,0,68,128Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,68,200Z"/></svg>
           <span>Icons</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goTeam }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"/></svg>
+          <span>Team</span>
         </button>
       </nav>
 
@@ -1249,6 +1260,64 @@
           <a class="btn btn-secondary" href="https://phosphoricons.com" target="_blank" rel="noopener"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,104a8,8,0,0,1-16,0V59.32l-66.33,66.34a8,8,0,0,1-11.32-11.32L196.68,48H152a8,8,0,0,1,0-16h64a8,8,0,0,1,8,8Zm-40,24a8,8,0,0,0-8,8v72H48V80h72a8,8,0,0,0,0-16H48A16,16,0,0,0,32,80V208a16,16,0,0,0,16,16H176a16,16,0,0,0,16-16V136A8,8,0,0,0,184,128Z"/></svg><span class="btn-label"><span>Browse Phosphor</span><span aria-hidden="true">Browse Phosphor</span></span></a>
           <a class="btn btn-secondary" href="assets/exatom-icons.zip" data-icon-pack download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Download the icon set</span><span aria-hidden="true">Download the icon set</span></span></a>
         </div>
+      </div>
+    </section>
+
+    <!-- ---------- TEAM ---------- -->
+    <section class="section" id="team">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"/></svg></span>
+        <h2 class="section-title">Team</h2>
+      </div>
+      <p class="section-intro">The official set of headshots — for LinkedIn, the about page, speaker bios, press. One square crop, on a plain ground, at consistent framing across every person and every account.</p>
+
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-photo"><img src="bart.jpg" alt="Bart"></div>
+          <p class="team-name">Bart</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><img src="filip.jpg" alt="Filip"></div>
+          <p class="team-name">Filip</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><img src="kurt.jpg" alt="Kurt"></div>
+          <p class="team-name">Kurt</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><img src="marcelo.jpg" alt="Marcelo"></div>
+          <p class="team-name">Marcelo</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><img src="matthieu.jpg" alt="Matthieu"></div>
+          <p class="team-name">Matthieu</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><img src="michael.jpg" alt="Michaël"></div>
+          <p class="team-name">Michaël</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><img src="olger.jpg" alt="Olger"></div>
+          <p class="team-name">Olger</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><img src="oliver.jpg" alt="Oliver"></div>
+          <p class="team-name">Oliver</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><img src="sander.jpg" alt="Sander"></div>
+          <p class="team-name">Sander</p>
+        </div>
+        <div class="team-card">
+          <div class="team-photo"><img src="stephan.jpg" alt="Stephan"></div>
+          <p class="team-name">Stephan</p>
+        </div>
+      </div>
+
+      <div class="rule-list">
+        <div class="rule"><div class="rule-key">Crop</div><div class="rule-val">Square, head and shoulders, same framing for everyone — no one photo wider or looser than the rest.</div></div>
+        <div class="rule"><div class="rule-key">Background</div><div class="rule-val">Plain and light. No office backdrops, no busy interiors — the person is the subject.</div></div>
+        <div class="rule"><div class="rule-key">Use</div><div class="rule-val">LinkedIn personal profile pictures, the about page, speaker decks and press requests. Never cropped tighter or looser than the square delivered here.</div></div>
       </div>
     </section>
 

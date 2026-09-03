@@ -110,7 +110,7 @@ for (const a of assets) {
   groups.get(group).push(a);
 }
 
-const TITLE = { logo: 'Logo', icons: 'Icons', fonts: 'Fonts', decks: 'Deck templates', social: 'Social templates', print: 'Print' };
+const TITLE = { logo: 'Logo', icons: 'Icons', team: 'Team', fonts: 'Fonts', decks: 'Deck templates', social: 'Social templates', print: 'Print' };
 const label = (g) => TITLE[g] || g.charAt(0).toUpperCase() + g.slice(1).replace(/[-_]/g, ' ');
 
 const assetRow = (a) => {
@@ -191,6 +191,7 @@ let brandPane = contentOf(brandSrc)
 
 /* keep the filename findable next to the rewritten src */
 brandPane = brandPane.replace(/<img src="([^"]+\.svg)"/g, '<img data-file="$1" src="logo/$1"');
+brandPane = brandPane.replace(/<img src="([^"]+\.(?:jpe?g|png|webp))"/g, '<img src="assets/team/$1">' );
 
 /* the source points at assets/exatom-icons.zip; the build files it under icons/ */
 brandPane = brandPane.replace('href="assets/exatom-icons.zip"', `href="assets/${ICON_ZIP}"`);
@@ -230,7 +231,7 @@ const socPane = fixImgs(contentOf(socSrc));
 
 /* strip the canvas {{ hole }} bindings — this site wires its own handlers */
 const cleanNav = (html) => html.replace(/\s*onClick="\{\{\s*(\w+)\s*\}\}"/g, (_m, name) => {
-  const id = { goLogo: 'logo', goColor: 'color', goType: 'type', goFoundations: 'foundations', goUi: 'ui', goForms: 'forms', goIcons: 'icons',
+  const id = { goLogo: 'logo', goColor: 'color', goType: 'type', goFoundations: 'foundations', goUi: 'ui', goForms: 'forms', goIcons: 'icons', goTeam: 'team',
     goFormat: 'format', goLayouts: 'layouts', goSlideType: 'slide-type', goData: 'data', goBuilding: 'building',
     goProfile: 'profile', goFormats: 'formats', goCarousel: 'carousel', goCaptions: 'captions' }[name];
   if (!id) throw new Error('unmapped handler: ' + name);
