@@ -228,7 +228,7 @@ const siteCss = `
     .user-block[aria-expanded="true"] { background: var(--warm-white); }
     .switch-pop {
       position: absolute; left: 0; right: 0; bottom: calc(100% + 6px);
-      background: var(--white); border: 1px solid var(--border); border-radius: 6px;
+      background: var(--white); border: 1px solid var(--border); border-radius: 8px;
       box-shadow: 0 12px 32px rgba(24, 18, 45, 0.10), 0 2px 6px rgba(24, 18, 45, 0.05);
       padding: var(--s-1); display: flex; flex-direction: column; gap: 2px; z-index: 20;
     }
@@ -281,14 +281,14 @@ const siteCss = `
     .asset-btn.is-done svg + span + svg { display: inline; }
 
     /* ---------- Download library ---------- */
-    .asset-list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .asset-list { list-style: none; margin: 0; padding: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
     .asset-row { display: flex; align-items: center; gap: var(--s-4); padding: var(--s-3) var(--s-4); border-top: 1px solid var(--border); }
     .asset-row:first-child { border-top: none; }
     .asset-row:hover { background: var(--warm-white); }
     .asset-icon { display: inline-flex; color: var(--gray-300); }
     .asset-icon svg { width: 18px; height: 18px; }
     .asset-name { font-size: 14px; letter-spacing: -0.02em; flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
-    .asset-type { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--gray-500); background: var(--white); border: 1px solid var(--border); padding: 3px 7px; border-radius: 3px; flex: 0 0 auto; }
+    .asset-type { font-size: 11px; font-weight: 600; letter-spacing: 0.04em; color: var(--gray-500); background: var(--white); border: 1px solid var(--border); padding: 3px 7px; border-radius: 4px; flex: 0 0 auto; }
     .asset-size { font-size: 12px; color: var(--gray-500); flex: 0 0 68px; text-align: right; }
     .asset-get {
       display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto;
@@ -300,7 +300,7 @@ const siteCss = `
     .asset-get svg { width: 13px; height: 13px; flex: 0 0 13px; }
     .asset-get:hover { background: var(--blue); color: var(--white); }
 
-    .awaiting { border: 1px dashed var(--gray-300); border-radius: 6px; background: var(--white); padding: var(--s-5) var(--s-6); max-width: 720px; }
+    .awaiting { border: 1px dashed var(--gray-300); border-radius: 8px; background: var(--white); padding: var(--s-5) var(--s-6); max-width: 720px; }
     .awaiting-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: var(--gray-500); margin-bottom: var(--s-3); }
     .awaiting-tag span { width: 6px; height: 6px; border-radius: 999px; background: var(--gray-300); }
     .awaiting h4 { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }

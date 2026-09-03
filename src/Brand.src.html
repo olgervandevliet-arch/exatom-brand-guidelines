@@ -91,7 +91,7 @@
       transition: background 120ms ease;
     }
     .user-block:hover { background: var(--warm-white); }
-    .user-block img { width: 32px; height: 32px; flex: 0 0 32px; border-radius: 6px; }
+    .user-block img { width: 32px; height: 32px; flex: 0 0 32px; border-radius: 8px; }
     .user-text { display: flex; flex-direction: column; min-width: 0; }
     .user-name { font-size: 14px; font-weight: 500; letter-spacing: -0.02em; color: var(--dark); }
     .user-meta { font-size: 12px; color: var(--gray-500); }
@@ -110,7 +110,7 @@
     .section { padding-top: var(--s-9); scroll-margin-top: var(--s-6); }
     .section + .section { border-top: 1px solid var(--border); }
     .section-head { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-3); }
-    .section-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; flex: 0 0 34px; border-radius: 6px; background: var(--blue-light); color: var(--blue); }
+    .section-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; flex: 0 0 34px; border-radius: 8px; background: var(--blue-light); color: var(--blue); }
     .section-icon svg { width: 20px; height: 20px; }
     .section-title { font-size: 38px; letter-spacing: -0.018em; line-height: 1.1; }
     .section-intro { font-size: 16px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-7); }
@@ -119,11 +119,11 @@
     .subsection-title { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
     .subsection-note { font-size: 14px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-5); }
     .caption { font-size: 13px; line-height: 1.5; color: var(--gray-500); }
-    code { font-family: 'Inter', sans-serif; font-size: 0.92em; background: var(--warm-white); padding: 2px 6px; border-radius: 3px; }
+    code { font-family: 'Inter', sans-serif; font-size: 0.92em; background: var(--warm-white); padding: 2px 6px; border-radius: 4px; }
 
     /* ---------- Logo ---------- */
     .logo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); }
-    .logo-tile { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .logo-tile { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
     .logo-stage { height: 132px; display: flex; align-items: center; justify-content: center; padding: var(--s-5); }
     .logo-stage img { max-height: 34px; width: auto; }
     .logo-stage.icon-stage img { max-height: 56px; }
@@ -132,15 +132,23 @@
     .tile-sub { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
 
     .clearspace { display: flex; gap: var(--s-7); align-items: center; flex-wrap: wrap; }
-    .clearspace-demo { position: relative; padding: 44px; border: 1px dashed var(--gray-300); border-radius: 6px; background: var(--white); }
+    .clearspace-demo { position: relative; padding: 44px; border: 1px dashed var(--gray-300); border-radius: 8px; background: var(--white); }
     .clearspace-demo img { height: 44px; display: block; }
     .clearspace-inner { position: absolute; inset: 22px; border: 1px solid var(--blue); border-radius: 4px; opacity: 0.35; }
 
     /* ---------- Color ---------- */
     .bg-tile-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-4); }
-    .swatch-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--s-4); }
-    .swatch-grid.six { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-    .swatch { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    /* stacked, so the palette reads as a list of values rather than a wall of
+       tiles: the fill on the left at a constant width, the numbers beside it */
+    .swatch-list { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .swatch-row { display: flex; align-items: stretch; border-top: 1px solid var(--border); }
+    .swatch-row:first-child { border-top: none; }
+    .swatch-chip { flex: 0 0 220px; min-height: 92px; }
+    .swatch-info { flex: 1 1 auto; display: flex; align-items: center; gap: var(--s-6); padding: var(--s-4) var(--s-5); min-width: 0; }
+    .swatch-info .swatch-name { flex: 0 0 160px; }
+    .swatch-values { flex: 0 0 200px; }
+    .swatch-info .swatch-role { flex: 1 1 auto; margin-top: 0; }
+    .swatch { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
     .swatch-fill { height: 108px; }
     .swatch-meta { padding: var(--s-3) var(--s-4); border-top: 1px solid var(--border); }
     .swatch-name { font-size: 13px; font-weight: 600; letter-spacing: -0.02em; }
@@ -148,30 +156,29 @@
     .swatch-rgb { font-size: 11px; color: var(--gray-300); font-family: 'Inter', sans-serif; margin-top: 1px; }
     .swatch-role { font-size: 11px; color: var(--gray-500); margin-top: var(--s-2); line-height: 1.4; }
 
-    .scale-strip { display: flex; border-radius: 6px; overflow: hidden; }
+    .scale-strip { display: flex; border-radius: 8px; overflow: hidden; }
     .scale-cell { flex: 1; padding: var(--s-6) var(--s-4) var(--s-4); display: flex; flex-direction: column; justify-content: flex-end; min-height: 116px; }
     .scale-hex { font-size: 12px; font-family: 'Inter', sans-serif; }
     .scale-role { font-size: 11px; margin-top: 3px; opacity: 0.75; }
 
     .gradient-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4); }
-    .gradient-tile { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .gradient-tile { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
     .gradient-fill { height: 176px; }
     .pairing-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s-4); }
-    .pairing { border: 1px solid transparent; border-radius: 6px; height: 128px; display: flex; align-items: center; justify-content: center; }
+    .pairing { border: 1px solid transparent; border-radius: 8px; height: 128px; display: flex; align-items: center; justify-content: center; }
     .pairing.on-white { border-color: var(--border); }
 
     .text-pair-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); }
-    .text-pair { position: relative; border-radius: 6px; padding: 20px; height: 400px; overflow: hidden; }
+    .text-pair { position: relative; border-radius: 8px; padding: 20px; height: 400px; overflow: hidden; }
     .tp-title { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 56px; letter-spacing: -0.04em; line-height: 0.98; margin-top: -0.16em; max-width: 9ch; }
-    .tp-body { position: absolute; left: 20px; bottom: 20px; width: 52%; font-size: 14px; line-height: 1.4; }
-    .tp-btn { position: absolute; right: 20px; bottom: 20px; font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13px; padding: 10px 18px; border-radius: 999px; }
-    /* when the card carries the mark, the body moves up under the headline so
-       the bottom margin stays a single row: mark left, action right */
-    .tp-body.under { position: static; width: 62%; margin-top: var(--s-5); }
-    .tp-mark { position: absolute; left: 20px; bottom: 20px; display: block; }
+    .tp-foot { position: absolute; left: 20px; right: 20px; bottom: 20px; display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+    .tp-foot-left { display: flex; flex-direction: column; align-items: flex-start; gap: var(--s-3); max-width: 62%; }
+    .tp-body { font-size: 14px; line-height: 1.4; }
+    .tp-btn { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13px; padding: 10px 18px; border-radius: 999px; }
+    .tp-mark { flex: 0 0 auto; display: block; }
     .tp-mark svg { width: 40px; height: 40px; display: block; }
 
-    .layout-demo { position: relative; width: 925px; max-width: 100%; height: 420px; border-radius: 6px; padding: 37px; overflow: hidden; }
+    .layout-demo { position: relative; width: 925px; max-width: 100%; height: 420px; border-radius: 8px; padding: 37px; overflow: hidden; }
     .ld-headline { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 88px; letter-spacing: -0.04em; line-height: 0.98; max-width: 9ch; margin-top: -0.14em; }
     .ld-body { position: absolute; left: 37px; bottom: 37px; width: 46%; font-size: 22px; line-height: 1.35; }
     .ld-mark { position: absolute; right: 37px; bottom: 37px; }
@@ -180,7 +187,7 @@
 
     /* ---------- Typography ---------- */
     .type-families { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); }
-    .family-card { border: 1px solid var(--border); border-radius: 6px; padding: var(--s-6); }
+    .family-card { border: 1px solid var(--border); border-radius: 8px; padding: var(--s-6); }
     .family-name { font-family: 'Instrument Sans', sans-serif; font-size: 40px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-4); }
     .family-name.inter { font-family: 'Inter', sans-serif; font-weight: 400; letter-spacing: -0.01em; }
     .family-role { font-size: 14px; color: var(--gray-500); line-height: 1.6; margin-bottom: var(--s-5); }
@@ -194,7 +201,7 @@
     .weight-spec { flex: 0 0 200px; font-size: 12px; letter-spacing: 0.01em; color: var(--gray-500); font-family: 'Inter', sans-serif; }
     .weight-sample { font-family: 'Instrument Sans', sans-serif; font-size: 30px; letter-spacing: -0.02em; }
 
-    .rule-list { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: var(--s-5); }
+    .rule-list { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; margin-top: var(--s-5); }
     .rule { display: flex; gap: var(--s-5); padding: var(--s-4) var(--s-5); border-top: 1px solid var(--border); }
     .rule:first-child { border-top: none; }
     .rule-key { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: -0.02em; flex: 0 0 150px; }
@@ -202,19 +209,19 @@
     .specimen { padding: var(--s-7) 0; border-bottom: 1px solid var(--border); }
     .specimen:last-of-type { border-bottom: none; }
     .specimen-spec { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-bottom: var(--s-3); }
-    .spec-chip { font-size: 11px; letter-spacing: 0.01em; font-family: 'Inter', sans-serif; color: var(--gray-500); background: var(--warm-white); padding: 4px 9px; border-radius: 3px; }
+    .spec-chip { font-size: 11px; letter-spacing: 0.01em; font-family: 'Inter', sans-serif; color: var(--gray-500); background: var(--warm-white); padding: 4px 9px; border-radius: 4px; }
     .sp-headline { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 80px; letter-spacing: -0.04em; line-height: 1.1; }
     .sp-subhead { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 40px; letter-spacing: 0; line-height: 1.15; }
     .sp-body { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 20px; letter-spacing: -0.02em; line-height: 1.4; max-width: 60ch; }
     .sp-small { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px; line-height: 1.6; color: var(--gray-700); max-width: 60ch; }
 
     .lh-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4); }
-    .lh-card { border: 1px solid var(--border); border-radius: 6px; padding: var(--s-5); }
+    .lh-card { border: 1px solid var(--border); border-radius: 8px; padding: var(--s-5); }
     .lh-value { font-size: 12px; font-family: 'Inter', sans-serif; color: var(--gray-500); margin-bottom: var(--s-4); }
     .lh-sample { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 21px; letter-spacing: -0.02em; }
 
     /* ---------- UI examples ---------- */
-    .space-scale { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .space-scale { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
     .space-row { display: flex; align-items: center; gap: var(--s-5); padding: 10px var(--s-5); border-top: 1px solid var(--border); }
     .space-row:first-child { border-top: none; }
     .space-bar { height: 10px; background: var(--blue-light); border-radius: 2px; flex: 0 0 auto; }
@@ -228,6 +235,23 @@
       padding: 13px 24px; border-radius: 999px; border: 1px solid transparent; cursor: pointer;
       transition: background 130ms ease, border-color 130ms ease, color 130ms ease;
     }
+
+    /* Hover: the label drops out of the bottom while a second copy arrives from
+       above. Both are clipped by .btn-label, so the type never leaves the pill.
+       Two spans, not one — a single element cannot be in both places at once. */
+    .btn-label { display: block; position: relative; overflow: hidden; line-height: 1.3; }
+    .btn-label > span { display: block; transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+    .btn-label > span + span { position: absolute; inset: 0; transform: translateY(-105%); }
+    .btn:hover .btn-label > span { transform: translateY(105%); }
+    .btn:hover .btn-label > span + span { transform: translateY(0); }
+    .btn:disabled .btn-label > span, .btn-disabled .btn-label > span { transform: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .btn-label > span { transition: none; }
+      .btn:hover .btn-label > span { transform: none; }
+      .btn:hover .btn-label > span + span { transform: translateY(-105%); }
+    }
+    .btn-sm { font-size: 13px; padding: 9px 18px; }
     .btn-primary { background: var(--blue); color: var(--white); }
     .btn-primary:hover { background: #1E46C4; }
     .btn-secondary { background: var(--white); color: var(--dark); border-color: var(--gray-100); }
@@ -240,7 +264,7 @@
 
     /* On #18122D the palette inverts: Blue drops to 2.6:1 against the ground, so
        the filled action becomes white and the tertiary text becomes Blue Light. */
-    .on-dark-stage { background: var(--dark); border-radius: 6px; padding: var(--s-7); }
+    .on-dark-stage { background: var(--dark); border-radius: 8px; padding: var(--s-7); }
     .on-dark-stage .btn-primary { background: var(--white); color: var(--dark); }
     .on-dark-stage .btn-primary:hover { background: var(--blue-light); }
     .on-dark-stage .btn-secondary { background: transparent; color: var(--white); border-color: rgba(255, 255, 255, 0.28); }
@@ -253,7 +277,7 @@
     .field-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-5); }
     .field { display: flex; flex-direction: column; gap: var(--s-2); }
     .field-label { font-size: 13px; font-weight: 600; letter-spacing: -0.02em; color: var(--dark); }
-    .field-input { font-family: 'Inter', sans-serif; font-size: 15px; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--gray-100); background: var(--white); color: var(--dark); }
+    .field-input { font-family: 'Inter', sans-serif; font-size: 15px; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--gray-100); background: var(--white); color: var(--dark); }
     .field-input::placeholder { color: var(--gray-300); }
     .field-input.is-focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(42, 90, 233, 0.14); outline: none; }
     .field-input.is-error { border-color: var(--coral); }
@@ -271,23 +295,23 @@
     .field-select select {
       appearance: none; -webkit-appearance: none; width: 100%;
       font-family: 'Inter', sans-serif; font-size: 15px; padding: 12px 44px 12px 16px;
-      border-radius: 10px; border: 1px solid var(--gray-100); background: var(--white); color: var(--dark);
+      border-radius: 12px; border: 1px solid var(--gray-100); background: var(--white); color: var(--dark);
     }
     .field-select svg { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--gray-500); pointer-events: none; }
 
-    .field-textarea { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.55; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--gray-100); background: var(--white); color: var(--dark); resize: vertical; min-height: 96px; }
+    .field-textarea { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.55; padding: 12px 16px; border-radius: 12px; border: 1px solid var(--gray-100); background: var(--white); color: var(--dark); resize: vertical; min-height: 96px; }
 
     .choice-list { display: flex; flex-direction: column; gap: var(--s-2); }
     .choice-list.row { flex-direction: row; flex-wrap: wrap; gap: var(--s-3); }
     .choice {
       display: flex; align-items: center; gap: 10px;
-      padding: 12px 16px; border: 1px solid var(--gray-100); border-radius: 10px;
+      padding: 12px 16px; border: 1px solid var(--gray-100); border-radius: 12px;
       font-size: 15px; cursor: pointer; background: var(--white);
       transition: border-color 120ms ease, background 120ms ease;
     }
     .choice:hover { border-color: var(--gray-300); }
     .choice.is-on { border-color: var(--blue); background: var(--blue-light); }
-    .choice-box { width: 18px; height: 18px; flex: 0 0 18px; border: 1px solid var(--gray-300); border-radius: 5px; background: var(--white); display: inline-flex; align-items: center; justify-content: center; color: var(--white); }
+    .choice-box { width: 18px; height: 18px; flex: 0 0 18px; border: 1px solid var(--gray-300); border-radius: 4px; background: var(--white); display: inline-flex; align-items: center; justify-content: center; color: var(--white); }
     .choice-box.round { border-radius: 999px; }
     .choice-box svg { width: 12px; height: 12px; opacity: 0; }
     .choice-box .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--white); opacity: 0; }
@@ -295,7 +319,7 @@
     .choice.is-on .choice-box svg, .choice.is-on .choice-box .dot { opacity: 1; }
 
     /* a form as it actually ships — one column, grouped, with the postcode lookup */
-    .form-demo { max-width: 480px; border: 1px solid var(--border); border-radius: 6px; padding: var(--s-7); background: var(--white); }
+    .form-demo { max-width: 480px; border: 1px solid var(--border); border-radius: 8px; padding: var(--s-7); background: var(--white); }
     .form-demo .field + .field, .form-demo .field-group + .field, .form-demo .field + .field-group { margin-top: var(--s-5); }
     .form-title { font-family: 'Inter Tight', sans-serif; font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
     .form-lede { font-size: 14px; line-height: 1.55; color: var(--gray-500); margin-bottom: var(--s-6); }
@@ -308,7 +332,7 @@
     .form-actions { margin-top: var(--s-6); display: flex; align-items: center; gap: var(--s-4); }
 
     .dodont { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); margin-top: var(--s-5); }
-    .dodont-card { border: 1px solid var(--border); border-radius: 6px; padding: var(--s-5); }
+    .dodont-card { border: 1px solid var(--border); border-radius: 8px; padding: var(--s-5); }
     .dodont-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; margin-bottom: var(--s-3); }
     .dodont-tag.do { color: #0F7A5A; }
     .dodont-tag.skip { color: var(--coral); }
@@ -316,7 +340,7 @@
     .dodont-card li { font-size: 14px; line-height: 1.65; color: var(--gray-700); }
 
     .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4); }
-    .ui-card { position: relative; height: 420px; border: 1px solid var(--border); border-radius: 6px; padding: 17px; display: flex; flex-direction: column; }
+    .ui-card { position: relative; height: 420px; border: 1px solid var(--border); border-radius: 8px; padding: 17px; display: flex; flex-direction: column; }
     .ui-card.on-tint { background: var(--blue-light); border-color: transparent; }
     .ui-card.on-dark { background: var(--dark); border-color: transparent; }
     .metric { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 68px; letter-spacing: -0.04em; line-height: 1; margin-top: -0.16em; }
@@ -327,7 +351,7 @@
     .metric-label.on-dark { color: var(--gray-300); }
 
     .icon-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-4); }
-    .icon-cell { position: relative; display: flex; flex-direction: column; gap: var(--s-3); border: 1px solid var(--border); border-radius: 6px; padding: var(--s-5); }
+    .icon-cell { position: relative; display: flex; flex-direction: column; gap: var(--s-3); border: 1px solid var(--border); border-radius: 8px; padding: var(--s-5); }
     .icon-get {
       position: absolute; top: 8px; right: 8px;
       display: inline-flex; align-items: center; justify-content: center;
@@ -535,49 +559,59 @@
       <div class="subsection" id="color-core">
         <h3 class="subsection-title">Core palette</h3>
         <p class="subsection-note">Blue, Warm White and Dark are the primary brand colors across every application. Do not substitute unapproved alternatives.</p>
-        <div class="swatch-grid">
-          <div class="swatch">
-            <div class="swatch-fill" style="background: #FFFFFF; border-bottom: 1px solid var(--border); height: 208px"></div>
-            <div class="swatch-meta">
+        <div class="swatch-list">
+          <div class="swatch-row">
+            <div class="swatch-chip" style="background: #FFFFFF; border-bottom: 1px solid var(--border)"></div>
+            <div class="swatch-info">
               <p class="swatch-name">Exatom White</p>
-              <p class="swatch-hex">#FFFFFF</p>
-              <p class="swatch-rgb">255 / 255 / 255</p>
+              <div class="swatch-values">
+                <p class="swatch-hex">#FFFFFF</p>
+                <p class="swatch-rgb">255 / 255 / 255</p>
+              </div>
               <p class="swatch-role">Page background, cards</p>
             </div>
           </div>
-          <div class="swatch">
-            <div class="swatch-fill" style="background: #F7F4F2; height: 208px"></div>
-            <div class="swatch-meta">
+          <div class="swatch-row">
+            <div class="swatch-chip" style="background: #F7F4F2"></div>
+            <div class="swatch-info">
               <p class="swatch-name">Warm White</p>
-              <p class="swatch-hex">#F7F4F2</p>
-              <p class="swatch-rgb">247 / 244 / 242</p>
+              <div class="swatch-values">
+                <p class="swatch-hex">#F7F4F2</p>
+                <p class="swatch-rgb">247 / 244 / 242</p>
+              </div>
               <p class="swatch-role">Section fills, borders</p>
             </div>
           </div>
-          <div class="swatch">
-            <div class="swatch-fill" style="background: #E8EEFF; height: 208px"></div>
-            <div class="swatch-meta">
+          <div class="swatch-row">
+            <div class="swatch-chip" style="background: #E8EEFF"></div>
+            <div class="swatch-info">
               <p class="swatch-name">Blue Light</p>
-              <p class="swatch-hex">#E8EEFF</p>
-              <p class="swatch-rgb">232 / 238 / 255</p>
+              <div class="swatch-values">
+                <p class="swatch-hex">#E8EEFF</p>
+                <p class="swatch-rgb">232 / 238 / 255</p>
+              </div>
               <p class="swatch-role">Tinted panels, labels</p>
             </div>
           </div>
-          <div class="swatch">
-            <div class="swatch-fill" style="background: #2A5AE9; height: 208px"></div>
-            <div class="swatch-meta">
+          <div class="swatch-row">
+            <div class="swatch-chip" style="background: #2A5AE9"></div>
+            <div class="swatch-info">
               <p class="swatch-name">Blue</p>
-              <p class="swatch-hex">#2A5AE9</p>
-              <p class="swatch-rgb">042 / 090 / 233</p>
+              <div class="swatch-values">
+                <p class="swatch-hex">#2A5AE9</p>
+                <p class="swatch-rgb">042 / 090 / 233</p>
+              </div>
               <p class="swatch-role">Primary action, accent</p>
             </div>
           </div>
-          <div class="swatch">
-            <div class="swatch-fill" style="background: #18122D; height: 208px"></div>
-            <div class="swatch-meta">
+          <div class="swatch-row">
+            <div class="swatch-chip" style="background: #18122D"></div>
+            <div class="swatch-info">
               <p class="swatch-name">Dark</p>
-              <p class="swatch-hex">#18122D</p>
-              <p class="swatch-rgb">024 / 018 / 045</p>
+              <div class="swatch-values">
+                <p class="swatch-hex">#18122D</p>
+                <p class="swatch-rgb">024 / 018 / 045</p>
+              </div>
               <p class="swatch-role">Body text, dark surfaces</p>
             </div>
           </div>
@@ -599,53 +633,71 @@
       <div class="subsection" id="color-extended">
         <h3 class="subsection-title">Extended palette</h3>
         <p class="subsection-note">Highlights, accents and marketing material only — always in balance with the core palette, and never as a replacement for it in primary brand applications. Mint is the loudest of the set; treat it as a spark, not a surface.</p>
-        <div class="swatch-grid six">
-          <div class="swatch">
-            <div class="swatch-fill" style="background:#E5FFF7"></div>
-            <div class="swatch-meta">
+        <div class="swatch-list">
+          <div class="swatch-row">
+            <div class="swatch-chip" style="background:#E5FFF7"></div>
+            <div class="swatch-info">
               <p class="swatch-name">Mint Light</p>
-              <p class="swatch-hex">#E5FFF7</p>
-              <p class="swatch-rgb">229 / 255 / 247</p>
+              <div class="swatch-values">
+                <p class="swatch-hex">#E5FFF7</p>
+                <p class="swatch-rgb">229 / 255 / 247</p>
+              </div>
+              <p class="swatch-role">Campaign surfaces, spark backgrounds</p>
             </div>
           </div>
-          <div class="swatch">
-            <div class="swatch-fill" style="background:#3FFFD9"></div>
-            <div class="swatch-meta">
+          <div class="swatch-row">
+            <div class="swatch-chip" style="background:#3FFFD9"></div>
+            <div class="swatch-info">
               <p class="swatch-name">Mint</p>
-              <p class="swatch-hex">#3FFFD9</p>
-              <p class="swatch-rgb">063 / 255 / 217</p>
+              <div class="swatch-values">
+                <p class="swatch-hex">#3FFFD9</p>
+                <p class="swatch-rgb">063 / 255 / 217</p>
+              </div>
+              <p class="swatch-role">Accent only — never a surface</p>
             </div>
           </div>
-          <div class="swatch">
-            <div class="swatch-fill" style="background:#023533"></div>
-            <div class="swatch-meta">
+          <div class="swatch-row">
+            <div class="swatch-chip" style="background:#023533"></div>
+            <div class="swatch-info">
               <p class="swatch-name">Teal</p>
-              <p class="swatch-hex">#023533</p>
-              <p class="swatch-rgb">002 / 053 / 051</p>
+              <div class="swatch-values">
+                <p class="swatch-hex">#023533</p>
+                <p class="swatch-rgb">002 / 053 / 051</p>
+              </div>
+              <p class="swatch-role">Ink on Mint Light, deep campaign ground</p>
             </div>
           </div>
-          <div class="swatch">
-            <div class="swatch-fill" style="background:#FEEFEF"></div>
-            <div class="swatch-meta">
+          <div class="swatch-row">
+            <div class="swatch-chip" style="background:#FEEFEF"></div>
+            <div class="swatch-info">
               <p class="swatch-name">Blush</p>
-              <p class="swatch-hex">#FEEFEF</p>
-              <p class="swatch-rgb">254 / 239 / 239</p>
+              <div class="swatch-values">
+                <p class="swatch-hex">#FEEFEF</p>
+                <p class="swatch-rgb">254 / 239 / 239</p>
+              </div>
+              <p class="swatch-role">Campaign surfaces, softer register</p>
             </div>
           </div>
-          <div class="swatch">
-            <div class="swatch-fill" style="background:#FF5E74"></div>
-            <div class="swatch-meta">
+          <div class="swatch-row">
+            <div class="swatch-chip" style="background:#FF5E74"></div>
+            <div class="swatch-info">
               <p class="swatch-name">Coral</p>
-              <p class="swatch-hex">#FF5E74</p>
-              <p class="swatch-rgb">255 / 094 / 116</p>
+              <div class="swatch-values">
+                <p class="swatch-hex">#FF5E74</p>
+                <p class="swatch-rgb">255 / 094 / 116</p>
+              </div>
+              <p class="swatch-role">Errors, and campaign accents</p>
             </div>
           </div>
-          <div class="swatch">
-            <div class="swatch-fill" style="background:#440020"></div>
-            <div class="swatch-meta">
+          <div class="swatch-row">
+            <div class="swatch-chip" style="background:#440020"></div>
+            <div class="swatch-info">
               <p class="swatch-name">Burgundy</p>
-              <p class="swatch-hex">#440020</p>
-              <p class="swatch-rgb">068 / 000 / 032</p>
+              <div class="swatch-values">
+                <p class="swatch-hex">#440020</p>
+                <p class="swatch-rgb">068 / 000 / 032</p>
+              </div>
+              <p class="swatch-role">Ink on Blush, deep campaign ground</p>
             </div>
           </div>
         </div>
@@ -691,40 +743,68 @@
 
       <div class="subsection" id="color-text">
         <h3 class="subsection-title">Text on color</h3>
-        <p class="subsection-note">Pairings carrying type, laid out as formats rather than text blocks: 400 tall, so the modular margin is 20px, the headline sits with its cap-height on the top margin, and the action closes the bottom margin. The ink is always the lightest or darkest member of its own pair, never the accent. The two core-palette cards at the bottom — Blue&nbsp;Light with Dark, Dark with Blue&nbsp;Light — are the default; the four extended pairings above them are campaign work, and carry the mark on the bottom margin.</p>
+        <p class="subsection-note">Pairings carrying type, laid out as formats rather than text blocks: 400 tall, so the modular margin is 20px, the headline sits with its cap-height on the top margin, and the bottom margin carries the description and action on the left with the mark on the right. The ink is always the lightest or darkest member of its own pair, never the accent. Blue&nbsp;Light and Dark lead because they are the core palette; the four extended pairings below them are campaign work.</p>
         <div class="specimen-spec"><span class="spec-chip">400 tall</span><span class="spec-chip">20px modular margin</span><span class="spec-chip">headline 56px</span><span class="spec-chip">body 14px = 25%</span><span class="spec-chip">pill action</span></div>
         <div class="text-pair-grid" style="gap: 16px">
-          <div class="text-pair" style="background:#E5FFF7">
-            <p class="tp-title" style="color:#023533">Boost conversions.</p>
-            <p class="tp-body" style="color:#023533">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
-            <span class="tp-btn" style="background:#023533;color:#E5FFF7">Start free trial</span>
-          </div>
-          <div class="text-pair" style="background:#023533">
-            <p class="tp-title" style="color:#E5FFF7">Boost conversions.</p>
-            <p class="tp-body" style="color:#E5FFF7">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
-            <span class="tp-btn" style="background:#E5FFF7;color:#023533">Start free trial</span>
-          </div>
-          <div class="text-pair" style="background:#FEEFEF">
-            <p class="tp-title" style="color:#440020">Boost conversions.</p>
-            <p class="tp-body" style="color:#440020">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
-            <span class="tp-btn" style="background:#440020;color:#FEEFEF">Start free trial</span>
-          </div>
-          <div class="text-pair" style="background:#440020">
-            <p class="tp-title" style="color:#FEEFEF">Boost conversions.</p>
-            <p class="tp-body" style="color:#FEEFEF">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
-            <span class="tp-btn" style="background:#FEEFEF;color:#440020">Start free trial</span>
-          </div>
           <div class="text-pair" style="background:#E8EEFF">
             <p class="tp-title" style="color:#18122D">Your form is leaking revenue.</p>
-            <p class="tp-body under" style="color:#18122D">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
-            <span class="tp-mark"><svg viewBox="0 0 228 228" aria-hidden="true"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#18122D"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#E8EEFF"/></svg></span>
-            <span class="tp-btn" style="background:#18122D;color:#E8EEFF">Start free trial</span>
+            <div class="tp-foot">
+              <div class="tp-foot-left">
+                <p class="tp-body" style="color:#18122D">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
+                <span class="tp-btn" style="background:#18122D;color:#E8EEFF">Start free trial</span>
+              </div>
+              <span class="tp-mark"><svg viewBox="0 0 228 228" aria-hidden="true"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#18122D"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#E8EEFF"/></svg></span>
+            </div>
           </div>
           <div class="text-pair" style="background:#18122D">
             <p class="tp-title" style="color:#E8EEFF">Your form is leaking revenue.</p>
-            <p class="tp-body under" style="color:#E8EEFF">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
-            <span class="tp-mark"><svg viewBox="0 0 228 228" aria-hidden="true"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#E8EEFF"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#18122D"/></svg></span>
-            <span class="tp-btn" style="background:#E8EEFF;color:#18122D">Start free trial</span>
+            <div class="tp-foot">
+              <div class="tp-foot-left">
+                <p class="tp-body" style="color:#E8EEFF">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
+                <span class="tp-btn" style="background:#E8EEFF;color:#18122D">Start free trial</span>
+              </div>
+              <span class="tp-mark"><svg viewBox="0 0 228 228" aria-hidden="true"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#E8EEFF"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#18122D"/></svg></span>
+            </div>
+          </div>
+          <div class="text-pair" style="background:#E5FFF7">
+            <p class="tp-title" style="color:#023533">Your form is leaking revenue.</p>
+            <div class="tp-foot">
+              <div class="tp-foot-left">
+                <p class="tp-body" style="color:#023533">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
+                <span class="tp-btn" style="background:#023533;color:#E5FFF7">Start free trial</span>
+              </div>
+              <span class="tp-mark"><svg viewBox="0 0 228 228" aria-hidden="true"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#023533"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#E5FFF7"/></svg></span>
+            </div>
+          </div>
+          <div class="text-pair" style="background:#023533">
+            <p class="tp-title" style="color:#E5FFF7">Your form is leaking revenue.</p>
+            <div class="tp-foot">
+              <div class="tp-foot-left">
+                <p class="tp-body" style="color:#E5FFF7">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
+                <span class="tp-btn" style="background:#E5FFF7;color:#023533">Start free trial</span>
+              </div>
+              <span class="tp-mark"><svg viewBox="0 0 228 228" aria-hidden="true"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#E5FFF7"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#023533"/></svg></span>
+            </div>
+          </div>
+          <div class="text-pair" style="background:#FEEFEF">
+            <p class="tp-title" style="color:#440020">Your form is leaking revenue.</p>
+            <div class="tp-foot">
+              <div class="tp-foot-left">
+                <p class="tp-body" style="color:#440020">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
+                <span class="tp-btn" style="background:#440020;color:#FEEFEF">Start free trial</span>
+              </div>
+              <span class="tp-mark"><svg viewBox="0 0 228 228" aria-hidden="true"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#440020"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#FEEFEF"/></svg></span>
+            </div>
+          </div>
+          <div class="text-pair" style="background:#440020">
+            <p class="tp-title" style="color:#FEEFEF">Your form is leaking revenue.</p>
+            <div class="tp-foot">
+              <div class="tp-foot-left">
+                <p class="tp-body" style="color:#FEEFEF">Exatom makes it easy to see where form visitors drop off, and even easier to fix it.</p>
+                <span class="tp-btn" style="background:#FEEFEF;color:#440020">Start free trial</span>
+              </div>
+              <span class="tp-mark"><svg viewBox="0 0 228 228" aria-hidden="true"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#FEEFEF"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#440020"/></svg></span>
+            </div>
           </div>
         </div>
       </div>
@@ -875,9 +955,9 @@
         <p class="subsection-note">Two extremes and little in between: controls are fully pilled, surfaces are close to square. That contrast is what makes a button read as a button.</p>
         <div class="rule-list">
           <div class="rule"><span class="rule-key">Buttons & tags</span><span class="rule-val"><strong>999px</strong> — Fully pilled — the most recognisable shape in the system</span></div>
-          <div class="rule"><span class="rule-key">Input fields</span><span class="rule-val"><strong>10px</strong> — Softer than surfaces so controls read as interactive</span></div>
-          <div class="rule"><span class="rule-key">Cards & surfaces</span><span class="rule-val"><strong>6px</strong> — Quiet, close to square; the brand is precise, not bubbly</span></div>
-          <div class="rule"><span class="rule-key">Small elements</span><span class="rule-val"><strong>3–4px</strong> — Chips, code, inline marks</span></div>
+          <div class="rule"><span class="rule-key">Input fields</span><span class="rule-val"><strong>12px</strong> — Softer than surfaces so controls read as interactive</span></div>
+          <div class="rule"><span class="rule-key">Cards & surfaces</span><span class="rule-val"><strong>8px</strong> — Quiet, close to square; the brand is precise, not bubbly</span></div>
+          <div class="rule"><span class="rule-key">Small elements</span><span class="rule-val"><strong>4px</strong> — Chips, code, inline marks</span></div>
           <div class="rule"><span class="rule-key">Icon badges</span><span class="rule-val"><strong>50%</strong> — Only where the shape is the icon itself</span></div>
         </div>
       </div>
@@ -915,26 +995,33 @@
       <div class="subsection" id="ui-buttons">
         <h3 class="subsection-title">Buttons</h3>
         <p class="subsection-note">One primary action per view, repeated down the page rather than competing with alternatives beside it. Blue is the only filled action colour; Dark is reserved for a second, quieter primary on light sections.</p>
-        <div class="specimen-spec"><span class="spec-chip">999px radius</span><span class="spec-chip">13 / 24px padding</span><span class="spec-chip">Inter SemiBold 15px</span><span class="spec-chip">&minus;2% tracking</span><span class="spec-chip">1px border</span><span class="spec-chip">no shadow</span></div>
+        <div class="specimen-spec"><span class="spec-chip">999px radius</span><span class="spec-chip">13 / 24px padding</span><span class="spec-chip">small: 9 / 18px at 13px</span><span class="spec-chip">Inter SemiBold 15px</span><span class="spec-chip">&minus;2% tracking</span><span class="spec-chip">1px border</span><span class="spec-chip">no shadow</span><span class="spec-chip">hover: label roll 420ms</span></div>
 
         <div class="btn-row">
-          <button class="btn btn-primary">Start free trial</button>
-          <button class="btn btn-secondary">Book a demo</button>
-          <button class="btn btn-dark">See the platform</button>
-          <button class="btn btn-tertiary">Read the case study</button>
-          <button class="btn btn-disabled">Unavailable</button>
+          <button class="btn btn-primary"><span class="btn-label"><span>Start free trial</span><span aria-hidden="true">Start free trial</span></span></button>
+          <button class="btn btn-secondary"><span class="btn-label"><span>Book a demo</span><span aria-hidden="true">Book a demo</span></span></button>
+          <button class="btn btn-dark"><span class="btn-label"><span>See the platform</span><span aria-hidden="true">See the platform</span></span></button>
+          <button class="btn btn-tertiary"><span class="btn-label"><span>Read the case study</span><span aria-hidden="true">Read the case study</span></span></button>
+          <button class="btn btn-disabled"><span class="btn-label"><span>Unavailable</span><span aria-hidden="true">Unavailable</span></span></button>
         </div>
-        <p class="caption" style="margin-top: var(--s-4)">Primary, Secondary, Dark, Tertiary, Disabled. Tertiary is text alone &mdash; no fill, no border, no arrow. It carries the third-most-important action on a view, and never the only one.</p>
+        <div class="btn-row" style="margin-top: var(--s-4)">
+          <button class="btn btn-sm btn-primary"><span class="btn-label"><span>Start free trial</span><span aria-hidden="true">Start free trial</span></span></button>
+          <button class="btn btn-sm btn-secondary"><span class="btn-label"><span>Book a demo</span><span aria-hidden="true">Book a demo</span></span></button>
+          <button class="btn btn-sm btn-dark"><span class="btn-label"><span>See the platform</span><span aria-hidden="true">See the platform</span></span></button>
+          <button class="btn btn-sm btn-tertiary"><span class="btn-label"><span>Read the case study</span><span aria-hidden="true">Read the case study</span></span></button>
+          <button class="btn btn-sm btn-disabled"><span class="btn-label"><span>Unavailable</span><span aria-hidden="true">Unavailable</span></span></button>
+        </div>
+        <p class="caption" style="margin-top: var(--s-4)">Primary, Secondary, Dark, Tertiary, Disabled, each at both sizes. Tertiary is text alone &mdash; no fill, no border, no arrow. It carries the third-most-important action on a view, and never the only one. On hover the label drops out of the bottom while a second copy arrives from above, clipped by the pill; Disabled does not move, and neither does anything when the visitor asks for reduced motion.</p>
 
         <div class="subsection" id="ui-buttons-dark" style="margin-top: var(--s-7)">
           <p class="subsection-title">On dark</p>
           <p class="subsection-note">On Dark #18122D the roles stay the same but the colours invert. Blue is not usable as a fill here: at 2.6:1 against this ground it fails contrast, so the primary action becomes white and Tertiary switches to Blue Light.</p>
           <div class="on-dark-stage">
             <div class="btn-row">
-              <button class="btn btn-primary">Start free trial</button>
-              <button class="btn btn-secondary">Book a demo</button>
-              <button class="btn btn-tertiary">Read the case study</button>
-              <button class="btn btn-disabled">Unavailable</button>
+              <button class="btn btn-primary"><span class="btn-label"><span>Start free trial</span><span aria-hidden="true">Start free trial</span></span></button>
+              <button class="btn btn-secondary"><span class="btn-label"><span>Book a demo</span><span aria-hidden="true">Book a demo</span></span></button>
+              <button class="btn btn-tertiary"><span class="btn-label"><span>Read the case study</span><span aria-hidden="true">Read the case study</span></span></button>
+              <button class="btn btn-disabled"><span class="btn-label"><span>Unavailable</span><span aria-hidden="true">Unavailable</span></span></button>
             </div>
           </div>
           <div class="rule-list">
@@ -1096,8 +1183,8 @@
             </div>
           </div>
           <div class="form-actions">
-            <button class="btn btn-primary">Book the test drive</button>
-            <button class="btn btn-tertiary">Back</button>
+            <button class="btn btn-primary"><span class="btn-label"><span>Book the test drive</span><span aria-hidden="true">Book the test drive</span></span></button>
+            <button class="btn btn-tertiary"><span class="btn-label"><span>Back</span><span aria-hidden="true">Back</span></span></button>
           </div>
         </div>
 
@@ -1160,8 +1247,8 @@
           <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5-9.06L62,132.71l84.62-90.66L136.16,94.43a8,8,0,0,0,5,9.06l52.8,19.8Z"/></svg></span><span class="icon-use">No developer needed</span><span class="icon-name">Lightning</span></div>
         </div>
         <div class="btn-row" style="margin-top: var(--s-6)">
-          <a class="btn btn-secondary" href="https://phosphoricons.com" target="_blank" rel="noopener"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,104a8,8,0,0,1-16,0V59.32l-66.33,66.34a8,8,0,0,1-11.32-11.32L196.68,48H152a8,8,0,0,1,0-16h64a8,8,0,0,1,8,8Zm-40,24a8,8,0,0,0-8,8v72H48V80h72a8,8,0,0,0,0-16H48A16,16,0,0,0,32,80V208a16,16,0,0,0,16,16H176a16,16,0,0,0,16-16V136A8,8,0,0,0,184,128Z"/></svg><span>Browse Phosphor</span></a>
-          <a class="btn btn-secondary" href="assets/exatom-icons.zip" data-icon-pack download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span>Download the icon set</span></a>
+          <a class="btn btn-secondary" href="https://phosphoricons.com" target="_blank" rel="noopener"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,104a8,8,0,0,1-16,0V59.32l-66.33,66.34a8,8,0,0,1-11.32-11.32L196.68,48H152a8,8,0,0,1,0-16h64a8,8,0,0,1,8,8Zm-40,24a8,8,0,0,0-8,8v72H48V80h72a8,8,0,0,0,0-16H48A16,16,0,0,0,32,80V208a16,16,0,0,0,16,16H176a16,16,0,0,0,16-16V136A8,8,0,0,0,184,128Z"/></svg><span class="btn-label"><span>Browse Phosphor</span><span aria-hidden="true">Browse Phosphor</span></span></a>
+          <a class="btn btn-secondary" href="assets/exatom-icons.zip" data-icon-pack download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Download the icon set</span><span aria-hidden="true">Download the icon set</span></span></a>
         </div>
       </div>
     </section>
