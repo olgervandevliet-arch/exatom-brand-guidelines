@@ -219,7 +219,7 @@
     a.btn { display: inline-flex; align-items: center; gap: var(--s-2); text-decoration: none; }
     a.btn svg { width: 15px; height: 15px; flex: 0 0 15px; }
     .btn {
-      font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 15px;
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 15px; letter-spacing: -0.02em;
       padding: 13px 24px; border-radius: 999px; border: 1px solid transparent; cursor: pointer;
       transition: background 130ms ease, border-color 130ms ease, color 130ms ease;
     }
@@ -227,11 +227,23 @@
     .btn-primary:hover { background: #1E46C4; }
     .btn-secondary { background: var(--white); color: var(--dark); border-color: var(--gray-100); }
     .btn-secondary:hover { background: var(--warm-white); }
-    .btn-ghost { background: transparent; color: var(--blue); padding-left: var(--s-3); padding-right: var(--s-3); }
-    .btn-ghost:hover { background: var(--blue-light); }
+    .btn-tertiary { background: transparent; color: var(--blue); padding-left: var(--s-2); padding-right: var(--s-2); }
+    .btn-tertiary:hover { color: #1E46C4; text-decoration: underline; text-underline-offset: 3px; }
     .btn-dark { background: var(--dark); color: var(--white); }
     .btn-dark:hover { background: #241C40; }
     .btn:disabled, .btn-disabled { background: var(--warm-white); color: var(--gray-300); border-color: transparent; cursor: not-allowed; }
+
+    /* On #18122D the palette inverts: Blue drops to 2.6:1 against the ground, so
+       the filled action becomes white and the tertiary text becomes Blue Light. */
+    .on-dark-stage { background: var(--dark); border-radius: 6px; padding: var(--s-7); }
+    .on-dark-stage .btn-primary { background: var(--white); color: var(--dark); }
+    .on-dark-stage .btn-primary:hover { background: var(--blue-light); }
+    .on-dark-stage .btn-secondary { background: transparent; color: var(--white); border-color: rgba(255, 255, 255, 0.28); }
+    .on-dark-stage .btn-secondary:hover { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.5); }
+    .on-dark-stage .btn-tertiary { background: transparent; color: var(--blue-light); }
+    .on-dark-stage .btn-tertiary:hover { color: var(--white); }
+    .on-dark-stage .btn-disabled { background: rgba(255, 255, 255, 0.07); color: var(--gray-500); }
+    .on-dark-stage .caption { color: var(--gray-300); }
 
     .field-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-5); }
     .field { display: flex; flex-direction: column; gap: var(--s-2); }
@@ -241,7 +253,62 @@
     .field-input.is-focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(42, 90, 233, 0.14); outline: none; }
     .field-input.is-error { border-color: var(--coral); }
     .field-help { font-size: 12px; color: var(--gray-500); }
-    .field-help.error { color: var(--coral); }
+    .field-help.error { color: var(--coral); display: flex; align-items: flex-start; gap: 5px; }
+    .field-help.ok { color: #0F7A5A; display: flex; align-items: flex-start; gap: 5px; }
+    .field-help svg { width: 13px; height: 13px; flex: 0 0 13px; margin-top: 1px; }
+    .field-input.is-filled { border-color: var(--gray-300); }
+    .field-input.is-ok { border-color: #0F7A5A; }
+    .field-input:disabled, .field-input.is-disabled { background: var(--warm-white); color: var(--gray-300); border-color: transparent; cursor: not-allowed; }
+    .field-req { color: var(--gray-300); font-weight: 400; }
+
+    /* select — native chevron off, one drawn in so it matches the icon set */
+    .field-select { position: relative; }
+    .field-select select {
+      appearance: none; -webkit-appearance: none; width: 100%;
+      font-family: 'Inter', sans-serif; font-size: 15px; padding: 12px 44px 12px 16px;
+      border-radius: 10px; border: 1px solid var(--gray-100); background: var(--white); color: var(--dark);
+    }
+    .field-select svg { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--gray-500); pointer-events: none; }
+
+    .field-textarea { font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.55; padding: 12px 16px; border-radius: 10px; border: 1px solid var(--gray-100); background: var(--white); color: var(--dark); resize: vertical; min-height: 96px; }
+
+    .choice-list { display: flex; flex-direction: column; gap: var(--s-2); }
+    .choice-list.row { flex-direction: row; flex-wrap: wrap; gap: var(--s-3); }
+    .choice {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 16px; border: 1px solid var(--gray-100); border-radius: 10px;
+      font-size: 15px; cursor: pointer; background: var(--white);
+      transition: border-color 120ms ease, background 120ms ease;
+    }
+    .choice:hover { border-color: var(--gray-300); }
+    .choice.is-on { border-color: var(--blue); background: var(--blue-light); }
+    .choice-box { width: 18px; height: 18px; flex: 0 0 18px; border: 1px solid var(--gray-300); border-radius: 5px; background: var(--white); display: inline-flex; align-items: center; justify-content: center; color: var(--white); }
+    .choice-box.round { border-radius: 999px; }
+    .choice-box svg { width: 12px; height: 12px; opacity: 0; }
+    .choice-box .dot { width: 8px; height: 8px; border-radius: 999px; background: var(--white); opacity: 0; }
+    .choice.is-on .choice-box { background: var(--blue); border-color: var(--blue); }
+    .choice.is-on .choice-box svg, .choice.is-on .choice-box .dot { opacity: 1; }
+
+    /* a form as it actually ships — one column, grouped, with the postcode lookup */
+    .form-demo { max-width: 480px; border: 1px solid var(--border); border-radius: 6px; padding: var(--s-7); background: var(--white); }
+    .form-demo .field + .field, .form-demo .field-group + .field, .form-demo .field + .field-group { margin-top: var(--s-5); }
+    .form-title { font-family: 'Inter Tight', sans-serif; font-size: 24px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
+    .form-lede { font-size: 14px; line-height: 1.55; color: var(--gray-500); margin-bottom: var(--s-6); }
+    .form-step { display: flex; align-items: center; gap: var(--s-2); margin-bottom: var(--s-5); }
+    .form-step span { flex: 1; height: 3px; border-radius: 999px; background: var(--warm-white); }
+    .form-step span.done { background: var(--blue); }
+    .field-group { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
+    .form-note { display: flex; gap: 8px; align-items: flex-start; font-size: 12px; line-height: 1.5; color: var(--gray-500); margin-top: var(--s-3); }
+    .form-note svg { width: 14px; height: 14px; flex: 0 0 14px; color: var(--blue); margin-top: 1px; }
+    .form-actions { margin-top: var(--s-6); display: flex; align-items: center; gap: var(--s-4); }
+
+    .dodont { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); margin-top: var(--s-5); }
+    .dodont-card { border: 1px solid var(--border); border-radius: 6px; padding: var(--s-5); }
+    .dodont-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; margin-bottom: var(--s-3); }
+    .dodont-tag.do { color: #0F7A5A; }
+    .dodont-tag.skip { color: var(--coral); }
+    .dodont-card ul { margin: 0; padding-left: 18px; }
+    .dodont-card li { font-size: 14px; line-height: 1.65; color: var(--gray-700); }
 
     .card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4); }
     .ui-card { position: relative; height: 420px; border: 1px solid var(--border); border-radius: 6px; padding: 17px; display: flex; flex-direction: column; }
@@ -255,7 +322,18 @@
     .metric-label.on-dark { color: var(--gray-300); }
 
     .icon-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-4); }
-    .icon-cell { display: flex; flex-direction: column; gap: var(--s-3); border: 1px solid var(--border); border-radius: 6px; padding: var(--s-5); }
+    .icon-cell { position: relative; display: flex; flex-direction: column; gap: var(--s-3); border: 1px solid var(--border); border-radius: 6px; padding: var(--s-5); }
+    .icon-get {
+      position: absolute; top: 8px; right: 8px;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px; padding: 0; border: 0; border-radius: 999px;
+      background: var(--warm-white); color: var(--gray-700); cursor: pointer;
+      opacity: 0; transition: opacity 120ms ease, background 120ms ease, color 120ms ease;
+    }
+    .icon-get svg { width: 14px; height: 14px; }
+    .icon-cell:hover .icon-get, .icon-get:focus-visible { opacity: 1; }
+    .icon-get:hover { background: var(--blue-light); color: var(--blue); }
+    .icon-get.is-done { opacity: 1; background: var(--blue); color: var(--white); }
     .icon-use { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: -0.02em; color: var(--dark); }
     .icon-name { font-size: 11px; color: var(--gray-500); margin-top: -6px; }
     .icon-chip { display: inline-flex; color: var(--dark); }
@@ -812,37 +890,171 @@
       <div class="subsection" id="ui-buttons">
         <h3 class="subsection-title">Buttons</h3>
         <p class="subsection-note">One primary action per view, repeated down the page rather than competing with alternatives beside it. Blue is the only filled action colour; Dark is reserved for a second, quieter primary on light sections.</p>
-        <div class="specimen-spec"><span class="spec-chip">999px radius</span><span class="spec-chip">13 / 24px padding</span><span class="spec-chip">Instrument Sans SemiBold 15px</span><span class="spec-chip">1px border</span><span class="spec-chip">no shadow</span></div>
+        <div class="specimen-spec"><span class="spec-chip">999px radius</span><span class="spec-chip">13 / 24px padding</span><span class="spec-chip">Inter SemiBold 15px</span><span class="spec-chip">&minus;2% tracking</span><span class="spec-chip">1px border</span><span class="spec-chip">no shadow</span></div>
 
         <div class="btn-row">
           <button class="btn btn-primary">Start free trial</button>
           <button class="btn btn-secondary">Book a demo</button>
           <button class="btn btn-dark">See the platform</button>
-          <button class="btn btn-ghost">Read the case study →</button>
+          <button class="btn btn-tertiary">Read the case study</button>
           <button class="btn btn-disabled">Unavailable</button>
+        </div>
+        <p class="caption" style="margin-top: var(--s-4)">Primary, Secondary, Dark, Tertiary, Disabled. Tertiary is text alone &mdash; no fill, no border, no arrow. It carries the third-most-important action on a view, and never the only one.</p>
+
+        <div class="subsection" id="ui-buttons-dark" style="margin-top: var(--s-7)">
+          <p class="subsection-title">On dark</p>
+          <p class="subsection-note">On Dark #18122D the roles stay the same but the colours invert. Blue is not usable as a fill here: at 2.6:1 against this ground it fails contrast, so the primary action becomes white and Tertiary switches to Blue Light.</p>
+          <div class="on-dark-stage">
+            <div class="btn-row">
+              <button class="btn btn-primary">Start free trial</button>
+              <button class="btn btn-secondary">Book a demo</button>
+              <button class="btn btn-tertiary">Read the case study</button>
+              <button class="btn btn-disabled">Unavailable</button>
+            </div>
+          </div>
+          <div class="rule-list">
+            <div class="rule"><span class="rule-key">Primary</span><span class="rule-val">White fill, Dark text. The only filled action on the surface.</span></div>
+            <div class="rule"><span class="rule-key">Secondary</span><span class="rule-val">Transparent, 1px white at 28%, white text. The border lifts to 50% on hover.</span></div>
+            <div class="rule"><span class="rule-key">Tertiary</span><span class="rule-val">Blue Light #E8EEFF text, no fill. Blue #2A5AE9 is never used for text on Dark.</span></div>
+            <div class="rule"><span class="rule-key">Disabled</span><span class="rule-val">White at 7%, Gray 500 text.</span></div>
+          </div>
         </div>
       </div>
 
       <div class="subsection" id="ui-fields">
         <h3 class="subsection-title">Form fields</h3>
-        <p class="subsection-note">Exatom's product is form conversion, so the forms on this site are held to the same standard: visible labels above the field, one column, and error text that names the fix instead of the failure.</p>
+        <p class="subsection-note">Exatom sells form conversion, so our own forms are the shortest argument we have. Everything below is what we ask clients to do: labels above the field, one column, one question at a time, and error text that names the fix instead of the failure.</p>
         <div class="specimen-spec"><span class="spec-chip">10px radius</span><span class="spec-chip">12 / 16px padding</span><span class="spec-chip">Inter 15px</span><span class="spec-chip">1px #D1D0D5 border</span><span class="spec-chip">focus ring 3px rgba(42,90,233,.14)</span></div>
 
+        <p class="subsection-title" style="margin-top: var(--s-7)">States</p>
+        <p class="subsection-note">Six states, and every one of them says something. A field that looks identical whether it is empty, wrong or accepted is a field people abandon.</p>
         <div class="field-grid">
           <div class="field">
             <label class="field-label">Work email</label>
             <input class="field-input" type="text" placeholder="you@company.com" readonly="">
-            <p class="field-help">Default</p>
+            <p class="field-help">Default &mdash; placeholder shows the shape, never the label</p>
           </div>
           <div class="field">
             <label class="field-label">Work email</label>
             <input class="field-input is-focus" type="text" value="stephan@exatom.io" readonly="">
-            <p class="field-help">Focus</p>
+            <p class="field-help">Focus &mdash; 3px ring, border to Blue</p>
+          </div>
+          <div class="field">
+            <label class="field-label">Work email</label>
+            <input class="field-input is-filled" type="text" value="stephan@exatom.io" readonly="">
+            <p class="field-help">Filled &mdash; border darkens to Gray 300</p>
           </div>
           <div class="field">
             <label class="field-label">Work email</label>
             <input class="field-input is-error" type="text" value="stephan@exatom" readonly="">
-            <p class="field-help error">Add the domain ending, like .io or .com</p>
+            <p class="field-help error"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm-8-80V80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,172Z"/></svg><span>Add the domain ending, like .io or .com</span></p>
+          </div>
+          <div class="field">
+            <label class="field-label">VAT number</label>
+            <input class="field-input is-ok" type="text" value="BE 0123.456.789" readonly="">
+            <p class="field-help ok"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg><span>Checked against the VIES register</span></p>
+          </div>
+          <div class="field">
+            <label class="field-label">Company <span class="field-req">&mdash; from your email</span></label>
+            <input class="field-input is-disabled" type="text" value="Exatom" disabled="">
+            <p class="field-help">Disabled &mdash; prefilled, so do not ask twice</p>
+          </div>
+        </div>
+
+        <p class="subsection-title" style="margin-top: var(--s-8)">Field types</p>
+        <p class="subsection-note">Four beyond the text input. Radios and checkboxes are full-width targets, not 18px dots &mdash; on mobile the label is the tap area.</p>
+        <div class="field-grid" style="grid-template-columns: repeat(2, minmax(0, 1fr))">
+          <div class="field">
+            <label class="field-label">Monthly form volume</label>
+            <div class="field-select">
+              <select><option>10,000 &ndash; 50,000</option></select>
+              <svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"/></svg>
+            </div>
+            <p class="field-help">Chevron is drawn, not native, so it matches the icon set</p>
+          </div>
+          <div class="field">
+            <label class="field-label">What are you optimising? <span class="field-req">&mdash; pick one</span></label>
+            <div class="choice-list">
+              <div class="choice is-on"><span class="choice-box round"><span class="dot"></span></span><span>Lead or quote form</span></div>
+              <div class="choice"><span class="choice-box round"><span class="dot"></span></span><span>Checkout</span></div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label">Integrations</label>
+            <div class="choice-list row">
+              <div class="choice is-on"><span class="choice-box"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg></span><span>GA4</span></div>
+              <div class="choice"><span class="choice-box"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg></span><span>HubSpot</span></div>
+              <div class="choice"><span class="choice-box"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg></span><span>Segment</span></div>
+            </div>
+          </div>
+          <div class="field">
+            <label class="field-label">Anything we should know? <span class="field-req">&mdash; optional</span></label>
+            <textarea class="field-textarea" readonly="">Our checkout loses most people at the address step.</textarea>
+            <p class="field-help">Mark optional fields, never required ones &mdash; most fields are required</p>
+          </div>
+        </div>
+
+        <p class="subsection-title" style="margin-top: var(--s-8)">A form in full</p>
+        <p class="subsection-note">The same rules assembled. One column, grouped by what the visitor is thinking about, and the address block does the lookup instead of asking for four fields. That single change is what moved Kia Germany.</p>
+        <div class="form-demo">
+          <div class="form-step"><span class="done"></span><span class="done"></span><span></span></div>
+          <p class="form-title">Book a test drive</p>
+          <p class="form-lede">Two minutes. We confirm by email within a day.</p>
+
+          <div class="field">
+            <label class="field-label">Email</label>
+            <input class="field-input is-filled" type="text" value="j.devries@gmail.com" readonly="">
+          </div>
+          <div class="field">
+            <label class="field-label">Mobile</label>
+            <input class="field-input" type="text" placeholder="06 12 34 56 78" readonly="">
+            <p class="field-help">So the dealer can confirm the slot</p>
+          </div>
+          <div class="field">
+            <label class="field-label">Postcode</label>
+            <div class="field-group">
+              <input class="field-input is-ok" type="text" value="6221 BT" readonly="">
+              <input class="field-input is-ok" type="text" value="14" readonly="">
+            </div>
+            <p class="form-note"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z"/></svg><span>Maastricht, Sint Servaasklooster 14 &mdash; found from the postcode, so street and city are never asked.</span></p>
+          </div>
+          <div class="field">
+            <label class="field-label">Preferred day</label>
+            <div class="choice-list row">
+              <div class="choice"><span class="choice-box round"><span class="dot"></span></span><span>Weekday</span></div>
+              <div class="choice is-on"><span class="choice-box round"><span class="dot"></span></span><span>Saturday</span></div>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary">Book the test drive</button>
+            <button class="btn btn-tertiary">Back</button>
+          </div>
+        </div>
+
+        <p class="subsection-title" style="margin-top: var(--s-8)">What we hold ourselves to</p>
+        <p class="subsection-note">Drawn from the friction points we find in client forms week after week. If our own form breaks one of these, it is a bug.</p>
+        <div class="dodont">
+          <div class="dodont-card">
+            <p class="dodont-tag do"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M173.66,98.34a8,8,0,0,1,0,11.32l-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35A8,8,0,0,1,173.66,98.34ZM232,128A104,104,0,1,1,128,24,104.11,104.11,0,0,1,232,128Zm-16,0a88,88,0,1,0-88,88A88.1,88.1,0,0,0,216,128Z"/></svg>DO</p>
+            <ul>
+              <li>Label above the field, always visible while typing.</li>
+              <li>Validate when the field is left, not on every keystroke.</li>
+              <li>Say what to do: &ldquo;Add the domain ending&rdquo;, not &ldquo;Invalid input&rdquo;.</li>
+              <li>Derive what you can &mdash; address from postcode, company from email domain.</li>
+              <li>One column. Two columns only for values that belong together, like postcode and number.</li>
+              <li>Keep the submit button reachable without scrolling past the last field.</li>
+            </ul>
+          </div>
+          <div class="dodont-card">
+            <p class="dodont-tag skip"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm-8-80V80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm20,36a12,12,0,1,1-12-12A12,12,0,0,1,140,172Z"/></svg>SKIP</p>
+            <ul>
+              <li>Placeholder text standing in for the label &mdash; it disappears exactly when it is needed.</li>
+              <li>Asterisks on required fields when nearly everything is required. Mark the optional ones.</li>
+              <li>Clearing what someone typed because the format was wrong.</li>
+              <li>Asking twice for something you already have.</li>
+              <li>A reset button next to submit.</li>
+              <li>Error summaries at the top with no link down to the field.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -876,22 +1088,22 @@
         <div class="specimen-spec"><span class="spec-chip">Phosphor regular</span><span class="spec-chip">256 grid</span><span class="spec-chip">18px in menus</span><span class="spec-chip">26px in cells</span><span class="spec-chip">currentColor</span></div>
         <p class="subsection-note">Exatom uses <strong>Phosphor</strong> for every icon, regular weight, on a 256 grid. It is the only icon library in the system — no Lucide, no Heroicons, no emoji standing in for an icon. Where a third-party component ships with a different set, swap it for the Phosphor equivalent. Below is the working set for the platform's features, with the Phosphor name each one maps to.</p>
         <div class="icon-row">
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V48a8,8,0,0,1,16,0v94.37L90.73,98a8,8,0,0,1,10.07-.38l58.81,44.11L218.73,90a8,8,0,1,1,10.54,12l-64,56a8,8,0,0,1-10.07.38L96.39,114.29,40,163.63V200H224A8,8,0,0,1,232,208Z"/></svg></span><span class="icon-use">Form analytics</span><span class="icon-name">ChartLine</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M88,24V16a8,8,0,0,1,16,0v8a8,8,0,0,1-16,0ZM16,104h8a8,8,0,0,0,0-16H16a8,8,0,0,0,0,16ZM124.42,39.16a8,8,0,0,0,10.74-3.58l8-16a8,8,0,0,0-14.31-7.16l-8,16A8,8,0,0,0,124.42,39.16Zm-96,81.69-16,8a8,8,0,0,0,7.16,14.31l16-8a8,8,0,1,0-7.16-14.31ZM219.31,184a16,16,0,0,1,0,22.63l-12.68,12.68a16,16,0,0,1-22.63,0L132.7,168,115,214.09c0,.1-.08.21-.13.32a15.83,15.83,0,0,1-14.6,9.59l-.79,0a15.83,15.83,0,0,1-14.41-11L32.8,52.92A16,16,0,0,1,52.92,32.8L213,85.07a16,16,0,0,1,1.41,29.8l-.32.13L168,132.69ZM208,195.31,156.69,144h0a16,16,0,0,1,4.93-26l.32-.14,45.95-17.64L48,48l52.2,159.86,17.65-46c0-.11.08-.22.13-.33a16,16,0,0,1,11.69-9.34,16.72,16.72,0,0,1,3-.28,16,16,0,0,1,11.3,4.69L195.31,208Z"/></svg></span><span class="icon-use">Field interactions</span><span class="icon-name">CursorClick</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48.24-94.78-64-40A8,8,0,0,0,100,88v80a8,8,0,0,0,12.24,6.78l64-40a8,8,0,0,0,0-13.56ZM116,153.57V102.43L156.91,128Z"/></svg></span><span class="icon-use">Session replay</span><span class="icon-name">PlayCircle</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M224,71.1a8,8,0,0,1-10.78-3.42,94.13,94.13,0,0,0-33.46-36.91,8,8,0,1,1,8.54-13.54,111.46,111.46,0,0,1,39.12,43.09A8,8,0,0,1,224,71.1ZM35.71,72a8,8,0,0,0,7.1-4.32A94.13,94.13,0,0,1,76.27,30.77a8,8,0,1,0-8.54-13.54A111.46,111.46,0,0,0,28.61,60.32,8,8,0,0,0,35.71,72Zm186.1,103.94A16,16,0,0,1,208,200H167.2a40,40,0,0,1-78.4,0H48a16,16,0,0,1-13.79-24.06C43.22,160.39,48,138.28,48,112a80,80,0,0,1,160,0C208,138.27,212.78,160.38,221.81,175.94ZM150.62,200H105.38a24,24,0,0,0,45.24,0ZM208,184c-10.64-18.27-16-42.49-16-72a64,64,0,0,0-128,0c0,29.52-5.38,53.74-16,72Z"/></svg></span><span class="icon-use">Performance alerts</span><span class="icon-name">BellRinging</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M224,200h-8V40a8,8,0,0,0-8-8H152a8,8,0,0,0-8,8V80H96a8,8,0,0,0-8,8v40H48a8,8,0,0,0-8,8v64H32a8,8,0,0,0,0,16H224a8,8,0,0,0,0-16ZM160,48h40V200H160ZM104,96h40V200H104ZM56,144H88v56H56Z"/></svg></span><span class="icon-use">Industry benchmarks</span><span class="icon-name">ChartBar</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M172,112a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h68A8,8,0,0,1,172,112Zm-8,24H96a8,8,0,0,0,0,16h68a8,8,0,0,0,0-16Zm68-12A100.11,100.11,0,0,1,132,224H48a16,16,0,0,1-16-16V124a100,100,0,0,1,200,0Zm-16,0a84,84,0,0,0-168,0v84h84A84.09,84.09,0,0,0,216,124Z"/></svg></span><span class="icon-use">Smart nudges</span><span class="icon-name">ChatTeardropText</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M48,64a8,8,0,0,1,8-8H72V40a8,8,0,0,1,16,0V56h16a8,8,0,0,1,0,16H88V88a8,8,0,0,1-16,0V72H56A8,8,0,0,1,48,64ZM184,192h-8v-8a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0v-8h8a8,8,0,0,0,0-16Zm56-48H224V128a8,8,0,0,0-16,0v16H192a8,8,0,0,0,0,16h16v16a8,8,0,0,0,16,0V160h16a8,8,0,0,0,0-16ZM219.31,80,80,219.31a16,16,0,0,1-22.62,0L36.68,198.63a16,16,0,0,1,0-22.63L176,36.69a16,16,0,0,1,22.63,0l20.68,20.68A16,16,0,0,1,219.31,80Zm-54.63,32L144,91.31l-96,96L68.68,208ZM208,68.69,187.31,48l-32,32L176,100.69Z"/></svg></span><span class="icon-use">Autofixes</span><span class="icon-name">MagicWand</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M197.58,129.06,146,110l-19-51.62a15.92,15.92,0,0,0-29.88,0L78,110l-51.62,19a15.92,15.92,0,0,0,0,29.88L78,178l19,51.62a15.92,15.92,0,0,0,29.88,0L146,178l51.62-19a15.92,15.92,0,0,0,0-29.88ZM137,164.22a8,8,0,0,0-4.74,4.74L112,223.85,91.78,169A8,8,0,0,0,87,164.22L32.15,144,87,123.78A8,8,0,0,0,91.78,119L112,64.15,132.22,119a8,8,0,0,0,4.74,4.74L191.85,144ZM144,40a8,8,0,0,1,8-8h16V16a8,8,0,0,1,16,0V32h16a8,8,0,0,1,0,16H184V64a8,8,0,0,1-16,0V48H152A8,8,0,0,1,144,40ZM248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88Z"/></svg></span><span class="icon-use">Eureka AI</span><span class="icon-name">Sparkle</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M220.27,158.54a8,8,0,0,0-7.7-.46,20,20,0,1,1,0-36.16A8,8,0,0,0,224,114.69V72a16,16,0,0,0-16-16H171.78a35.36,35.36,0,0,0,.22-4,36.11,36.11,0,0,0-11.36-26.24,36,36,0,0,0-60.55,23.62,36.56,36.56,0,0,0,.14,6.62H64A16,16,0,0,0,48,72v32.22a35.36,35.36,0,0,0-4-.22,36.12,36.12,0,0,0-26.24,11.36,35.7,35.7,0,0,0-9.69,27,36.08,36.08,0,0,0,33.31,33.6,35.68,35.68,0,0,0,6.62-.14V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V165.31A8,8,0,0,0,220.27,158.54ZM208,208H64V165.31a8,8,0,0,0-11.43-7.23,20,20,0,1,1,0-36.16A8,8,0,0,0,64,114.69V72h46.69a8,8,0,0,0,7.23-11.43,20,20,0,1,1,36.16,0A8,8,0,0,0,161.31,72H208v32.23a35.68,35.68,0,0,0-6.62-.14A36,36,0,0,0,204,176a35.36,35.36,0,0,0,4-.22Z"/></svg></span><span class="icon-use">CRO Pulse extension</span><span class="icon-name">PuzzlePiece</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm0,72c0,37.07-13.66,67.16-40.6,89.42A129.3,129.3,0,0,1,128,223.62a128.25,128.25,0,0,1-38.92-21.81C61.82,179.51,48,149.3,48,112l0-56,160,0ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"/></svg></span><span class="icon-use">Cookieless & GDPR</span><span class="icon-name">ShieldCheck</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M237.66,18.34a8,8,0,0,0-11.32,0l-52.4,52.41-5.37-5.38a32.05,32.05,0,0,0-45.26,0L100,88.69l-6.34-6.35A8,8,0,0,0,82.34,93.66L88.69,100,65.37,123.31a32,32,0,0,0,0,45.26l5.38,5.37-52.41,52.4a8,8,0,0,0,11.32,11.32l52.4-52.41,5.37,5.38a32,32,0,0,0,45.26,0L156,167.31l6.34,6.35a8,8,0,0,0,11.32-11.32L167.31,156l23.32-23.31a32,32,0,0,0,0-45.26l-5.38-5.37,52.41-52.4A8,8,0,0,0,237.66,18.34Zm-116.29,161a16,16,0,0,1-22.62,0L76.69,157.25a16,16,0,0,1,0-22.62L100,111.31,144.69,156Zm57.94-57.94L156,144.69,111.31,100l23.32-23.31a16,16,0,0,1,22.62,0l22.06,22A16,16,0,0,1,179.31,121.37ZM88.57,35A8,8,0,0,1,103.43,29l8,20A8,8,0,0,1,96.57,55ZM24.57,93A8,8,0,0,1,35,88.57l20,8A8,8,0,0,1,49,111.43l-20-8A8,8,0,0,1,24.57,93ZM231.43,163a8,8,0,0,1-10.4,4.46l-20-8A8,8,0,1,1,207,144.57l20,8A8,8,0,0,1,231.43,163Zm-64,58.06A8,8,0,0,1,152.57,227l-8-20A8,8,0,0,1,159.43,201Z"/></svg></span><span class="icon-use">Integrations</span><span class="icon-name">PlugsConnected</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M240,128v64a8,8,0,0,1-8,8H168a8,8,0,0,1,0-16h44.69L136,107.31l-34.34,34.35a8,8,0,0,1-11.32,0l-72-72A8,8,0,0,1,29.66,58.34L96,124.69l34.34-34.35a8,8,0,0,1,11.32,0L224,172.69V128a8,8,0,0,1,16,0Z"/></svg></span><span class="icon-use">Drop-off</span><span class="icon-name">TrendDown</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M240,56v64a8,8,0,0,1-16,0V75.31l-82.34,82.35a8,8,0,0,1-11.32,0L96,123.31,29.66,189.66a8,8,0,0,1-11.32-11.32l72-72a8,8,0,0,1,11.32,0L136,140.69,212.69,64H168a8,8,0,0,1,0-16h64A8,8,0,0,1,240,56Z"/></svg></span><span class="icon-use">Conversion uplift</span><span class="icon-name">TrendUp</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M230.14,58.87A8,8,0,0,0,224,56H62.68L56.6,22.57A8,8,0,0,0,48.73,16H24a8,8,0,0,0,0,16h18L67.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,160,204a28,28,0,1,0,28-28H91.17a8,8,0,0,1-7.87-6.57L80.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,230.14,58.87ZM104,204a12,12,0,1,1-12-12A12,12,0,0,1,104,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,200,204Zm4-74.57A8,8,0,0,1,196.1,136H77.22L65.59,72H214.41Z"/></svg></span><span class="icon-use">Checkout</span><span class="icon-name">ShoppingCart</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M112,40a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80v96a16,16,0,0,0,16,16h80v16a8,8,0,0,0,16,0V48A8,8,0,0,0,112,40ZM24,176V80h80v96ZM248,80v96a16,16,0,0,1-16,16H144a8,8,0,0,1,0-16h88V80H144a8,8,0,0,1,0-16h88A16,16,0,0,1,248,80ZM88,112a8,8,0,0,1-8,8H72v24a8,8,0,0,1-16,0V120H48a8,8,0,0,1,0-16H80A8,8,0,0,1,88,112Z"/></svg></span><span class="icon-use">Web forms</span><span class="icon-name">Textbox</span></div>
-          <div class="icon-cell"><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5-9.06L62,132.71l84.62-90.66L136.16,94.43a8,8,0,0,0,5,9.06l52.8,19.8Z"/></svg></span><span class="icon-use">No developer needed</span><span class="icon-name">Lightning</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M232,208a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V48a8,8,0,0,1,16,0v94.37L90.73,98a8,8,0,0,1,10.07-.38l58.81,44.11L218.73,90a8,8,0,1,1,10.54,12l-64,56a8,8,0,0,1-10.07.38L96.39,114.29,40,163.63V200H224A8,8,0,0,1,232,208Z"/></svg></span><span class="icon-use">Form analytics</span><span class="icon-name">ChartLine</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M88,24V16a8,8,0,0,1,16,0v8a8,8,0,0,1-16,0ZM16,104h8a8,8,0,0,0,0-16H16a8,8,0,0,0,0,16ZM124.42,39.16a8,8,0,0,0,10.74-3.58l8-16a8,8,0,0,0-14.31-7.16l-8,16A8,8,0,0,0,124.42,39.16Zm-96,81.69-16,8a8,8,0,0,0,7.16,14.31l16-8a8,8,0,1,0-7.16-14.31ZM219.31,184a16,16,0,0,1,0,22.63l-12.68,12.68a16,16,0,0,1-22.63,0L132.7,168,115,214.09c0,.1-.08.21-.13.32a15.83,15.83,0,0,1-14.6,9.59l-.79,0a15.83,15.83,0,0,1-14.41-11L32.8,52.92A16,16,0,0,1,52.92,32.8L213,85.07a16,16,0,0,1,1.41,29.8l-.32.13L168,132.69ZM208,195.31,156.69,144h0a16,16,0,0,1,4.93-26l.32-.14,45.95-17.64L48,48l52.2,159.86,17.65-46c0-.11.08-.22.13-.33a16,16,0,0,1,11.69-9.34,16.72,16.72,0,0,1,3-.28,16,16,0,0,1,11.3,4.69L195.31,208Z"/></svg></span><span class="icon-use">Field interactions</span><span class="icon-name">CursorClick</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm48.24-94.78-64-40A8,8,0,0,0,100,88v80a8,8,0,0,0,12.24,6.78l64-40a8,8,0,0,0,0-13.56ZM116,153.57V102.43L156.91,128Z"/></svg></span><span class="icon-use">Session replay</span><span class="icon-name">PlayCircle</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M224,71.1a8,8,0,0,1-10.78-3.42,94.13,94.13,0,0,0-33.46-36.91,8,8,0,1,1,8.54-13.54,111.46,111.46,0,0,1,39.12,43.09A8,8,0,0,1,224,71.1ZM35.71,72a8,8,0,0,0,7.1-4.32A94.13,94.13,0,0,1,76.27,30.77a8,8,0,1,0-8.54-13.54A111.46,111.46,0,0,0,28.61,60.32,8,8,0,0,0,35.71,72Zm186.1,103.94A16,16,0,0,1,208,200H167.2a40,40,0,0,1-78.4,0H48a16,16,0,0,1-13.79-24.06C43.22,160.39,48,138.28,48,112a80,80,0,0,1,160,0C208,138.27,212.78,160.38,221.81,175.94ZM150.62,200H105.38a24,24,0,0,0,45.24,0ZM208,184c-10.64-18.27-16-42.49-16-72a64,64,0,0,0-128,0c0,29.52-5.38,53.74-16,72Z"/></svg></span><span class="icon-use">Performance alerts</span><span class="icon-name">BellRinging</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M224,200h-8V40a8,8,0,0,0-8-8H152a8,8,0,0,0-8,8V80H96a8,8,0,0,0-8,8v40H48a8,8,0,0,0-8,8v64H32a8,8,0,0,0,0,16H224a8,8,0,0,0,0-16ZM160,48h40V200H160ZM104,96h40V200H104ZM56,144H88v56H56Z"/></svg></span><span class="icon-use">Industry benchmarks</span><span class="icon-name">ChartBar</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M172,112a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h68A8,8,0,0,1,172,112Zm-8,24H96a8,8,0,0,0,0,16h68a8,8,0,0,0,0-16Zm68-12A100.11,100.11,0,0,1,132,224H48a16,16,0,0,1-16-16V124a100,100,0,0,1,200,0Zm-16,0a84,84,0,0,0-168,0v84h84A84.09,84.09,0,0,0,216,124Z"/></svg></span><span class="icon-use">Smart nudges</span><span class="icon-name">ChatTeardropText</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M48,64a8,8,0,0,1,8-8H72V40a8,8,0,0,1,16,0V56h16a8,8,0,0,1,0,16H88V88a8,8,0,0,1-16,0V72H56A8,8,0,0,1,48,64ZM184,192h-8v-8a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0v-8h8a8,8,0,0,0,0-16Zm56-48H224V128a8,8,0,0,0-16,0v16H192a8,8,0,0,0,0,16h16v16a8,8,0,0,0,16,0V160h16a8,8,0,0,0,0-16ZM219.31,80,80,219.31a16,16,0,0,1-22.62,0L36.68,198.63a16,16,0,0,1,0-22.63L176,36.69a16,16,0,0,1,22.63,0l20.68,20.68A16,16,0,0,1,219.31,80Zm-54.63,32L144,91.31l-96,96L68.68,208ZM208,68.69,187.31,48l-32,32L176,100.69Z"/></svg></span><span class="icon-use">Autofixes</span><span class="icon-name">MagicWand</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M197.58,129.06,146,110l-19-51.62a15.92,15.92,0,0,0-29.88,0L78,110l-51.62,19a15.92,15.92,0,0,0,0,29.88L78,178l19,51.62a15.92,15.92,0,0,0,29.88,0L146,178l51.62-19a15.92,15.92,0,0,0,0-29.88ZM137,164.22a8,8,0,0,0-4.74,4.74L112,223.85,91.78,169A8,8,0,0,0,87,164.22L32.15,144,87,123.78A8,8,0,0,0,91.78,119L112,64.15,132.22,119a8,8,0,0,0,4.74,4.74L191.85,144ZM144,40a8,8,0,0,1,8-8h16V16a8,8,0,0,1,16,0V32h16a8,8,0,0,1,0,16H184V64a8,8,0,0,1-16,0V48H152A8,8,0,0,1,144,40ZM248,88a8,8,0,0,1-8,8h-8v8a8,8,0,0,1-16,0V96h-8a8,8,0,0,1,0-16h8V72a8,8,0,0,1,16,0v8h8A8,8,0,0,1,248,88Z"/></svg></span><span class="icon-use">Eureka AI</span><span class="icon-name">Sparkle</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M220.27,158.54a8,8,0,0,0-7.7-.46,20,20,0,1,1,0-36.16A8,8,0,0,0,224,114.69V72a16,16,0,0,0-16-16H171.78a35.36,35.36,0,0,0,.22-4,36.11,36.11,0,0,0-11.36-26.24,36,36,0,0,0-60.55,23.62,36.56,36.56,0,0,0,.14,6.62H64A16,16,0,0,0,48,72v32.22a35.36,35.36,0,0,0-4-.22,36.12,36.12,0,0,0-26.24,11.36,35.7,35.7,0,0,0-9.69,27,36.08,36.08,0,0,0,33.31,33.6,35.68,35.68,0,0,0,6.62-.14V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V165.31A8,8,0,0,0,220.27,158.54ZM208,208H64V165.31a8,8,0,0,0-11.43-7.23,20,20,0,1,1,0-36.16A8,8,0,0,0,64,114.69V72h46.69a8,8,0,0,0,7.23-11.43,20,20,0,1,1,36.16,0A8,8,0,0,0,161.31,72H208v32.23a35.68,35.68,0,0,0-6.62-.14A36,36,0,0,0,204,176a35.36,35.36,0,0,0,4-.22Z"/></svg></span><span class="icon-use">CRO Pulse extension</span><span class="icon-name">PuzzlePiece</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,40H48A16,16,0,0,0,32,56v56c0,52.72,25.52,84.67,46.93,102.19,23.06,18.86,46,25.26,47,25.53a8,8,0,0,0,4.2,0c1-.27,23.91-6.67,47-25.53C198.48,196.67,224,164.72,224,112V56A16,16,0,0,0,208,40Zm0,72c0,37.07-13.66,67.16-40.6,89.42A129.3,129.3,0,0,1,128,223.62a128.25,128.25,0,0,1-38.92-21.81C61.82,179.51,48,149.3,48,112l0-56,160,0ZM82.34,141.66a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32l-56,56a8,8,0,0,1-11.32,0Z"/></svg></span><span class="icon-use">Cookieless & GDPR</span><span class="icon-name">ShieldCheck</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M237.66,18.34a8,8,0,0,0-11.32,0l-52.4,52.41-5.37-5.38a32.05,32.05,0,0,0-45.26,0L100,88.69l-6.34-6.35A8,8,0,0,0,82.34,93.66L88.69,100,65.37,123.31a32,32,0,0,0,0,45.26l5.38,5.37-52.41,52.4a8,8,0,0,0,11.32,11.32l52.4-52.41,5.37,5.38a32,32,0,0,0,45.26,0L156,167.31l6.34,6.35a8,8,0,0,0,11.32-11.32L167.31,156l23.32-23.31a32,32,0,0,0,0-45.26l-5.38-5.37,52.41-52.4A8,8,0,0,0,237.66,18.34Zm-116.29,161a16,16,0,0,1-22.62,0L76.69,157.25a16,16,0,0,1,0-22.62L100,111.31,144.69,156Zm57.94-57.94L156,144.69,111.31,100l23.32-23.31a16,16,0,0,1,22.62,0l22.06,22A16,16,0,0,1,179.31,121.37ZM88.57,35A8,8,0,0,1,103.43,29l8,20A8,8,0,0,1,96.57,55ZM24.57,93A8,8,0,0,1,35,88.57l20,8A8,8,0,0,1,49,111.43l-20-8A8,8,0,0,1,24.57,93ZM231.43,163a8,8,0,0,1-10.4,4.46l-20-8A8,8,0,1,1,207,144.57l20,8A8,8,0,0,1,231.43,163Zm-64,58.06A8,8,0,0,1,152.57,227l-8-20A8,8,0,0,1,159.43,201Z"/></svg></span><span class="icon-use">Integrations</span><span class="icon-name">PlugsConnected</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M240,128v64a8,8,0,0,1-8,8H168a8,8,0,0,1,0-16h44.69L136,107.31l-34.34,34.35a8,8,0,0,1-11.32,0l-72-72A8,8,0,0,1,29.66,58.34L96,124.69l34.34-34.35a8,8,0,0,1,11.32,0L224,172.69V128a8,8,0,0,1,16,0Z"/></svg></span><span class="icon-use">Drop-off</span><span class="icon-name">TrendDown</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M240,56v64a8,8,0,0,1-16,0V75.31l-82.34,82.35a8,8,0,0,1-11.32,0L96,123.31,29.66,189.66a8,8,0,0,1-11.32-11.32l72-72a8,8,0,0,1,11.32,0L136,140.69,212.69,64H168a8,8,0,0,1,0-16h64A8,8,0,0,1,240,56Z"/></svg></span><span class="icon-use">Conversion uplift</span><span class="icon-name">TrendUp</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M230.14,58.87A8,8,0,0,0,224,56H62.68L56.6,22.57A8,8,0,0,0,48.73,16H24a8,8,0,0,0,0,16h18L67.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,160,204a28,28,0,1,0,28-28H91.17a8,8,0,0,1-7.87-6.57L80.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,230.14,58.87ZM104,204a12,12,0,1,1-12-12A12,12,0,0,1,104,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,200,204Zm4-74.57A8,8,0,0,1,196.1,136H77.22L65.59,72H214.41Z"/></svg></span><span class="icon-use">Checkout</span><span class="icon-name">ShoppingCart</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M112,40a8,8,0,0,0-8,8V64H24A16,16,0,0,0,8,80v96a16,16,0,0,0,16,16h80v16a8,8,0,0,0,16,0V48A8,8,0,0,0,112,40ZM24,176V80h80v96ZM248,80v96a16,16,0,0,1-16,16H144a8,8,0,0,1,0-16h88V80H144a8,8,0,0,1,0-16h88A16,16,0,0,1,248,80ZM88,112a8,8,0,0,1-8,8H72v24a8,8,0,0,1-16,0V120H48a8,8,0,0,1,0-16H80A8,8,0,0,1,88,112Z"/></svg></span><span class="icon-use">Web forms</span><span class="icon-name">Textbox</span></div>
+          <div class="icon-cell"><button type="button" class="icon-get" data-icon-svg title="Download this icon" aria-label="Download this icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></button><span class="icon-chip"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M215.79,118.17a8,8,0,0,0-5-5.66L153.18,90.9l14.66-73.33a8,8,0,0,0-13.69-7l-112,120a8,8,0,0,0,3,13l57.63,21.61L88.16,238.43a8,8,0,0,0,13.69,7l112-120A8,8,0,0,0,215.79,118.17ZM109.37,214l10.47-52.38a8,8,0,0,0-5-9.06L62,132.71l84.62-90.66L136.16,94.43a8,8,0,0,0,5,9.06l52.8,19.8Z"/></svg></span><span class="icon-use">No developer needed</span><span class="icon-name">Lightning</span></div>
         </div>
         <div class="btn-row" style="margin-top: var(--s-6)">
           <a class="btn btn-secondary" href="https://phosphoricons.com" target="_blank" rel="noopener"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,104a8,8,0,0,1-16,0V59.32l-66.33,66.34a8,8,0,0,1-11.32-11.32L196.68,48H152a8,8,0,0,1,0-16h64a8,8,0,0,1,8,8Zm-40,24a8,8,0,0,0-8,8v72H48V80h72a8,8,0,0,0,0-16H48A16,16,0,0,0,32,80V208a16,16,0,0,0,16,16H176a16,16,0,0,0,16-16V136A8,8,0,0,0,184,128Z"/></svg><span>Browse Phosphor</span></a>

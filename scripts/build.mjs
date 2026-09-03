@@ -450,6 +450,25 @@ ${PAGES.map((x) => switchOpt(x, p.id)).join('\n')}
       return;
     }
 
+    var iconGet = ev.target.closest('[data-icon-svg]');
+    if (iconGet) {
+      var cell = iconGet.closest('.icon-cell');
+      var svg = cell && cell.querySelector('.icon-chip svg');
+      var nameEl = cell && cell.querySelector('.icon-name');
+      if (svg && nameEl) {
+        var file = nameEl.textContent.trim().replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase() + '.svg';
+        var out = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="currentColor">' +
+                  svg.innerHTML.trim() + '</svg>\\n';
+        var url = URL.createObjectURL(new Blob([out], { type: 'image/svg+xml' }));
+        var a = document.createElement('a');
+        a.href = url; a.download = file; a.rel = 'noopener';
+        document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+        flash(iconGet);
+      }
+      return;
+    }
+
     var copy = ev.target.closest('[data-copy]');
     if (copy) { copyText(copy.dataset.copy).then(function (ok) { if (ok) flash(copy); }); return; }
 
