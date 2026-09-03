@@ -39,8 +39,14 @@ The content lives in three files under `src/`:
 | File | Guide |
 |---|---|
 | `Brand.src.html` | Brand guidelines — logo, color, typography, foundations, UI elements |
-| `Presentations.src.html` | Presentations — slide format, layouts, charts |
-| `Social.src.html` | Social media — LinkedIn profile, post formats, carousels, captions |
+| `Presentations.src.html` | Presentations — a coming-soon placeholder for now |
+| `Social.src.html` | Social media — a coming-soon placeholder for now |
+
+Presentations and social media are parked. The guides that were written for them
+sit next to the placeholders as `Presentations.full.html` and `Social.full.html`;
+the build ignores both. To bring one back, copy it over the matching `.src.html`
+and rebuild — the sidebar menu returns on its own, because the build only draws
+the Sections list when the source has one.
 
 They carry some Claude Design canvas markup (`<x-dc>`, `<helmet>`, `{{ holes }}`)
 because the same three files also feed the design canvas. `scripts/build.mjs`

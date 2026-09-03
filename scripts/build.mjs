@@ -243,9 +243,9 @@ const siteCss = `
     .switch-opt:hover { background: var(--warm-white); }
     .switch-opt > svg:first-child { width: 18px; height: 18px; flex: 0 0 18px; color: var(--gray-700); }
     .switch-opt .tick { width: 15px; height: 15px; flex: 0 0 15px; margin-left: auto; color: var(--blue); opacity: 0; display: inline-flex; }
-    .switch-opt[aria-current="true"] { color: var(--blue); font-weight: 500; }
-    .switch-opt[aria-current="true"] > svg:first-child { color: var(--blue); }
-    .switch-opt[aria-current="true"] .tick { opacity: 1; }
+    .switch-opt[aria-current] { color: var(--blue); font-weight: 500; }
+    .switch-opt[aria-current] > svg:first-child { color: var(--blue); }
+    .switch-opt[aria-current] .tick { opacity: 1; }
 
     /* ---------- Copy & download ---------- */
     .copy-chip {
@@ -371,11 +371,11 @@ const page = (p) => `<!doctype html>
 <div class="shell">
   <aside class="sidebar">
     <div class="sidebar-inner">
-      <p class="sidebar-group-label">Sections</p>
+${p.nav.trim() ? `      <p class="sidebar-group-label">Sections</p>
       <nav class="menu">
 ${p.nav}
       </nav>
-
+` : ''}
       <div class="sidebar-footer">
         <div class="switcher">
           <div class="switch-pop" hidden>
