@@ -4,7 +4,14 @@ The working reference for how Exatom looks — logo, color, typography, foundati
 UI elements, presentations and social media — plus every brand file to download.
 
 It is a static site. No framework, no database, no build dependencies: one Node
-script turns three source files into `site/`, and Vercel serves that.
+script turns three source files into four pages, and Vercel serves them.
+
+| URL | Page |
+|---|---|
+| `/` | Brand guidelines |
+| `/presentations` | Presentations |
+| `/social` | Social media |
+| `/downloads` | Every brand file, generated from `assets/` |
 
 ## Adding a file to the downloads
 
@@ -32,8 +39,8 @@ The content lives in three files under `src/`:
 | File | Guide |
 |---|---|
 | `Brand.src.html` | Brand guidelines — logo, color, typography, foundations, UI elements |
-| `Presentations.dc.html` | Presentations — slide format, layouts, charts |
-| `Social.dc.html` | Social media — LinkedIn profile, post formats, carousels, captions |
+| `Presentations.src.html` | Presentations — slide format, layouts, charts |
+| `Social.src.html` | Social media — LinkedIn profile, post formats, carousels, captions |
 
 They carry some Claude Design canvas markup (`<x-dc>`, `<helmet>`, `{{ holes }}`)
 because the same three files also feed the design canvas. `scripts/build.mjs`

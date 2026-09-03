@@ -3,8 +3,8 @@
  *
  * Sources:
  *   src/Brand.src.html          brand guidelines (logo, color, type, foundations, UI)
- *   src/Presentations.dc.html   slide system
- *   src/Social.dc.html          LinkedIn
+ *   src/Presentations.src.html  slide system
+ *   src/Social.src.html         LinkedIn
  *   assets/**                   anything dropped here becomes a download
  *
  * The same three source files also feed the Claude Design canvas, so they keep
@@ -150,8 +150,8 @@ const downloadsNav = [...groups.keys()].map((g) => {
 /* --------------------------------------------------------------- the guides */
 
 const brandSrc = read('src/Brand.src.html');
-const presSrc = read('src/Presentations.dc.html');
-const socSrc = read('src/Social.dc.html');
+const presSrc = read('src/Presentations.src.html');
+const socSrc = read('src/Social.src.html');
 
 let brandPane = contentOf(brandSrc)
   .replace('<h1 class="display">Web design</h1>', '<h1 class="display">Brand guidelines</h1>')
@@ -310,33 +310,51 @@ const siteCss = `
       .asset-row { flex-wrap: wrap; }
       .asset-name { flex-basis: 100%; }
     }
+`;
 
-${scope(guideCss(presSrc), '[data-guide="presentations"]')}
-${scope(guideCss(socSrc), '[data-guide="social"]')}`;
 
 /* --------------------------------------------------------------- assembling */
 
-const guideNav = (id, html) =>
-  `      <div class="guide-nav" data-guide="${id}"${id === 'brand' ? '' : ' hidden'}>
-        <nav class="menu">${html}</nav>
-      </div>`;
+const PAGES = [
+  {
+    id: 'brand', file: 'index.html', href: '/', name: 'Brand guidelines',
+    nav: cleanNav(navOf(brandSrc)), pane: brandPane, css: '',
+    description: "Exatom's brand guidelines: logo, color, typography, spacing and the UI elements built from them.",
+  },
+  {
+    id: 'presentations', file: 'presentations.html', href: '/presentations', name: 'Presentations',
+    nav: cleanNav(navOf(presSrc)), pane: presPane, css: scope(guideCss(presSrc), '[data-guide="presentations"]'),
+    description: 'How an Exatom deck is built: slide format, margins, eight layouts, type and charts.',
+  },
+  {
+    id: 'social', file: 'social.html', href: '/social', name: 'Social media',
+    nav: cleanNav(navOf(socSrc)), pane: socPane, css: scope(guideCss(socSrc), '[data-guide="social"]'),
+    description: 'How Exatom shows up on LinkedIn: profile, banner, post formats, carousels and captions.',
+  },
+  {
+    id: 'downloads', file: 'downloads.html', href: '/downloads', name: 'Downloads',
+    nav: downloadsNav, pane: downloadsPane, css: '',
+    description: 'Every Exatom brand file in one place, straight from the repository.',
+  },
+];
 
-const switchOpt = (g) =>
-  `          <button type="button" class="switch-opt" data-goto="${g.id}"${g.id === 'brand' ? ' aria-current="true"' : ''}>${I[g.id]}<span>${g.name}</span><span class="tick">${I.check}</span></button>`;
+const switchOpt = (page, current) =>
+  `            <a class="switch-opt" href="${page.href}"${page.id === current ? ' aria-current="page"' : ''}>` +
+  `${I[page.id]}<span>${page.name}</span><span class="tick">${I.check}</span></a>`;
 
-const html = `<!doctype html>
+const page = (p) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Exatom — Brand guidelines</title>
-<meta name="description" content="Exatom's brand guidelines: logo, color, typography, foundations, UI elements, presentations and social media, with every asset available to download.">
+<title>Exatom — ${p.name}</title>
+<meta name="description" content="${esc(p.description)}">
 <meta name="robots" content="noindex">
 <link rel="icon" href="logo/exatom-icon-full-color.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Inter+Tight:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;display=swap">
-<style>${baseCss}${siteCss}
+<style>${baseCss}${siteCss}${p.css}
 </style>
 </head>
 <body>
@@ -344,25 +362,20 @@ const html = `<!doctype html>
   <aside class="sidebar">
     <div class="sidebar-inner">
       <p class="sidebar-group-label">Sections</p>
-${guideNav('brand', cleanNav(navOf(brandSrc)))}
-${guideNav('presentations', cleanNav(navOf(presSrc)))}
-${guideNav('social', cleanNav(navOf(socSrc)))}
-      <div class="guide-nav" data-guide="downloads" hidden>
-        <nav class="menu">
-${downloadsNav}
-        </nav>
-      </div>
+      <nav class="menu">
+${p.nav}
+      </nav>
 
       <div class="sidebar-footer">
         <div class="switcher">
           <div class="switch-pop" hidden>
-${GUIDES.map(switchOpt).join('\n')}
+${PAGES.map((x) => switchOpt(x, p.id)).join('\n')}
           </div>
           <button type="button" class="user-block" aria-expanded="false" aria-haspopup="true">
             <img src="logo/exatom-icon-full-color.svg" alt="">
             <div class="user-text">
               <span class="user-name">Exatom</span>
-              <span class="user-meta" data-guide-label>Brand guidelines</span>
+              <span class="user-meta">${p.name}</span>
             </div>
             ${I.caret}
           </button>
@@ -372,20 +385,13 @@ ${GUIDES.map(switchOpt).join('\n')}
   </aside>
 
   <main class="content" style="max-width: 1200px; padding: 32px 64px 96px">
-    <div class="guide-pane" data-guide="brand">${brandPane}
-    </div>
-    <div class="guide-pane" data-guide="presentations" hidden>${presPane}
-    </div>
-    <div class="guide-pane" data-guide="social" hidden>${socPane}
-    </div>
-    <div class="guide-pane" data-guide="downloads" hidden>${downloadsPane}
+    <div class="guide-pane" data-guide="${p.id}">${p.pane}
     </div>
   </main>
 </div>
 
 <script>
 (function () {
-  var NAMES = ${JSON.stringify(Object.fromEntries(GUIDES.map((g) => [g.id, g.name])))};
   var pop = document.querySelector('.switch-pop');
   var trigger = document.querySelector('.user-block');
 
@@ -394,19 +400,11 @@ ${GUIDES.map(switchOpt).join('\n')}
     trigger.setAttribute('aria-expanded', 'false');
   }
 
-  function show(id, push) {
-    document.querySelectorAll('.guide-pane').forEach(function (el) { el.hidden = el.dataset.guide !== id; });
-    document.querySelectorAll('.guide-nav').forEach(function (el) { el.hidden = el.dataset.guide !== id; });
-    document.querySelectorAll('.switch-opt').forEach(function (el) {
-      if (el.dataset.goto === id) el.setAttribute('aria-current', 'true');
-      else el.removeAttribute('aria-current');
-    });
-    document.querySelector('[data-guide-label]').textContent = NAMES[id];
-    document.title = 'Exatom \\u2014 ' + NAMES[id];
-    closeSwitcher();
-    if (push !== false) history.replaceState(null, '', id === 'brand' ? location.pathname : '#' + id);
-    scrollTo(0, 0);
-  }
+  trigger.addEventListener('click', function () {
+    var open = pop.hidden;
+    pop.hidden = !open;
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
 
   function flash(el) {
     el.classList.add('is-done');
@@ -434,16 +432,7 @@ ${GUIDES.map(switchOpt).join('\n')}
     }
   }
 
-  trigger.addEventListener('click', function () {
-    var open = pop.hidden;
-    pop.hidden = !open;
-    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
-
   document.addEventListener('click', function (ev) {
-    var goto = ev.target.closest('[data-goto]');
-    if (goto) { show(goto.dataset.goto); return; }
-
     var scroll = ev.target.closest('[data-scroll]');
     if (scroll) {
       var el = document.getElementById(scroll.dataset.scroll);
@@ -468,9 +457,6 @@ ${GUIDES.map(switchOpt).join('\n')}
   });
 
   document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') closeSwitcher(); });
-
-  var start = location.hash.replace('#', '');
-  if (NAMES[start]) show(start, false);
 })();
 </script>
 </body>
@@ -481,7 +467,8 @@ ${GUIDES.map(switchOpt).join('\n')}
 
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(join(OUT, 'logo'), { recursive: true });
-writeFileSync(join(OUT, 'index.html'), html);
+
+for (const p of PAGES) writeFileSync(join(OUT, p.file), page(p));
 
 for (const f of readdirSync(join(ROOT, 'logo'))) {
   if (f.endsWith('.svg')) copyFileSync(join(ROOT, 'logo', f), join(OUT, 'logo', f));
@@ -494,7 +481,7 @@ for (const a of assets) {
 }
 
 console.log(
-  `built site/ — ${(html.length / 1024).toFixed(0)} KB html, ${tiles} logo tiles, ` +
-  `${(brandPane.match(/copy-chip/g) || []).length} copy chips, ` +
+  `built site/ — ${PAGES.length} pages (${PAGES.map((p) => p.file).join(', ')}), ` +
+  `${tiles} logo tiles, ${(brandPane.match(/copy-chip/g) || []).length} copy chips, ` +
   `${assets.length} downloads in ${groups.size} group${groups.size === 1 ? '' : 's'}`
 );
