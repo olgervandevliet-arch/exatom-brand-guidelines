@@ -251,6 +251,13 @@
     .btn:disabled:hover .btn-label > span, .btn-disabled:hover .btn-label > span { transform: none; }
     .btn:disabled:hover .btn-label > span + span, .btn-disabled:hover .btn-label > span + span { transform: translateY(-105%); }
 
+    /* Tertiary has no fill and no border, so there is nothing for the roll to be
+       clipped by — the type would read as jumping in mid-air. It underlines. */
+    .btn-tertiary .btn-label { overflow: visible; }
+    .btn-tertiary .btn-label > span + span { display: none; }
+    .btn-tertiary:hover .btn-label > span { transform: none; }
+    .btn-tertiary:hover { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+
     @media (prefers-reduced-motion: reduce) {
       .btn-label > span { transition: none; }
       .btn:hover .btn-label > span { transform: none; }
@@ -986,7 +993,7 @@
       <div class="subsection" id="ui-buttons">
         <h3 class="subsection-title">Buttons</h3>
         <p class="subsection-note">One primary action per view, repeated down the page rather than competing with alternatives beside it. Blue is the only filled action colour; Dark is reserved for a second, quieter primary on light sections.</p>
-        <div class="specimen-spec"><span class="spec-chip">999px radius</span><span class="spec-chip">13 / 24px padding</span><span class="spec-chip">small: 9 / 18px at 13px</span><span class="spec-chip">Inter SemiBold 15px</span><span class="spec-chip">&minus;2% tracking</span><span class="spec-chip">1px border</span><span class="spec-chip">no shadow</span><span class="spec-chip">hover: label roll 420ms, colour holds</span></div>
+        <div class="specimen-spec"><span class="spec-chip">999px radius</span><span class="spec-chip">13 / 24px padding</span><span class="spec-chip">small: 9 / 18px at 13px</span><span class="spec-chip">Inter SemiBold 15px</span><span class="spec-chip">&minus;2% tracking</span><span class="spec-chip">1px border</span><span class="spec-chip">no shadow</span><span class="spec-chip">hover: label roll 420ms, colour holds</span><span class="spec-chip">tertiary: underline</span></div>
 
         <div class="btn-row">
           <button class="btn btn-primary"><span class="btn-label"><span>Start free trial</span><span aria-hidden="true">Start free trial</span></span></button>
@@ -1002,7 +1009,7 @@
           <button class="btn btn-sm btn-tertiary"><span class="btn-label"><span>Read the case study</span><span aria-hidden="true">Read the case study</span></span></button>
           <button class="btn btn-sm btn-disabled"><span class="btn-label"><span>Unavailable</span><span aria-hidden="true">Unavailable</span></span></button>
         </div>
-        <p class="caption" style="margin-top: var(--s-4)">Primary, Secondary, Dark, Tertiary, Disabled, each at both sizes. Tertiary is text alone &mdash; no fill, no border, no arrow. It carries the third-most-important action on a view, and never the only one. On hover the label drops out of the bottom while a second copy arrives from above, clipped by the pill &mdash; one 420ms move. Nothing else moves: fill, border and text colour hold, so the roll is the whole of the feedback. Disabled does not respond at all, and neither does anything when the visitor asks for reduced motion.</p>
+        <p class="caption" style="margin-top: var(--s-4)">Primary, Secondary, Dark, Tertiary, Disabled, each at both sizes. Tertiary is text alone &mdash; no fill, no border, no arrow. It carries the third-most-important action on a view, and never the only one. On hover the label drops out of the bottom while a second copy arrives from above, clipped by the pill &mdash; one 420ms move. Nothing else changes: fill, border and text colour hold, so the roll is the whole of the feedback. Tertiary is the exception &mdash; with no fill to clip against it underlines instead. Disabled does not respond at all, and neither does anything when the visitor asks for reduced motion.</p>
 
         <div class="subsection" id="ui-buttons-dark" style="margin-top: var(--s-7)">
           <p class="subsection-title">On dark</p>
