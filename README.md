@@ -1,0 +1,56 @@
+# Exatom brand guidelines
+
+The working reference for how Exatom looks — logo, color, typography, foundations,
+UI elements, presentations and social media — plus every brand file to download.
+
+It is a static site. No framework, no database, no build dependencies: one Node
+script turns three source files into `site/`, and Vercel serves that.
+
+## Adding a file to the downloads
+
+Drop it into `assets/`, in a subfolder that names the group:
+
+```
+assets/
+  logo/          → shows up under "Logo"
+  fonts/         → shows up under "Fonts"
+  decks/         → shows up under "Deck templates"
+  anything-else/ → shows up under "Anything else"
+```
+
+Commit it (dragging the file into the folder on github.com is enough) and Vercel
+rebuilds within a minute. The build script scans the folder, so there is no list
+to keep in sync. `README.md` files and dotfiles are skipped.
+
+Everything in this repository is public. Do not put anything here that should not
+be — sales decks, pricing sheets, customer data.
+
+## Editing the guidelines
+
+The content lives in three files under `src/`:
+
+| File | Guide |
+|---|---|
+| `Brand.src.html` | Brand guidelines — logo, color, typography, foundations, UI elements |
+| `Presentations.dc.html` | Presentations — slide format, layouts, charts |
+| `Social.dc.html` | Social media — LinkedIn profile, post formats, carousels, captions |
+
+They carry some Claude Design canvas markup (`<x-dc>`, `<helmet>`, `{{ holes }}`)
+because the same three files also feed the design canvas. `scripts/build.mjs`
+strips it. Edit the HTML inside them and the site follows.
+
+Colors, spacing and type live once, in the `<style>` block of `Brand.src.html`.
+The other two files carry only what is specific to their medium; the build scopes
+those rules per guide so they cannot leak.
+
+## Running it locally
+
+```bash
+npm run build   # writes site/
+npm run dev     # builds, then serves site/ on http://localhost:3000
+```
+
+## Deploying
+
+Pushing to `main` deploys. Vercel runs `node scripts/build.mjs` and publishes
+`site/` — configured in `vercel.json`, nothing to set up by hand.

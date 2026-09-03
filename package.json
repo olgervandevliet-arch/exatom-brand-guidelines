@@ -1,0 +1,9 @@
+{
+  "name": "exatom-brand-guidelines",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && npx --yes serve site"
+  }
+}

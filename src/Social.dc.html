@@ -1,0 +1,501 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Inter+Tight:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;display=swap">
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --warm-white: #F7F4F2;
+      --blue-light: #E8EEFF;
+      --blue: #2A5AE9;
+      --dark: #18122D;
+      --gray-700: #464157;
+      --gray-500: #747181;
+      --gray-300: #A3A0AB;
+      --gray-100: #D1D0D5;
+      --border: #F7F4F2;
+
+      --s-1: 4px;  --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
+      --s-5: 24px; --s-6: 32px;  --s-7: 48px;  --s-8: 64px;
+      --s-9: 96px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: auto; overflow: visible; }
+    x-dc { display: block; }
+    body { margin: 0; background: var(--white); font-family: 'Inter', system-ui, sans-serif; color: var(--dark); -webkit-font-smoothing: antialiased; }
+    a { color: var(--blue); text-decoration: none; } a:hover { color: #1E46C4; }
+    h1, h2, h3, h4 { font-family: 'Inter Tight', 'Inter', system-ui, sans-serif; font-weight: 600; margin: 0; }
+    p { margin: 0; }
+    strong, b { font-weight: 600; }
+
+    .shell { display: flex; align-items: stretch; }
+
+    /* ---------- Sidebar ---------- */
+    .sidebar { flex: 0 0 264px; width: 264px; border-right: 1px solid var(--border); }
+    .sidebar-inner {
+      position: sticky; top: 0;
+      width: 264px; height: 100vh;
+      overflow-y: auto;
+      padding: var(--s-5) var(--s-4);
+      display: flex; flex-direction: column;
+    }
+    .sidebar-group-label {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.01em; color: var(--gray-500);
+      padding: var(--s-2) var(--s-3); margin-bottom: var(--s-1);
+    }
+    .guide-index { display: flex; flex-direction: column; gap: 2px; }
+    .guide-item {
+      display: flex; align-items: center; gap: 10px;
+      height: 36px; padding: 0 var(--s-3); border-radius: 4px;
+      font-size: 14px; letter-spacing: 0.01em; color: var(--gray-300);
+    }
+    .guide-item svg { width: 18px; height: 18px; flex: 0 0 18px; color: var(--gray-300); }
+    .guide-item.is-current { background: var(--blue-light); color: var(--blue); font-weight: 500; }
+    .guide-item.is-current svg { color: var(--blue); }
+    .guide-hint { font-size: 11px; line-height: 1.45; color: var(--gray-300); padding: var(--s-2) var(--s-3) 0; }
+    .sidebar-rule { height: 1px; background: var(--border); margin: var(--s-5) var(--s-3) var(--s-4); }
+
+    .menu { display: flex; flex-direction: column; gap: 2px; }
+    .menu-item {
+      display: flex; align-items: center; gap: 10px;
+      width: 100%; background: none; border: 0; font: inherit; text-align: left; cursor: pointer;
+      height: 36px; padding: 0 var(--s-3); border-radius: 4px;
+      font-size: 14px; letter-spacing: 0.01em; color: var(--dark);
+      transition: background 120ms ease, color 120ms ease;
+    }
+    .menu-item svg { width: 18px; height: 18px; flex: 0 0 18px; color: var(--gray-700); transition: color 120ms ease; }
+    .menu-item:hover { background: var(--warm-white); color: var(--dark); }
+    .menu-item:hover svg { color: var(--dark); }
+
+    .sidebar-footer { margin-top: auto; }
+    .user-block {
+      display: flex; align-items: center; gap: 10px;
+      height: 52px; padding: 0 var(--s-3); border-radius: 4px;
+      transition: background 120ms ease;
+    }
+    .user-block:hover { background: var(--warm-white); }
+    .user-block img { width: 26px; height: 26px; flex: 0 0 26px; border-radius: 4px; }
+    .user-text { display: flex; flex-direction: column; min-width: 0; }
+    .user-name { font-size: 14px; font-weight: 500; letter-spacing: 0.01em; color: var(--dark); }
+    .user-meta { font-size: 12px; color: var(--gray-500); }
+    .user-block > svg:last-child { width: 16px; height: 16px; flex: 0 0 16px; margin-left: auto; color: var(--gray-500); }
+
+    /* ---------- Content ---------- */
+    .content { flex: 1 1 auto; min-width: 0; padding: var(--s-6) var(--s-8) 160px; }
+    .content > * { max-width: 1120px; }
+
+    .masthead { margin: var(--s-6) 0 var(--s-9); }
+    .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; color: var(--blue); margin-bottom: var(--s-3); }
+    .display { font-size: 64px; letter-spacing: -0.028em; line-height: 1.02; margin-bottom: var(--s-4); }
+    .lede { font-size: 19px; line-height: 1.55; color: var(--gray-700); max-width: 62ch; }
+
+    .section { padding-top: var(--s-9); scroll-margin-top: var(--s-6); }
+    .section:first-of-type { padding-top: 0; }
+    .section + .section { border-top: 1px solid var(--border); }
+    .section-head { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-3); }
+    .section-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; flex: 0 0 34px; border-radius: 6px; background: var(--blue-light); color: var(--blue); }
+    .section-icon svg { width: 20px; height: 20px; }
+    .section-title { font-size: 38px; letter-spacing: -0.018em; line-height: 1.1; }
+    .section-intro { font-size: 16px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-7); }
+
+    .subsection { margin-top: var(--s-8); scroll-margin-top: var(--s-6); }
+    .subsection-title { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .subsection-note { font-size: 14px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-5); }
+    .caption { font-size: 13px; line-height: 1.5; color: var(--gray-500); }
+    code { font-family: 'Inter', sans-serif; font-size: 0.92em; background: var(--warm-white); padding: 2px 6px; border-radius: 3px; }
+
+    /* @guide-css */
+    .rule-list { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: var(--s-5); }
+    .rule { display: flex; gap: var(--s-5); padding: var(--s-4) var(--s-5); border-top: 1px solid var(--border); }
+    .rule:first-child { border-top: none; }
+    .rule-key { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.01em; flex: 0 0 190px; }
+    .rule-val { font-size: 13px; line-height: 1.5; color: var(--gray-700); }
+
+    /* ---------- Profile ---------- */
+    .profile-row { display: flex; gap: var(--s-6); flex-wrap: wrap; align-items: flex-start; }
+    .avatar-set { display: flex; gap: var(--s-5); align-items: flex-end; }
+    .avatar { border-radius: 6px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+    .avatar.a-lg { width: 120px; height: 120px; background: var(--blue-light); }
+    .avatar.a-lg img { width: 62px; }
+    .avatar.a-md { width: 72px; height: 72px; background: var(--dark); }
+    .avatar.a-md img { width: 38px; }
+    .avatar.a-sm { width: 44px; height: 44px; background: var(--white); border: 1px solid var(--border); }
+    .avatar.a-sm img { width: 24px; }
+    .avatar-note { font-size: 12px; color: var(--gray-500); margin-top: var(--s-2); text-align: center; }
+
+    .banner {
+      position: relative; width: 100%; max-width: 846px; aspect-ratio: 1128 / 191;
+      border-radius: 6px; overflow: hidden;
+      background: linear-gradient(128deg, #2A5AE9 0%, #4E7BF2 46%, #E8EEFF 100%);
+      display: flex; align-items: center; padding: 0 4.5%;
+    }
+    .banner-claim { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 26px; letter-spacing: -0.03em; color: var(--white); }
+    .banner-safe { position: absolute; left: 22%; right: 4.5%; top: 12%; bottom: 12%; border: 1px dashed rgba(255,255,255,0.55); border-radius: 4px; }
+
+    /* ---------- Posts ---------- */
+    .post-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-5); }
+    .post-card { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .post {
+      position: relative; overflow: hidden; padding: 8%;
+      display: flex; flex-direction: column; background: var(--white);
+    }
+    .post.square { aspect-ratio: 1 / 1; }
+    .post.link { aspect-ratio: 1200 / 627; }
+    .post.portrait { aspect-ratio: 4 / 5; }
+    .post.on-dark { background: var(--dark); color: var(--white); }
+    .post.on-tint { background: var(--blue-light); }
+    .post.on-gradient { background: linear-gradient(128deg, #2A5AE9 0%, #4E7BF2 44%, #E8EEFF 100%); color: var(--white); }
+    .po-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.09em; color: var(--blue); }
+    .po-eyebrow.light { color: rgba(255,255,255,0.72); }
+    .po-title { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 27px; letter-spacing: -0.035em; line-height: 1.04; max-width: 13ch; }
+    .po-title.sm { font-size: 21px; }
+    .po-metric { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 62px; letter-spacing: -0.04em; line-height: 1; color: var(--blue); }
+    .po-metric.light { color: var(--white); }
+    .po-body { font-size: 12px; line-height: 1.45; color: var(--gray-500); max-width: 26ch; margin-top: 8px; }
+    .po-body.light { color: rgba(255,255,255,0.78); }
+    .po-mark { position: absolute; left: 8%; bottom: 8%; }
+    .po-mark img { height: 14px; width: auto; }
+    .po-page { position: absolute; right: 8%; bottom: 8%; font-size: 11px; font-weight: 600; color: var(--gray-300); }
+    .po-page.light { color: rgba(255,255,255,0.6); }
+    .post-meta { padding: var(--s-3) var(--s-4); border-top: 1px solid var(--border); }
+    .post-name { font-size: 13px; font-weight: 600; letter-spacing: 0.01em; }
+    .post-size { font-size: 12px; color: var(--gray-500); margin-top: 3px; }
+    .post-use { font-size: 12px; color: var(--gray-500); margin-top: 6px; line-height: 1.45; }
+
+    /* ---------- Caption ---------- */
+    .caption-demo { border: 1px solid var(--border); border-radius: 6px; padding: var(--s-6); max-width: 620px; }
+    .caption-head { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-5); }
+    .caption-head .avatar { width: 44px; height: 44px; flex: 0 0 44px; background: var(--blue-light); border-radius: 999px; }
+    .caption-head .avatar img { width: 24px; }
+    .caption-org { font-size: 14px; font-weight: 600; letter-spacing: 0.01em; }
+    .caption-sub { font-size: 12px; color: var(--gray-500); }
+    .caption-body { font-size: 15px; line-height: 1.6; color: var(--dark); white-space: pre-line; }
+    .caption-body .fold { color: var(--gray-300); }
+
+    /* ---------- Awaiting ---------- */
+    .awaiting {
+      border: 1px dashed var(--gray-300); border-radius: 6px; background: var(--white);
+      padding: var(--s-5) var(--s-6); margin-top: var(--s-5); max-width: 720px;
+    }
+    .awaiting-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: var(--gray-500); margin-bottom: var(--s-3); }
+    .awaiting-tag span { width: 6px; height: 6px; border-radius: 999px; background: var(--gray-300); }
+    .awaiting h4 { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .awaiting ul { margin: 0; padding-left: 18px; }
+    .awaiting li { font-size: 14px; line-height: 1.65; color: var(--gray-700); }
+
+    .note-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); margin-top: var(--s-5); }
+    .note-card { border: 1px solid var(--border); border-radius: 6px; padding: var(--s-5); }
+    .note-card h4 { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .note-card p { font-size: 13px; line-height: 1.6; color: var(--gray-500); }
+  </style>
+</helmet>
+
+<div class="shell">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <p class="sidebar-group-label">Guides</p>
+      <div class="guide-index">
+        <div class="guide-item">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,40H48A24,24,0,0,0,24,64V176a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V64A24,24,0,0,0,208,40Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V64a8,8,0,0,1,8-8H208a8,8,0,0,1,8,8Zm-48,48a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,224Z"/></svg>
+          <span>Web design</span>
+        </div>
+        <div class="guide-item">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z"/></svg>
+          <span>Presentations</span>
+        </div>
+        <div class="guide-item is-current">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M176,160a39.89,39.89,0,0,0-28.62,12.09l-46.1-29.63a39.8,39.8,0,0,0,0-28.92l46.1-29.63a40,40,0,1,0-8.66-13.45l-46.1,29.63a40,40,0,1,0,0,55.82l46.1,29.63A40,40,0,1,0,176,160Zm0-128a24,24,0,1,1-24,24A24,24,0,0,1,176,32ZM64,152a24,24,0,1,1,24-24A24,24,0,0,1,64,152Zm112,72a24,24,0,1,1,24-24A24,24,0,0,1,176,224Z"/></svg>
+          <span>Social media</span>
+        </div>
+      </div>
+      <p class="guide-hint">Switch guides in the Pages menu.</p>
+
+      <div class="sidebar-rule"></div>
+
+      <p class="sidebar-group-label">Sections</p>
+      <nav class="menu">
+        <button type="button" class="menu-item" onClick="{{ goProfile }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"/></svg>
+          <span>Profile &amp; banner</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goFormats }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM48,48H208v77.38l-24.69-24.7a16,16,0,0,0-22.62,0L53.37,208H48ZM208,208H76l96-96,36,36v60ZM96,120A24,24,0,1,0,72,96,24,24,0,0,0,96,120Zm0-32a8,8,0,1,1-8,8A8,8,0,0,1,96,88Z"/></svg>
+          <span>Post formats</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goCarousel }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,88H48a16,16,0,0,0-16,16v96a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V104A16,16,0,0,0,208,88Zm0,112H48V104H208v96ZM48,64a8,8,0,0,1,8-8H200a8,8,0,0,1,0,16H56A8,8,0,0,1,48,64ZM64,32a8,8,0,0,1,8-8H184a8,8,0,0,1,0,16H72A8,8,0,0,1,64,32Z"/></svg>
+          <span>Carousels</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goCaptions }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M172,112a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h68A8,8,0,0,1,172,112Zm-8,24H96a8,8,0,0,0,0,16h68a8,8,0,0,0,0-16Zm68-12A100.11,100.11,0,0,1,132,224H48a16,16,0,0,1-16-16V124a100,100,0,0,1,200,0Zm-16,0a84,84,0,0,0-168,0v84h84A84.09,84.09,0,0,0,216,124Z"/></svg>
+          <span>Captions</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-block">
+          <img src="exatom-icon-full-color.svg" alt="">
+          <div class="user-text">
+            <span class="user-name">Exatom</span>
+            <span class="user-meta">Social media · v3</span>
+          </div>
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M231.65,194.55,198.46,36.75a16,16,0,0,0-19-12.39L132.65,34.42a16.08,16.08,0,0,0-12.3,19l33.19,157.8A16,16,0,0,0,169.16,224a16.25,16.25,0,0,0,3.38-.36l46.81-10.06A16.09,16.09,0,0,0,231.65,194.55ZM136,50.15c0-.06,0-.09,0-.09l46.8-10,3.33,15.87L139.33,66Zm6.62,31.47,46.82-10.05,3.34,15.9L146,97.53Zm6.64,31.57,46.82-10.06,13.3,63.24-46.82,10.06ZM216,197.94l-46.8,10-3.33-15.87L212.67,182,216,197.85C216,197.91,216,197.94,216,197.94ZM104,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V48A16,16,0,0,0,104,32ZM56,48h48V64H56Zm0,32h48v96H56Zm48,128H56V192h48v16Z"/></svg>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ CONTENT ============ -->
+  <main class="content">
+    <header class="masthead">
+      <p class="eyebrow">Exatom</p>
+      <h1 class="display">Social media</h1>
+      <p class="lede">LinkedIn is the only channel Exatom posts on, so this guide is written for LinkedIn specifically: the profile, the banner, the three post formats, and how a caption sounds. Colors, type and logo rules come from the brand guidelines.</p>
+    </header>
+
+    <!-- ---------- PROFILE ---------- -->
+    <section class="section" id="profile">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM74.08,197.5a64,64,0,0,1,107.84,0,87.83,87.83,0,0,1-107.84,0ZM96,120a32,32,0,1,1,32,32A32,32,0,0,1,96,120Zm97.76,66.41a79.66,79.66,0,0,0-36.06-28.75,48,48,0,1,0-59.4,0,79.66,79.66,0,0,0-36.06,28.75,88,88,0,1,1,131.52,0Z"/></svg></span>
+        <h2 class="section-title">Profile &amp; banner</h2>
+      </div>
+      <p class="section-intro">The company page is the one place the mark is seen at 40 px. It has to survive being small and round.</p>
+
+      <div class="subsection">
+        <p class="subsection-title">Profile picture</p>
+        <p class="subsection-note">Always the icon, never the full lockup — the wordmark is unreadable at avatar size. Blue light behind the full-color icon is the default; dark and white are alternates for campaigns.</p>
+        <div class="avatar-set">
+          <div>
+            <div class="avatar a-lg"><img src="exatom-icon-full-color.svg" alt=""></div>
+            <p class="avatar-note">Default</p>
+          </div>
+          <div>
+            <div class="avatar a-md"><img src="exatom-icon-white.svg" alt=""></div>
+            <p class="avatar-note">Alternate</p>
+          </div>
+          <div>
+            <div class="avatar a-sm"><img src="exatom-icon-full-color.svg" alt=""></div>
+            <p class="avatar-note">At 44 px</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule-list">
+        <div class="rule"><div class="rule-key">Profile picture</div><div class="rule-val">400 × 400 px, PNG. Icon centred, occupying 52% of the frame. LinkedIn crops it to a circle — keep the icon well inside.</div></div>
+        <div class="rule"><div class="rule-key">Page banner</div><div class="rule-val">1128 × 191 px. Gradient ground, one short claim, no logo — the profile picture already sits on top of it.</div></div>
+        <div class="rule"><div class="rule-key">Banner safe area</div><div class="rule-val">The profile picture overlaps the lower left. Keep all text right of 22% and clear of the bottom 12%.</div></div>
+        <div class="rule"><div class="rule-key">Personal banners</div><div class="rule-val">1584 × 396 px for team members' own profiles. Same gradient, same claim, no job title.</div></div>
+      </div>
+
+      <div class="subsection">
+        <p class="subsection-title">Banner</p>
+        <p class="subsection-note">The dashed line marks where the profile picture and page name sit on top.</p>
+        <div class="banner">
+          <div class="banner-safe"></div>
+          <p class="banner-claim" style="margin-left: 22%">Others analyse. Exatom acts.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- POST FORMATS ---------- -->
+    <section class="section" id="formats">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,32H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM48,48H208v77.38l-24.69-24.7a16,16,0,0,0-22.62,0L53.37,208H48ZM208,208H76l96-96,36,36v60ZM96,120A24,24,0,1,0,72,96,24,24,0,0,0,96,120Zm0-32a8,8,0,1,1-8,8A8,8,0,0,1,96,88Z"/></svg></span>
+        <h2 class="section-title">Post formats</h2>
+      </div>
+      <p class="section-intro">Three image formats, each with one job. The image carries one idea; the caption carries the argument.</p>
+
+      <div class="post-grid">
+        <div class="post-card">
+          <div class="post square on-tint">
+            <p class="po-eyebrow">Kia Germany</p>
+            <div style="margin-top: auto">
+              <p class="po-metric">+55%</p>
+              <p class="po-body">more completed test-drive requests</p>
+            </div>
+            <div class="po-mark"><img src="exatom-logo-full-color.svg" alt=""></div>
+          </div>
+          <div class="post-meta">
+            <p class="post-name">Metric post</p>
+            <p class="post-size">1200 × 1200 px</p>
+            <p class="post-use">One result, one client, one line. The workhorse — most case-study posts are this.</p>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post square on-gradient">
+            <p class="po-eyebrow light">Point of view</p>
+            <h3 class="po-title" style="margin: auto 0; color: #FFFFFF">Twenty friction points sit between intent and submit.</h3>
+            <div class="po-mark"><img src="exatom-logo-full-white.svg" alt=""></div>
+          </div>
+          <div class="post-meta">
+            <p class="post-name">Statement post</p>
+            <p class="post-size">1200 × 1200 px</p>
+            <p class="post-use">A claim on the gradient. Use sparingly — it works because it is rare.</p>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post link">
+            <p class="po-eyebrow">Case study</p>
+            <h3 class="po-title sm" style="margin-top: 6px">How Brooks Running cut checkout friction</h3>
+            <div class="po-mark"><img src="exatom-logo-full-color.svg" alt=""></div>
+          </div>
+          <div class="post-meta">
+            <p class="post-name">Link card</p>
+            <p class="post-size">1200 × 627 px</p>
+            <p class="post-use">The Open Graph image for a blog post or case study. Title only, on white.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule-list">
+        <div class="rule"><div class="rule-key">Margin</div><div class="rule-val">8% of the width on all sides — 96 px on a 1200 px square. Same modular logic as the web and slide margins.</div></div>
+        <div class="rule"><div class="rule-key">Logo</div><div class="rule-val">Bottom-left, height 4% of the frame. Full color on light, white on dark and on the gradient.</div></div>
+        <div class="rule"><div class="rule-key">Backgrounds</div><div class="rule-val">White, blue light, dark, or the gradient. Never a color outside the core palette.</div></div>
+        <div class="rule"><div class="rule-key">Words on an image</div><div class="rule-val">Maximum 12. If it needs more, it is a carousel or it belongs in the caption.</div></div>
+        <div class="rule"><div class="rule-key">Export</div><div class="rule-val">PNG at exact pixel size. LinkedIn recompresses — never upload something already compressed twice.</div></div>
+      </div>
+    </section>
+
+    <!-- ---------- CAROUSELS ---------- -->
+    <section class="section" id="carousel">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,88H48a16,16,0,0,0-16,16v96a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V104A16,16,0,0,0,208,88Zm0,112H48V104H208v96ZM48,64a8,8,0,0,1,8-8H200a8,8,0,0,1,0,16H56A8,8,0,0,1,48,64ZM64,32a8,8,0,0,1,8-8H184a8,8,0,0,1,0,16H72A8,8,0,0,1,64,32Z"/></svg></span>
+        <h2 class="section-title">Carousels</h2>
+      </div>
+      <p class="section-intro">A carousel is a small deck. It uses the presentation layouts at 4:5, uploaded to LinkedIn as a PDF.</p>
+
+      <div class="post-grid">
+        <div class="post-card">
+          <div class="post portrait on-gradient">
+            <p class="po-eyebrow light">Exatom</p>
+            <h3 class="po-title" style="margin: auto 0; color: #FFFFFF">Five reasons your form loses people</h3>
+            <div class="po-mark"><img src="exatom-logo-full-white.svg" alt=""></div>
+            <p class="po-page light">1</p>
+          </div>
+          <div class="post-meta">
+            <p class="post-name">Cover</p>
+            <p class="post-size">1080 × 1350 px</p>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post portrait">
+            <p class="po-eyebrow">02</p>
+            <h3 class="po-title sm" style="margin-top: 8px">The address field asks for what it could look up</h3>
+            <p class="po-body" style="margin-top: 12px; max-width: 30ch">Postcode lookup removes three fields and a spelling mistake. It is the cheapest fix on this list.</p>
+            <div class="po-mark"><img src="exatom-logo-full-color.svg" alt=""></div>
+            <p class="po-page">2</p>
+          </div>
+          <div class="post-meta">
+            <p class="post-name">Content page</p>
+            <p class="post-size">1080 × 1350 px</p>
+          </div>
+        </div>
+
+        <div class="post-card">
+          <div class="post portrait on-dark">
+            <h3 class="po-title" style="margin: auto 0; color: #FFFFFF">See where your own form leaks.</h3>
+            <p class="po-body light" style="margin-bottom: 32px">exatom.io</p>
+            <div class="po-mark"><img src="exatom-logo-full-white.svg" alt=""></div>
+          </div>
+          <div class="post-meta">
+            <p class="post-name">Closing</p>
+            <p class="post-size">1080 × 1350 px</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rule-list">
+        <div class="rule"><div class="rule-key">Size</div><div class="rule-val">1080 × 1350 px (4:5) — the tallest LinkedIn shows without cropping.</div></div>
+        <div class="rule"><div class="rule-key">Length</div><div class="rule-val">6 to 10 pages. Cover, content, closing. Fewer than six is a single image post.</div></div>
+        <div class="rule"><div class="rule-key">Page numbers</div><div class="rule-val">Bottom-right, Inter Semibold, gray 300 on light and 60% white on dark. Cover counts as page 1.</div></div>
+        <div class="rule"><div class="rule-key">Upload</div><div class="rule-val">Export as a single PDF, one page per slide, and upload it as a document post.</div></div>
+      </div>
+    </section>
+
+    <!-- ---------- CAPTIONS ---------- -->
+    <section class="section" id="captions">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M172,112a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h68A8,8,0,0,1,172,112Zm-8,24H96a8,8,0,0,0,0,16h68a8,8,0,0,0,0-16Zm68-12A100.11,100.11,0,0,1,132,224H48a16,16,0,0,1-16-16V124a100,100,0,0,1,200,0Zm-16,0a84,84,0,0,0-168,0v84h84A84.09,84.09,0,0,0,216,124Z"/></svg></span>
+        <h2 class="section-title">Captions</h2>
+      </div>
+      <p class="section-intro">The voice is the one in the tone-of-voice document: bold, challenging, human, driven. On LinkedIn that mostly means starting with the finding, not with a greeting.</p>
+
+      <div class="caption-demo">
+        <div class="caption-head">
+          <div class="avatar"><img src="exatom-icon-full-color.svg" alt=""></div>
+          <div>
+            <p class="caption-org">Exatom</p>
+            <p class="caption-sub">1,240 followers · 2h</p>
+          </div>
+        </div>
+        <p class="caption-body">Kia Germany's test-drive form was losing more than half its visitors at the address step.
+
+We found it in week one. The fix shipped in week two: postcode lookup, three fields removed, error text rewritten.
+
+Completed requests went up 55%.
+
+Most teams are still reading heatmaps. <span class="fold">…see more</span></p>
+      </div>
+
+      <div class="rule-list">
+        <div class="rule"><div class="rule-key">First line</div><div class="rule-val">The finding, or the number. LinkedIn cuts the caption after roughly 140 characters — the hook has to survive the fold.</div></div>
+        <div class="rule"><div class="rule-key">Length</div><div class="rule-val">80 to 150 words. Short paragraphs, one idea each, a blank line between them.</div></div>
+        <div class="rule"><div class="rule-key">Numbers</div><div class="rule-val">One number carries the post, and it matches the number on the image and in the case study. Never a figure we cannot source.</div></div>
+        <div class="rule"><div class="rule-key">Hashtags</div><div class="rule-val">At most three, at the end, lowercase-readable: #cro #formanalytics #conversionrate</div></div>
+        <div class="rule"><div class="rule-key">Emoji</div><div class="rule-val">None in the body. A single one is allowed to open a hiring or event post, nowhere else.</div></div>
+        <div class="rule"><div class="rule-key">Links</div><div class="rule-val">In the first comment when the post is an image; inline when it is a link card.</div></div>
+      </div>
+
+      <div class="note-cards">
+        <div class="note-card">
+          <h4>Say</h4>
+          <p>"Their address step was losing 54% of visitors." Specific, sourced, and it names the thing that was broken.</p>
+        </div>
+        <div class="note-card">
+          <h4>Skip</h4>
+          <p>"Excited to share…", "Let's dive in", "game-changing", rhetorical questions as openers, and any claim without a number behind it.</p>
+        </div>
+      </div>
+
+      <div class="awaiting">
+        <p class="awaiting-tag"><span></span>AWAITING INPUT</p>
+        <h4>What this guide still needs from you</h4>
+        <ul>
+          <li>Five to ten real posts you consider on-brand, so the caption rules can be checked against what already works.</li>
+          <li>Whether dashboard screenshots go in posts, and if so how they are cropped and framed.</li>
+          <li>Whether there is photography — team, office, events — or whether social stays fully graphic.</li>
+          <li>Whether team members post from personal profiles under a shared voice, and how that differs from the company page.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const go = (id) => () => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    return {
+      goProfile: go('profile'),
+      goFormats: go('formats'),
+      goCarousel: go('carousel'),
+      goCaptions: go('captions'),
+    };
+  }
+}
+</script>
+</body>
+</html>

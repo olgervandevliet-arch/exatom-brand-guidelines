@@ -1,0 +1,560 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&amp;family=Inter+Tight:wght@400;500;600&amp;family=Inter:wght@400;500;600&amp;display=swap">
+  <style>
+    :root {
+      --white: #FFFFFF;
+      --warm-white: #F7F4F2;
+      --blue-light: #E8EEFF;
+      --blue: #2A5AE9;
+      --dark: #18122D;
+      --gray-700: #464157;
+      --gray-500: #747181;
+      --gray-300: #A3A0AB;
+      --gray-100: #D1D0D5;
+      --border: #F7F4F2;
+
+      --s-1: 4px;  --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
+      --s-5: 24px; --s-6: 32px;  --s-7: 48px;  --s-8: 64px;
+      --s-9: 96px;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: auto; overflow: visible; }
+    x-dc { display: block; }
+    body { margin: 0; background: var(--white); font-family: 'Inter', system-ui, sans-serif; color: var(--dark); -webkit-font-smoothing: antialiased; }
+    a { color: var(--blue); text-decoration: none; } a:hover { color: #1E46C4; }
+    h1, h2, h3, h4 { font-family: 'Inter Tight', 'Inter', system-ui, sans-serif; font-weight: 600; margin: 0; }
+    p { margin: 0; }
+    strong, b { font-weight: 600; }
+
+    .shell { display: flex; align-items: stretch; }
+
+    /* ---------- Sidebar ---------- */
+    .sidebar { flex: 0 0 264px; width: 264px; border-right: 1px solid var(--border); }
+    .sidebar-inner {
+      position: sticky; top: 0;
+      width: 264px; height: 100vh;
+      overflow-y: auto;
+      padding: var(--s-5) var(--s-4);
+      display: flex; flex-direction: column;
+    }
+    .sidebar-group-label {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.01em; color: var(--gray-500);
+      padding: var(--s-2) var(--s-3); margin-bottom: var(--s-1);
+    }
+    .guide-index { display: flex; flex-direction: column; gap: 2px; }
+    .guide-item {
+      display: flex; align-items: center; gap: 10px;
+      height: 36px; padding: 0 var(--s-3); border-radius: 4px;
+      font-size: 14px; letter-spacing: 0.01em; color: var(--gray-300);
+    }
+    .guide-item svg { width: 18px; height: 18px; flex: 0 0 18px; color: var(--gray-300); }
+    .guide-item.is-current { background: var(--blue-light); color: var(--blue); font-weight: 500; }
+    .guide-item.is-current svg { color: var(--blue); }
+    .guide-hint { font-size: 11px; line-height: 1.45; color: var(--gray-300); padding: var(--s-2) var(--s-3) 0; }
+    .sidebar-rule { height: 1px; background: var(--border); margin: var(--s-5) var(--s-3) var(--s-4); }
+
+    .menu { display: flex; flex-direction: column; gap: 2px; }
+    .menu-item {
+      display: flex; align-items: center; gap: 10px;
+      width: 100%; background: none; border: 0; font: inherit; text-align: left; cursor: pointer;
+      height: 36px; padding: 0 var(--s-3); border-radius: 4px;
+      font-size: 14px; letter-spacing: 0.01em; color: var(--dark);
+      transition: background 120ms ease, color 120ms ease;
+    }
+    .menu-item svg { width: 18px; height: 18px; flex: 0 0 18px; color: var(--gray-700); transition: color 120ms ease; }
+    .menu-item:hover { background: var(--warm-white); color: var(--dark); }
+    .menu-item:hover svg { color: var(--dark); }
+
+    .sidebar-footer { margin-top: auto; }
+    .user-block {
+      display: flex; align-items: center; gap: 10px;
+      height: 52px; padding: 0 var(--s-3); border-radius: 4px;
+      transition: background 120ms ease;
+    }
+    .user-block:hover { background: var(--warm-white); }
+    .user-block img { width: 26px; height: 26px; flex: 0 0 26px; border-radius: 4px; }
+    .user-text { display: flex; flex-direction: column; min-width: 0; }
+    .user-name { font-size: 14px; font-weight: 500; letter-spacing: 0.01em; color: var(--dark); }
+    .user-meta { font-size: 12px; color: var(--gray-500); }
+    .user-block > svg:last-child { width: 16px; height: 16px; flex: 0 0 16px; margin-left: auto; color: var(--gray-500); }
+
+    /* ---------- Content ---------- */
+    .content { flex: 1 1 auto; min-width: 0; padding: var(--s-6) var(--s-8) 160px; }
+    .content > * { max-width: 1120px; }
+
+    .masthead { margin: var(--s-6) 0 var(--s-9); }
+    .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; color: var(--blue); margin-bottom: var(--s-3); }
+    .display { font-size: 64px; letter-spacing: -0.028em; line-height: 1.02; margin-bottom: var(--s-4); }
+    .lede { font-size: 19px; line-height: 1.55; color: var(--gray-700); max-width: 62ch; }
+
+    .section { padding-top: var(--s-9); scroll-margin-top: var(--s-6); }
+    .section:first-of-type { padding-top: 0; }
+    .section + .section { border-top: 1px solid var(--border); }
+    .section-head { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-3); }
+    .section-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; flex: 0 0 34px; border-radius: 6px; background: var(--blue-light); color: var(--blue); }
+    .section-icon svg { width: 20px; height: 20px; }
+    .section-title { font-size: 38px; letter-spacing: -0.018em; line-height: 1.1; }
+    .section-intro { font-size: 16px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-7); }
+
+    .subsection { margin-top: var(--s-8); scroll-margin-top: var(--s-6); }
+    .subsection-title { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .subsection-note { font-size: 14px; line-height: 1.6; color: var(--gray-500); max-width: 62ch; margin-bottom: var(--s-5); }
+    .caption { font-size: 13px; line-height: 1.5; color: var(--gray-500); }
+    code { font-family: 'Inter', sans-serif; font-size: 0.92em; background: var(--warm-white); padding: 2px 6px; border-radius: 3px; }
+
+    /* @guide-css */
+    .rule-list { display: flex; flex-direction: column; background: var(--white); border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-top: var(--s-5); }
+    .rule { display: flex; gap: var(--s-5); padding: var(--s-4) var(--s-5); border-top: 1px solid var(--border); }
+    .rule:first-child { border-top: none; }
+    .rule-key { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.01em; flex: 0 0 190px; }
+    .rule-val { font-size: 13px; line-height: 1.5; color: var(--gray-700); }
+
+    /* ---------- Slides ---------- */
+    .slide-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); }
+    .slide-card { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+    .slide {
+      position: relative; aspect-ratio: 16 / 9; overflow: hidden;
+      background: var(--white); padding: 4.0%;
+      display: flex; flex-direction: column;
+    }
+    .slide.on-dark { background: var(--dark); color: var(--white); }
+    .slide.on-tint { background: var(--blue-light); }
+    .slide.on-blue { background: var(--blue); color: var(--white); }
+    .slide.on-warm { background: var(--warm-white); }
+    .slide.on-gradient { background: linear-gradient(128deg, #2A5AE9 0%, #4E7BF2 42%, #E8EEFF 100%); color: var(--white); }
+    .sl-title { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 34px; letter-spacing: -0.035em; line-height: 1.02; max-width: 15ch; }
+    .sl-title.lg { font-size: 46px; max-width: 12ch; }
+    .sl-title.xl { font-size: 60px; max-width: 10ch; }
+    .sl-sub { font-size: 13px; line-height: 1.45; color: var(--gray-500); max-width: 40ch; margin-top: 10px; }
+    .sl-sub.on-dark { color: var(--gray-300); }
+    .sl-sub.on-blue { color: rgba(255,255,255,0.82); }
+    .sl-foot { position: absolute; left: 4.0%; right: 4.0%; bottom: 4.0%; display: flex; align-items: flex-end; justify-content: space-between; gap: var(--s-4); }
+    .sl-foot img { height: 15px; width: auto; }
+    .sl-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; color: var(--blue); }
+    .sl-eyebrow.on-dark, .sl-eyebrow.on-blue { color: rgba(255,255,255,0.7); }
+    .sl-cols { display: flex; gap: 5%; margin-top: 14px; }
+    .sl-col { flex: 1; font-size: 12px; line-height: 1.5; color: var(--gray-700); }
+    .sl-col-h { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; color: var(--dark); margin-bottom: 5px; }
+    .sl-metric { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 64px; letter-spacing: -0.04em; line-height: 1; color: var(--blue); }
+    .sl-metric.on-dark { color: var(--white); }
+    .sl-metric-label { font-size: 12px; line-height: 1.4; color: var(--gray-500); margin-top: 8px; max-width: 30ch; }
+    .sl-num { font-family: 'Instrument Sans', sans-serif; font-weight: 600; font-size: 13px; letter-spacing: 0.01em; color: var(--blue); }
+    .sl-num.on-dark { color: rgba(255,255,255,0.6); }
+    .slide-meta { padding: var(--s-3) var(--s-4); border-top: 1px solid var(--border); }
+    .slide-name { font-size: 13px; font-weight: 600; letter-spacing: 0.01em; }
+    .slide-use { font-size: 12px; color: var(--gray-500); margin-top: 3px; line-height: 1.45; }
+
+    /* Margin diagram */
+    .margin-demo { position: relative; aspect-ratio: 16 / 9; max-width: 620px; background: var(--warm-white); border-radius: 6px; overflow: hidden; }
+    .margin-safe { position: absolute; inset: 4.0%; border: 1px solid var(--blue); border-radius: 3px; opacity: 0.5; }
+    .margin-tag { position: absolute; top: 50%; left: 1.0%; transform: translateY(-50%); font-size: 10px; color: var(--blue); }
+    .margin-note { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center; }
+    .margin-note b { font-family: 'Instrument Sans', sans-serif; font-size: 30px; font-weight: 600; letter-spacing: -0.03em; display: block; }
+    .margin-note span { font-size: 12px; color: var(--gray-500); }
+
+    /* Chart */
+    .chart-demo { border: 1px solid var(--border); border-radius: 6px; padding: var(--s-6); max-width: 620px; }
+    .bars { display: flex; align-items: flex-end; gap: var(--s-4); height: 190px; }
+    .bar-col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: stretch; gap: var(--s-2); height: 100%; }
+    .bar { border-radius: 4px 4px 0 0; background: var(--blue-light); }
+    .bar.is-key { background: var(--blue); }
+    .bar-label { font-size: 11px; color: var(--gray-500); text-align: center; }
+    .bar-value { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; text-align: center; }
+
+    /* Awaiting input */
+    .awaiting {
+      border: 1px dashed var(--gray-300); border-radius: 6px; background: var(--white);
+      padding: var(--s-5) var(--s-6); margin-top: var(--s-5); max-width: 720px;
+    }
+    .awaiting-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: var(--gray-500); margin-bottom: var(--s-3); }
+    .awaiting-tag span { width: 6px; height: 6px; border-radius: 999px; background: var(--gray-300); }
+    .awaiting h4 { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .awaiting ul { margin: 0; padding-left: 18px; }
+    .awaiting li { font-size: 14px; line-height: 1.65; color: var(--gray-700); }
+
+    .note-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); margin-top: var(--s-5); }
+    .note-card { border: 1px solid var(--border); border-radius: 6px; padding: var(--s-5); }
+    .note-card h4 { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: 0.01em; margin-bottom: var(--s-2); }
+    .note-card p { font-size: 13px; line-height: 1.6; color: var(--gray-500); }
+  </style>
+</helmet>
+
+<div class="shell">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+      <p class="sidebar-group-label">Guides</p>
+      <div class="guide-index">
+        <div class="guide-item">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,40H48A24,24,0,0,0,24,64V176a24,24,0,0,0,24,24H208a24,24,0,0,0,24-24V64A24,24,0,0,0,208,40Zm8,136a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V64a8,8,0,0,1,8-8H208a8,8,0,0,1,8,8Zm-48,48a8,8,0,0,1-8,8H96a8,8,0,0,1,0-16h64A8,8,0,0,1,168,224Z"/></svg>
+          <span>Web design</span>
+        </div>
+        <div class="guide-item is-current">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z"/></svg>
+          <span>Presentations</span>
+        </div>
+        <div class="guide-item">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M176,160a39.89,39.89,0,0,0-28.62,12.09l-46.1-29.63a39.8,39.8,0,0,0,0-28.92l46.1-29.63a40,40,0,1,0-8.66-13.45l-46.1,29.63a40,40,0,1,0,0,55.82l46.1,29.63A40,40,0,1,0,176,160Zm0-128a24,24,0,1,1-24,24A24,24,0,0,1,176,32ZM64,152a24,24,0,1,1,24-24A24,24,0,0,1,64,152Zm112,72a24,24,0,1,1,24-24A24,24,0,0,1,176,224Z"/></svg>
+          <span>Social media</span>
+        </div>
+      </div>
+      <p class="guide-hint">Switch guides in the Pages menu.</p>
+
+      <div class="sidebar-rule"></div>
+
+      <p class="sidebar-group-label">Sections</p>
+      <nav class="menu">
+        <button type="button" class="menu-item" onClick="{{ goFormat }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M200,80v32a8,8,0,0,1-16,0V88H160a8,8,0,0,1,0-16h32A8,8,0,0,1,200,80ZM96,168H72V144a8,8,0,0,0-16,0v32a8,8,0,0,0,8,8H96a8,8,0,0,0,0-16ZM232,56V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56ZM216,200V56H40V200H216Z"/></svg>
+          <span>Format &amp; margins</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goLayouts }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V96H40V56ZM40,112H96v88H40Zm176,88H112V112H216v88Z"/></svg>
+          <span>Slide layouts</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goSlideType }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M87.24,52.59a8,8,0,0,0-14.48,0l-64,136a8,8,0,1,0,14.48,6.81L39.9,160h80.2l16.66,35.4a8,8,0,1,0,14.48-6.81ZM47.43,144,80,74.79,112.57,144ZM200,96c-12.76,0-22.73,3.47-29.63,10.32a8,8,0,0,0,11.26,11.36c3.8-3.77,10-5.68,18.37-5.68,13.23,0,24,9,24,20v3.22A42.76,42.76,0,0,0,200,128c-22.06,0-40,16.15-40,36s17.94,36,40,36a42.73,42.73,0,0,0,24-7.25,8,8,0,0,0,16-.75V132C240,112.15,222.06,96,200,96Zm0,88c-13.23,0-24-9-24-20s10.77-20,24-20,24,9,24,20S213.23,184,200,184Z"/></svg>
+          <span>Type on slides</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goData }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M224,200h-8V40a8,8,0,0,0-8-8H152a8,8,0,0,0-8,8V80H96a8,8,0,0,0-8,8v40H48a8,8,0,0,0-8,8v64H32a8,8,0,0,0,0,16H224a8,8,0,0,0,0-16ZM160,48h40V200H160ZM104,96h40V200H104ZM56,144H88v56H56Z"/></svg>
+          <span>Data &amp; charts</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goBuilding }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z"/></svg>
+          <span>Building a deck</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-block">
+          <img src="exatom-icon-full-color.svg" alt="">
+          <div class="user-text">
+            <span class="user-name">Exatom</span>
+            <span class="user-meta">Presentations · v3</span>
+          </div>
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M231.65,194.55,198.46,36.75a16,16,0,0,0-19-12.39L132.65,34.42a16.08,16.08,0,0,0-12.3,19l33.19,157.8A16,16,0,0,0,169.16,224a16.25,16.25,0,0,0,3.38-.36l46.81-10.06A16.09,16.09,0,0,0,231.65,194.55ZM136,50.15c0-.06,0-.09,0-.09l46.8-10,3.33,15.87L139.33,66Zm6.62,31.47,46.82-10.05,3.34,15.9L146,97.53Zm6.64,31.57,46.82-10.06,13.3,63.24-46.82,10.06ZM216,197.94l-46.8,10-3.33-15.87L212.67,182,216,197.85C216,197.91,216,197.94,216,197.94ZM104,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16h48a16,16,0,0,0,16-16V48A16,16,0,0,0,104,32ZM56,48h48V64H56Zm0,32h48v96H56Zm48,128H56V192h48v16Z"/></svg>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ============ CONTENT ============ -->
+  <main class="content">
+    <header class="masthead">
+      <p class="eyebrow">Exatom</p>
+      <h1 class="display">Presentations</h1>
+      <p class="lede">How an Exatom deck is built: the frame, the margins, the eight layouts, and how numbers are shown. Written as a specification, so it holds whether the deck is made in Claude Design or PowerPoint. Colors, type and logo rules come from the brand guidelines — this page only shows how they land on a slide.</p>
+    </header>
+
+    <!-- ---------- FORMAT ---------- -->
+    <section class="section" id="format">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M200,80v32a8,8,0,0,1-16,0V88H160a8,8,0,0,1,0-16h32A8,8,0,0,1,200,80ZM96,168H72V144a8,8,0,0,0-16,0v32a8,8,0,0,0,8,8H96a8,8,0,0,0,0-16ZM232,56V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56ZM216,200V56H40V200H216Z"/></svg></span>
+        <h2 class="section-title">Format &amp; margins</h2>
+      </div>
+      <p class="section-intro">One frame, one margin rule. Everything on a slide sits inside the safe area — nothing bleeds to the edge except a full-frame background.</p>
+
+      <div class="rule-list">
+        <div class="rule"><div class="rule-key">Slide size</div><div class="rule-val">1920 × 1080 px — 16:9. The only aspect ratio Exatom presents in.</div></div>
+        <div class="rule"><div class="rule-key">Margin</div><div class="rule-val">76.8 px — longest side ÷ 25, the same modular rule the web guide uses. Round to 77 px where a tool needs whole pixels.</div></div>
+        <div class="rule"><div class="rule-key">Safe area</div><div class="rule-val">1766.4 × 926.4 px. Text, logos and charts stay inside it.</div></div>
+        <div class="rule"><div class="rule-key">Backgrounds</div><div class="rule-val">White, warm white, blue light, dark, or the brand gradient. One background per slide — never a gradient behind a chart.</div></div>
+        <div class="rule"><div class="rule-key">Export</div><div class="rule-val">PDF for sending, 1920 × 1080 PNG per slide for embedding. Never screenshot a slide from the editor.</div></div>
+      </div>
+
+      <div class="subsection">
+        <p class="subsection-title">The safe area</p>
+        <p class="subsection-note">The blue line is the margin. Backgrounds may cross it; content may not.</p>
+        <div class="margin-demo">
+          <div class="margin-safe"></div>
+          <div class="margin-tag">76.8</div>
+          <div class="margin-note">
+            <b>1920 × 1080</b>
+            <span>1920 ÷ 25 = 76.8 px margin</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- LAYOUTS ---------- -->
+    <section class="section" id="layouts">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V96H40V56ZM40,112H96v88H40Zm176,88H112V112H216v88Z"/></svg></span>
+        <h2 class="section-title">Slide layouts</h2>
+      </div>
+      <p class="section-intro">Eight layouts cover every deck Exatom makes. A slide that needs a ninth is usually two slides.</p>
+
+      <div class="slide-grid">
+        <div class="slide-card">
+          <div class="slide on-gradient">
+            <p class="sl-eyebrow on-blue">Exatom</p>
+            <h3 class="sl-title xl" style="margin-top: auto">Others analyse. Exatom acts.</h3>
+            <div class="sl-foot">
+              <p class="sl-sub on-blue" style="margin: 0">Form conversion, September 2026</p>
+              <img src="exatom-logo-full-white.svg" alt="">
+            </div>
+          </div>
+          <div class="slide-meta">
+            <p class="slide-name">Cover</p>
+            <p class="slide-use">Gradient background, white logo bottom-right, deck subject and date bottom-left. One per deck.</p>
+          </div>
+        </div>
+
+        <div class="slide-card">
+          <div class="slide on-dark">
+            <p class="sl-num on-dark">02</p>
+            <h3 class="sl-title lg" style="margin-top: auto; color: #FFFFFF">Where forms lose people</h3>
+            <div class="sl-foot">
+              <p class="sl-sub on-dark" style="margin: 0">Section</p>
+              <img src="exatom-icon-white.svg" alt="" style="height: 20px">
+            </div>
+          </div>
+          <div class="slide-meta">
+            <p class="slide-name">Section divider</p>
+            <p class="slide-use">Dark ground, section number top-left, title on the baseline. Resets attention between chapters.</p>
+          </div>
+        </div>
+
+        <div class="slide-card">
+          <div class="slide on-tint">
+            <h3 class="sl-title lg" style="margin: auto 0">Twenty friction points sit between intent and submit.</h3>
+            <div class="sl-foot">
+              <p class="sl-sub" style="margin: 0">Exatom research, 2026</p>
+              <img src="exatom-logo-full-color.svg" alt="">
+            </div>
+          </div>
+          <div class="slide-meta">
+            <p class="slide-name">Statement</p>
+            <p class="slide-use">One sentence, vertically centred, nothing else. Use for the argument the deck turns on.</p>
+          </div>
+        </div>
+
+        <div class="slide-card">
+          <div class="slide">
+            <h3 class="sl-title">Sense, then act</h3>
+            <div class="sl-cols">
+              <div class="sl-col">
+                <p class="sl-col-h">Sense</p>
+                Every field, every hesitation, every drop-off — captured without cookies.
+              </div>
+              <div class="sl-col">
+                <p class="sl-col-h">Act</p>
+                Eureka turns the signal into a fix, and ships it to the live form.
+              </div>
+            </div>
+            <div class="sl-foot">
+              <p class="sl-sub" style="margin: 0"></p>
+              <img src="exatom-logo-full-color.svg" alt="">
+            </div>
+          </div>
+          <div class="slide-meta">
+            <p class="slide-name">Two column</p>
+            <p class="slide-use">Title on top, two equal columns with a bold lead word. Never more than three columns.</p>
+          </div>
+        </div>
+
+        <div class="slide-card">
+          <div class="slide">
+            <p class="sl-eyebrow">Kia Germany</p>
+            <div style="margin-top: auto">
+              <p class="sl-metric">+55%</p>
+              <p class="sl-metric-label">more completed test-drive requests after four weeks of agentic fixes.</p>
+            </div>
+            <div class="sl-foot">
+              <p class="sl-sub" style="margin: 0"></p>
+              <img src="exatom-logo-full-color.svg" alt="">
+            </div>
+          </div>
+          <div class="slide-meta">
+            <p class="slide-name">Metric</p>
+            <p class="slide-use">One number, one sentence. The number is blue on light, white on dark. Never two metrics on one slide.</p>
+          </div>
+        </div>
+
+        <div class="slide-card">
+          <div class="slide on-warm">
+            <h3 class="sl-title" style="font-size: 26px">Trusted by</h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8% 6%; margin: auto 0; align-items: center;">
+              <div style="height: 14px; background: var(--gray-100); border-radius: 2px;"></div>
+              <div style="height: 14px; background: var(--gray-100); border-radius: 2px;"></div>
+              <div style="height: 14px; background: var(--gray-100); border-radius: 2px;"></div>
+              <div style="height: 14px; background: var(--gray-100); border-radius: 2px;"></div>
+              <div style="height: 14px; background: var(--gray-100); border-radius: 2px;"></div>
+              <div style="height: 14px; background: var(--gray-100); border-radius: 2px;"></div>
+              <div style="height: 14px; background: var(--gray-100); border-radius: 2px;"></div>
+              <div style="height: 14px; background: var(--gray-100); border-radius: 2px;"></div>
+            </div>
+            <div class="sl-foot">
+              <p class="sl-sub" style="margin: 0"></p>
+              <img src="exatom-logo-full-color.svg" alt="">
+            </div>
+          </div>
+          <div class="slide-meta">
+            <p class="slide-name">Logo wall</p>
+            <p class="slide-use">Client logos on warm white, all optically the same weight, four per row. Grey placeholders shown here.</p>
+          </div>
+        </div>
+
+        <div class="slide-card">
+          <div class="slide on-blue">
+            <h3 class="sl-title lg" style="margin: auto 0; color: #FFFFFF">Let's fix your forms.</h3>
+            <div class="sl-foot">
+              <p class="sl-sub on-blue" style="margin: 0">exatom.io</p>
+              <img src="exatom-logo-full-white.svg" alt="">
+            </div>
+          </div>
+          <div class="slide-meta">
+            <p class="slide-name">Closing</p>
+            <p class="slide-use">Solid blue, one line, the URL bottom-left. No contact block, no thank-you slide after it.</p>
+          </div>
+        </div>
+
+        <div class="slide-card">
+          <div class="slide">
+            <h3 class="sl-title" style="font-size: 26px">Completion rate by step</h3>
+            <div style="display: flex; align-items: flex-end; gap: 5%; height: 46%; margin: auto 0 0;">
+              <div style="flex:1; height: 92%; background: var(--blue-light); border-radius: 3px 3px 0 0;"></div>
+              <div style="flex:1; height: 74%; background: var(--blue-light); border-radius: 3px 3px 0 0;"></div>
+              <div style="flex:1; height: 51%; background: var(--blue-light); border-radius: 3px 3px 0 0;"></div>
+              <div style="flex:1; height: 38%; background: var(--blue); border-radius: 3px 3px 0 0;"></div>
+              <div style="flex:1; height: 30%; background: var(--blue-light); border-radius: 3px 3px 0 0;"></div>
+            </div>
+            <div class="sl-foot">
+              <p class="sl-sub" style="margin: 0"></p>
+              <img src="exatom-logo-full-color.svg" alt="">
+            </div>
+          </div>
+          <div class="slide-meta">
+            <p class="slide-name">Chart</p>
+            <p class="slide-use">Chart fills the lower half, title on top. One bar carries the blue — the one being argued about.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- TYPE ---------- -->
+    <section class="section" id="slide-type">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M87.24,52.59a8,8,0,0,0-14.48,0l-64,136a8,8,0,1,0,14.48,6.81L39.9,160h80.2l16.66,35.4a8,8,0,1,0,14.48-6.81ZM47.43,144,80,74.79,112.57,144ZM200,96c-12.76,0-22.73,3.47-29.63,10.32a8,8,0,0,0,11.26,11.36c3.8-3.77,10-5.68,18.37-5.68,13.23,0,24,9,24,20v3.22A42.76,42.76,0,0,0,200,128c-22.06,0-40,16.15-40,36s17.94,36,40,36a42.73,42.73,0,0,0,24-7.25,8,8,0,0,0,16-.75V132C240,112.15,222.06,96,200,96Zm0,88c-13.23,0-24-9-24-20s10.77-20,24-20,24,9,24,20S213.23,184,200,184Z"/></svg></span>
+        <h2 class="section-title">Type on slides</h2>
+      </div>
+      <p class="section-intro">The same three families as the web, at slide distance. Sizes below are for a 1920 × 1080 frame.</p>
+
+      <div class="rule-list">
+        <div class="rule"><div class="rule-key">Cover title</div><div class="rule-val">Instrument Sans Semibold · 120 px · −4% letter-spacing · line-height 1.0 · max 10 words</div></div>
+        <div class="rule"><div class="rule-key">Slide title</div><div class="rule-val">Instrument Sans Semibold · 72 px · −3.5% · line-height 1.05 · max 2 lines</div></div>
+        <div class="rule"><div class="rule-key">Statement</div><div class="rule-val">Instrument Sans Semibold · 96 px · −4% · line-height 1.05 · one sentence</div></div>
+        <div class="rule"><div class="rule-key">Metric</div><div class="rule-val">Instrument Sans Semibold · 200 px · −4% · line-height 1.0</div></div>
+        <div class="rule"><div class="rule-key">Body</div><div class="rule-val">Inter Regular · 28 px · line-height 1.5 · max 60 characters per line</div></div>
+        <div class="rule"><div class="rule-key">Caption &amp; source</div><div class="rule-val">Inter Regular · 20 px · gray 500</div></div>
+        <div class="rule"><div class="rule-key">Eyebrow</div><div class="rule-val">Inter Semibold · 20 px · +10% letter-spacing · blue on light, 70% white on dark</div></div>
+      </div>
+
+      <div class="note-cards">
+        <div class="note-card">
+          <h4>Never on a slide</h4>
+          <p>Full-caps titles. Weights above semibold. A fourth typeface. Body text below 24 px. More than six lines of copy. Bullet points three levels deep.</p>
+        </div>
+        <div class="note-card">
+          <h4>One idea per slide</h4>
+          <p>If a slide needs a title, three bullets and a chart, it is three slides. Decks are read at a distance and skimmed afterwards as a PDF.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- DATA ---------- -->
+    <section class="section" id="data">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M224,200h-8V40a8,8,0,0,0-8-8H152a8,8,0,0,0-8,8V80H96a8,8,0,0,0-8,8v40H48a8,8,0,0,0-8,8v64H32a8,8,0,0,0,0,16H224a8,8,0,0,0,0-16ZM160,48h40V200H160ZM104,96h40V200H104ZM56,144H88v56H56Z"/></svg></span>
+        <h2 class="section-title">Data &amp; charts</h2>
+      </div>
+      <p class="section-intro">Exatom sells on numbers, so the numbers have to be readable from the back of the room. Charts use the core palette only, and carry no decoration that isn't data.</p>
+
+      <div class="chart-demo">
+        <p class="subsection-title" style="margin-bottom: var(--s-5)">Completion rate by form step</p>
+        <div class="bars">
+          <div class="bar-col"><p class="bar-value">94%</p><div class="bar" style="height: 82%"></div></div>
+          <div class="bar-col"><p class="bar-value">81%</p><div class="bar" style="height: 70%"></div></div>
+          <div class="bar-col"><p class="bar-value">63%</p><div class="bar" style="height: 55%"></div></div>
+          <div class="bar-col"><p class="bar-value">41%</p><div class="bar is-key" style="height: 36%"></div></div>
+          <div class="bar-col"><p class="bar-value">38%</p><div class="bar" style="height: 33%"></div></div>
+        </div>
+        <div style="display: flex; gap: var(--s-4); margin-top: var(--s-3)">
+          <p class="bar-label" style="flex: 1">Start</p>
+          <p class="bar-label" style="flex: 1">Contact</p>
+          <p class="bar-label" style="flex: 1">Address</p>
+          <p class="bar-label" style="flex: 1">Payment</p>
+          <p class="bar-label" style="flex: 1">Submit</p>
+        </div>
+      </div>
+
+      <div class="rule-list">
+        <div class="rule"><div class="rule-key">Bar color</div><div class="rule-val">Blue light for context, blue for the one bar the slide is about. Dark only when the chart sits on a light tint and needs more contrast.</div></div>
+        <div class="rule"><div class="rule-key">Gridlines</div><div class="rule-val">None. Put the value above the bar instead.</div></div>
+        <div class="rule"><div class="rule-key">Axes</div><div class="rule-val">Category labels only. No y-axis, no tick marks, no box around the plot.</div></div>
+        <div class="rule"><div class="rule-key">Legends</div><div class="rule-val">Avoid. Label the series directly where it sits.</div></div>
+        <div class="rule"><div class="rule-key">Source</div><div class="rule-val">Every chart carries a source line in 20 px gray 500 under it. A number without a source does not go on a slide.</div></div>
+        <div class="rule"><div class="rule-key">Rounding</div><div class="rule-val">Whole percentages. One number is the headline; the rest support it.</div></div>
+      </div>
+    </section>
+
+    <!-- ---------- BUILDING ---------- -->
+    <section class="section" id="building">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z"/></svg></span>
+        <h2 class="section-title">Building a deck</h2>
+      </div>
+      <p class="section-intro">Decks are made two ways at Exatom. The spec is the same; the mechanics differ.</p>
+
+      <div class="note-cards">
+        <div class="note-card">
+          <h4>Claude Design</h4>
+          <p>One artboard per slide, 1920 × 1080, <code>print: "fixed"</code> so Export PDF gives one page per slide. Lay the slides left to right in reading order with 120 px between them. Fonts load from Google Fonts in the helmet block.</p>
+        </div>
+        <div class="note-card">
+          <h4>PowerPoint</h4>
+          <p>Build the seven layouts as slide masters, not as copied slides. Set the margin guides at 76.8 px on all four sides. Install Instrument Sans and Inter locally before starting, otherwise PowerPoint silently substitutes.</p>
+        </div>
+      </div>
+
+      <div class="awaiting">
+        <p class="awaiting-tag"><span></span>AWAITING INPUT</p>
+        <h4>What this section still needs from you</h4>
+        <ul>
+          <li>The current VC deck as a reference, so the layouts here can be checked against a deck that already works.</li>
+          <li>Whether decks are ever client-branded — a Kia or Hyundai logo alongside Exatom's — and if so, where the client mark sits.</li>
+          <li>Whether there is a standard deck length and running order for sales conversations.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script data-dc-script>
+class Component extends DCLogic {
+  renderVals() {
+    const go = (id) => () => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    return {
+      goFormat: go('format'),
+      goLayouts: go('layouts'),
+      goSlideType: go('slide-type'),
+      goData: go('data'),
+      goBuilding: go('building'),
+    };
+  }
+}
+</script>
+</body>
+</html>
