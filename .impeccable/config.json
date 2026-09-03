@@ -29,6 +29,15 @@
         ],
         "createdAt": "2026-09-03T16:53:54.660Z",
         "reason": "Consistent with the guide's established editorial voice used throughout Main.dc.html and every other section, not AI slop introduced in this file"
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "files": [
+          "src/Partners.src.html"
+        ],
+        "createdAt": "2026-09-03T19:12:39.132Z",
+        "reason": "Exatom brand typography, mandated across the whole style guide, not an incidental AI default"
       }
     ]
   }

@@ -257,7 +257,7 @@ const cleanNav = (html) => html.replace(/\s*onClick="\{\{\s*(\w+)\s*\}\}"/g, (_m
   const id = { goLogo: 'logo', goColor: 'color', goType: 'type', goFoundations: 'foundations', goUi: 'ui', goForms: 'forms', goIcons: 'icons', goTeam: 'team',
     goFormat: 'format', goLayouts: 'layouts', goSlideType: 'slide-type', goData: 'data', goBuilding: 'building',
     goProfile: 'profile', goBanner: 'linkedin-banner', goWebinar: 'webinar',
-    goCaseStudies: 'clients-case-studies', goOtherClients: 'clients-other', goAgency: 'agency-partners', goTech: 'technology-partners' }[name];
+    goClients: 'clients', goPartners: 'partners' }[name];
   if (!id) throw new Error('unmapped handler: ' + name);
   return ` data-scroll="${id}"`;
 });
