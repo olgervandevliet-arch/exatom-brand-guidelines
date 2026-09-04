@@ -188,6 +188,93 @@
       background-blend-mode: overlay, normal, normal, normal, normal;
     }
 
+    .gradient-grid-lg { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5); }
+    .gradient-grid-lg .gradient-fill { height: 280px; }
+
+    .gradient-fill.bloom-field-blue {
+      background-color: #E8EEFF;
+      background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>"),
+        radial-gradient(circle at 67.04% 45.93%, rgba(232, 238, 255, 1) 0%, rgba(232, 238, 255, 0.844) 19.02%, rgba(232, 238, 255, 0.5) 38.05%, rgba(232, 238, 255, 0.156) 57.07%, rgba(232, 238, 255, 0) 76.1%),
+        radial-gradient(circle at 35.47% 65.92%, rgba(42, 90, 233, 1) 0%, rgba(42, 90, 233, 0.844) 12.9%, rgba(42, 90, 233, 0.5) 25.8%, rgba(42, 90, 233, 0.156) 38.7%, rgba(42, 90, 233, 0) 51.6%),
+        radial-gradient(circle at 48.33% 20.11%, rgba(42, 90, 233, 1) 0%, rgba(42, 90, 233, 0.844) 16.75%, rgba(42, 90, 233, 0.5) 33.5%, rgba(42, 90, 233, 0.156) 50.25%, rgba(42, 90, 233, 0) 67%),
+        radial-gradient(circle at 80.81% 88.03%, rgba(24, 18, 45, 1) 0%, rgba(24, 18, 45, 0.844) 10.28%, rgba(24, 18, 45, 0.5) 20.55%, rgba(24, 18, 45, 0.156) 30.83%, rgba(24, 18, 45, 0) 41.1%);
+      background-size: 120px 120px, auto, auto, auto, auto;
+      background-blend-mode: overlay, normal, normal, normal, normal;
+    }
+
+    .gradient-fill.depth-pool {
+      background-color: #18122D;
+      background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>"),
+        radial-gradient(circle at 30% 30%, rgba(42, 90, 233, 1) 0%, rgba(42, 90, 233, 0.844) 15.0%, rgba(42, 90, 233, 0.5) 30.0%, rgba(42, 90, 233, 0.156) 45.0%, rgba(42, 90, 233, 0) 60%),
+        radial-gradient(circle at 75% 70%, rgba(232, 238, 255, 1) 0%, rgba(232, 238, 255, 0.844) 13.75%, rgba(232, 238, 255, 0.5) 27.5%, rgba(232, 238, 255, 0.156) 41.25%, rgba(232, 238, 255, 0) 55%),
+        radial-gradient(circle at 50% 85%, rgba(42, 90, 233, 1) 0%, rgba(42, 90, 233, 0.844) 10.0%, rgba(42, 90, 233, 0.5) 20.0%, rgba(42, 90, 233, 0.156) 30.0%, rgba(42, 90, 233, 0) 40%);
+      background-size: 120px 120px, auto, auto, auto;
+      background-blend-mode: overlay, normal, normal, normal;
+    }
+
+    .gradient-fill.morning-blue {
+      background-color: #FFFFFF;
+      background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>"),
+        radial-gradient(circle at 30% 25%, rgba(232, 238, 255, 1) 0%, rgba(232, 238, 255, 0.844) 16.25%, rgba(232, 238, 255, 0.5) 32.5%, rgba(232, 238, 255, 0.156) 48.75%, rgba(232, 238, 255, 0) 65%),
+        radial-gradient(circle at 75% 70%, rgba(42, 90, 233, 1) 0%, rgba(42, 90, 233, 0.844) 11.25%, rgba(42, 90, 233, 0.5) 22.5%, rgba(42, 90, 233, 0.156) 33.75%, rgba(42, 90, 233, 0) 45%);
+      background-size: 120px 120px, auto, auto;
+      background-blend-mode: overlay, normal, normal;
+    }
+
+    .gradient-fill.signal-blue {
+      background-color: #2A5AE9;
+      background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>"),
+        radial-gradient(circle at 25% 30%, rgba(232, 238, 255, 1) 0%, rgba(232, 238, 255, 0.844) 15.0%, rgba(232, 238, 255, 0.5) 30.0%, rgba(232, 238, 255, 0.156) 45.0%, rgba(232, 238, 255, 0) 60%),
+        radial-gradient(circle at 75% 75%, rgba(24, 18, 45, 1) 0%, rgba(24, 18, 45, 0.844) 13.75%, rgba(24, 18, 45, 0.5) 27.5%, rgba(24, 18, 45, 0.156) 41.25%, rgba(24, 18, 45, 0) 55%),
+        radial-gradient(circle at 55% 15%, rgba(232, 238, 255, 1) 0%, rgba(232, 238, 255, 0.844) 10.0%, rgba(232, 238, 255, 0.5) 20.0%, rgba(232, 238, 255, 0.156) 30.0%, rgba(232, 238, 255, 0) 40%);
+      background-size: 120px 120px, auto, auto, auto;
+      background-blend-mode: overlay, normal, normal, normal;
+    }
+
+    .gradient-fill.mint-bloom {
+      background-color: #E5FFF7;
+      background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>"),
+        radial-gradient(circle at 30% 30%, rgba(63, 255, 217, 1) 0%, rgba(63, 255, 217, 0.844) 15.0%, rgba(63, 255, 217, 0.5) 30.0%, rgba(63, 255, 217, 0.156) 45.0%, rgba(63, 255, 217, 0) 60%),
+        radial-gradient(circle at 75% 70%, rgba(2, 53, 51, 1) 0%, rgba(2, 53, 51, 0.844) 12.5%, rgba(2, 53, 51, 0.5) 25.0%, rgba(2, 53, 51, 0.156) 37.5%, rgba(2, 53, 51, 0) 50%);
+      background-size: 120px 120px, auto, auto;
+      background-blend-mode: overlay, normal, normal;
+    }
+
+    .gradient-fill.teal-deep {
+      background-color: #023533;
+      background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>"),
+        radial-gradient(circle at 30% 30%, rgba(63, 255, 217, 1) 0%, rgba(63, 255, 217, 0.844) 15.0%, rgba(63, 255, 217, 0.5) 30.0%, rgba(63, 255, 217, 0.156) 45.0%, rgba(63, 255, 217, 0) 60%),
+        radial-gradient(circle at 75% 70%, rgba(229, 255, 247, 1) 0%, rgba(229, 255, 247, 0.844) 12.5%, rgba(229, 255, 247, 0.5) 25.0%, rgba(229, 255, 247, 0.156) 37.5%, rgba(229, 255, 247, 0) 50%);
+      background-size: 120px 120px, auto, auto;
+      background-blend-mode: overlay, normal, normal;
+    }
+
+    .gradient-fill.blush-bloom {
+      background-color: #FEEFEF;
+      background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>"),
+        radial-gradient(circle at 30% 30%, rgba(255, 94, 116, 1) 0%, rgba(255, 94, 116, 0.844) 15.0%, rgba(255, 94, 116, 0.5) 30.0%, rgba(255, 94, 116, 0.156) 45.0%, rgba(255, 94, 116, 0) 60%),
+        radial-gradient(circle at 75% 70%, rgba(68, 0, 32, 1) 0%, rgba(68, 0, 32, 0.844) 12.5%, rgba(68, 0, 32, 0.5) 25.0%, rgba(68, 0, 32, 0.156) 37.5%, rgba(68, 0, 32, 0) 50%);
+      background-size: 120px 120px, auto, auto;
+      background-blend-mode: overlay, normal, normal;
+    }
+
+    .gradient-fill.burgundy-deep {
+      background-color: #440020;
+      background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.5'/></svg>"),
+        radial-gradient(circle at 30% 30%, rgba(255, 94, 116, 1) 0%, rgba(255, 94, 116, 0.844) 15.0%, rgba(255, 94, 116, 0.5) 30.0%, rgba(255, 94, 116, 0.156) 45.0%, rgba(255, 94, 116, 0) 60%),
+        radial-gradient(circle at 75% 70%, rgba(254, 239, 239, 1) 0%, rgba(254, 239, 239, 0.844) 12.5%, rgba(254, 239, 239, 0.5) 25.0%, rgba(254, 239, 239, 0.156) 37.5%, rgba(254, 239, 239, 0) 50%);
+      background-size: 120px 120px, auto, auto;
+      background-blend-mode: overlay, normal, normal;
+    }
+
     .awaiting {
       border: 1px dashed var(--gray-300); border-radius: 6px; background: var(--white);
       padding: var(--s-5) var(--s-6); margin-top: var(--s-5); max-width: 720px;
@@ -457,6 +544,10 @@
           <svg viewBox="0 0 256 256" fill="currentColor"><path d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76ZM96,100A12,12,0,1,1,84,88,12,12,0,0,1,96,100Zm0,56a12,12,0,1,1-12-12A12,12,0,0,1,96,156Zm88-56a12,12,0,1,1-12-12A12,12,0,0,1,184,100Z"></path></svg>
           <span>Color</span>
         </button>
+        <button type="button" class="menu-item" onClick="{{ goGradients }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,16.37a86.4,86.4,0,0,1,16,3V212.67a86.4,86.4,0,0,1-16,3Zm32,9.26a87.81,87.81,0,0,1,16,10.54V195.83a87.81,87.81,0,0,1-16,10.54ZM40,128a88.11,88.11,0,0,1,80-87.63V215.63A88.11,88.11,0,0,1,40,128Zm160,50.54V77.46a87.82,87.82,0,0,1,0,101.08Z"/></svg>
+          <span>Gradients</span>
+        </button>
         <button type="button" class="menu-item" onClick="{{ goType }}">
           <svg viewBox="0 0 256 256" fill="currentColor"><path d="M87.24,52.59a8,8,0,0,0-14.48,0l-64,136a8,8,0,1,0,14.48,6.81L39.9,160h80.2l16.66,35.4a8,8,0,1,0,14.48-6.81ZM47.43,144,80,74.79,112.57,144ZM200,96c-12.76,0-22.73,3.47-29.63,10.32a8,8,0,0,0,11.26,11.36c3.8-3.77,10-5.68,18.37-5.68,13.23,0,24,9,24,20v3.22A42.76,42.76,0,0,0,200,128c-22.06,0-40,16.15-40,36s17.94,36,40,36a42.73,42.73,0,0,0,24-7.25,8,8,0,0,0,16-.75V132C240,112.15,222.06,96,200,96Zm0,88c-13.23,0-24-9-24-20s10.77-20,24-20,24,9,24,20S213.23,184,200,184Z"></path></svg>
           <span>Typography</span>
@@ -476,10 +567,6 @@
         <button type="button" class="menu-item" onClick="{{ goIcons }}">
           <svg viewBox="0 0 256 256" fill="currentColor"><path d="M172,76a44,44,0,1,0-44,44A44.05,44.05,0,0,0,172,76Zm-44,28a28,28,0,1,1,28-28A28,28,0,0,1,128,104Zm60,24a44,44,0,1,0,44,44A44.05,44.05,0,0,0,188,128Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,188,200ZM68,128a44,44,0,1,0,44,44A44.05,44.05,0,0,0,68,128Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,68,200Z"/></svg>
           <span>Icons</span>
-        </button>
-        <button type="button" class="menu-item" onClick="{{ goGradients }}">
-          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76ZM96,100A12,12,0,1,1,84,88,12,12,0,0,1,96,100Zm0,56a12,12,0,1,1-12-12A12,12,0,0,1,96,156Zm88-56a12,12,0,1,1-12-12A12,12,0,0,1,184,100Z"/></svg>
-          <span>Gradients</span>
         </button>
         <button type="button" class="menu-item" onClick="{{ goTeam }}">
           <svg viewBox="0 0 256 256" fill="currentColor"><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"/></svg>
@@ -852,6 +939,62 @@
               <span class="tp-mark"><svg viewBox="0 0 228 228" aria-hidden="true"><path d="M1.26727 61.5407C1.52956 27.5527 29.2949 0.212629 63.2829 0.47492L165.851 1.26645C199.839 1.52874 227.179 29.2941 226.917 63.2821L226.125 165.85C225.863 199.838 198.097 227.178 164.109 226.916L61.5415 226.124C27.5535 225.862 0.213444 198.097 0.475735 164.109L1.26727 61.5407Z" fill="#FEEFEF"/><path d="M170.3 57.0844V73.2583H73.2543V154.133H170.3V170.306H57.082V57.0844H170.3ZM170.304 137.955H89.4331V121.781H170.304V137.955ZM170.304 105.608H89.4331V89.4355H170.304V105.608Z" fill="#440020"/></svg></span>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- GRADIENTS ---------- -->
+    <section class="section" id="gradients">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,16.37a86.4,86.4,0,0,1,16,3V212.67a86.4,86.4,0,0,1-16,3Zm32,9.26a87.81,87.81,0,0,1,16,10.54V195.83a87.81,87.81,0,0,1-16,10.54ZM40,128a88.11,88.11,0,0,1,80-87.63V215.63A88.11,88.11,0,0,1,40,128Zm160,50.54V77.46a87.82,87.82,0,0,1,0,101.08Z"/></svg></span>
+        <h2 class="section-title">Gradients</h2>
+      </div>
+      <p class="section-intro">Mesh gradients built the same way as Color's three flat ones &mdash; several radial blobs blended over a solid backdrop, plus a grain pass. Four blue, working closest to the core palette; two each for Mint and Coral.</p>
+
+      <div class="gradient-grid-lg">
+        <div class="gradient-tile">
+          <div class="gradient-fill oceanic-shimmer">
+            <svg aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.215; mix-blend-mode: overlay;">
+              <filter id="grain-oceanic-shimmer">
+                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"></feTurbulence>
+                <feColorMatrix type="saturate" values="0"></feColorMatrix>
+              </filter>
+              <rect width="100%" height="100%" filter="url(#grain-oceanic-shimmer)"></rect>
+            </svg>
+          </div>
+          <div class="tile-meta"><p class="tile-name">Oceanic Shimmer</p><p class="tile-sub">#123A6B, layered light + grain</p></div>
+        </div>
+        <div class="gradient-tile">
+          <div class="gradient-fill bloom-field-blue"></div>
+          <div class="tile-meta"><p class="tile-name">Bloom Field</p><p class="tile-sub">Blue Light → Blue → Dark</p></div>
+        </div>
+        <div class="gradient-tile">
+          <div class="gradient-fill depth-pool"></div>
+          <div class="tile-meta"><p class="tile-name">Depth Pool</p><p class="tile-sub">Dark → Blue → Blue Light</p></div>
+        </div>
+        <div class="gradient-tile">
+          <div class="gradient-fill morning-blue"></div>
+          <div class="tile-meta"><p class="tile-name">Morning Blue</p><p class="tile-sub">White → Blue Light → Blue</p></div>
+        </div>
+        <div class="gradient-tile">
+          <div class="gradient-fill signal-blue"></div>
+          <div class="tile-meta"><p class="tile-name">Signal Blue</p><p class="tile-sub">Blue → Blue Light → Dark</p></div>
+        </div>
+        <div class="gradient-tile">
+          <div class="gradient-fill mint-bloom"></div>
+          <div class="tile-meta"><p class="tile-name">Mint Bloom</p><p class="tile-sub">Mint Light → Mint → Teal</p></div>
+        </div>
+        <div class="gradient-tile">
+          <div class="gradient-fill teal-deep"></div>
+          <div class="tile-meta"><p class="tile-name">Teal Deep</p><p class="tile-sub">Teal → Mint → Mint Light</p></div>
+        </div>
+        <div class="gradient-tile">
+          <div class="gradient-fill blush-bloom"></div>
+          <div class="tile-meta"><p class="tile-name">Blush Bloom</p><p class="tile-sub">Blush → Coral → Burgundy</p></div>
+        </div>
+        <div class="gradient-tile">
+          <div class="gradient-fill burgundy-deep"></div>
+          <div class="tile-meta"><p class="tile-name">Burgundy Deep</p><p class="tile-sub">Burgundy → Coral → Blush</p></div>
         </div>
       </div>
     </section>
@@ -1295,30 +1438,6 @@
         <div class="btn-row" style="margin-top: var(--s-6)">
           <a class="btn btn-secondary" href="https://phosphoricons.com" target="_blank" rel="noopener"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,104a8,8,0,0,1-16,0V59.32l-66.33,66.34a8,8,0,0,1-11.32-11.32L196.68,48H152a8,8,0,0,1,0-16h64a8,8,0,0,1,8,8Zm-40,24a8,8,0,0,0-8,8v72H48V80h72a8,8,0,0,0,0-16H48A16,16,0,0,0,32,80V208a16,16,0,0,0,16,16H176a16,16,0,0,0,16-16V136A8,8,0,0,0,184,128Z"/></svg><span class="btn-label"><span>Browse Phosphor</span><span aria-hidden="true">Browse Phosphor</span></span></a>
           <a class="btn btn-secondary" href="assets/exatom-icons.zip" data-icon-pack download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Download the icon set</span><span aria-hidden="true">Download the icon set</span></span></a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ---------- GRADIENTS ---------- -->
-    <section class="section" id="gradients">
-      <div class="section-head">
-        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76ZM96,100A12,12,0,1,1,84,88,12,12,0,0,1,96,100Zm0,56a12,12,0,1,1-12-12A12,12,0,0,1,96,156Zm88-56a12,12,0,1,1-12-12A12,12,0,0,1,184,100Z"/></svg></span>
-        <h2 class="section-title">Gradients</h2>
-      </div>
-      <p class="section-intro">The gradient set is being expanded beyond the three carried in Color. First entry below — more to come.</p>
-
-      <div class="gradient-grid">
-        <div class="gradient-tile">
-          <div class="gradient-fill oceanic-shimmer">
-            <svg aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.215; mix-blend-mode: overlay;">
-              <filter id="grain-oceanic-shimmer">
-                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"></feTurbulence>
-                <feColorMatrix type="saturate" values="0"></feColorMatrix>
-              </filter>
-              <rect width="100%" height="100%" filter="url(#grain-oceanic-shimmer)"></rect>
-            </svg>
-          </div>
-          <div class="tile-meta"><p class="tile-name">Oceanic Shimmer</p><p class="tile-sub">#123A6B, layered light + grain</p></div>
         </div>
       </div>
     </section>
