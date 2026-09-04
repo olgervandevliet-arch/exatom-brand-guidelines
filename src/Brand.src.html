@@ -176,6 +176,15 @@
     .gradient-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4); }
     .gradient-tile { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
     .gradient-fill { height: 176px; }
+
+    .awaiting {
+      border: 1px dashed var(--gray-300); border-radius: 6px; background: var(--white);
+      padding: var(--s-5) var(--s-6); margin-top: var(--s-5); max-width: 720px;
+    }
+    .awaiting-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; letter-spacing: 0.06em; color: var(--gray-500); margin-bottom: var(--s-3); }
+    .awaiting-tag span { width: 6px; height: 6px; border-radius: 999px; background: var(--gray-300); }
+    .awaiting h4 { font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
+    .awaiting p { font-size: 14px; line-height: 1.65; color: var(--gray-700); }
     .pairing-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--s-4); }
     .pairing { border: 1px solid transparent; border-radius: 8px; height: 128px; display: flex; align-items: center; justify-content: center; }
     .pairing.on-white { border-color: var(--border); }
@@ -456,6 +465,10 @@
         <button type="button" class="menu-item" onClick="{{ goIcons }}">
           <svg viewBox="0 0 256 256" fill="currentColor"><path d="M172,76a44,44,0,1,0-44,44A44.05,44.05,0,0,0,172,76Zm-44,28a28,28,0,1,1,28-28A28,28,0,0,1,128,104Zm60,24a44,44,0,1,0,44,44A44.05,44.05,0,0,0,188,128Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,188,200ZM68,128a44,44,0,1,0,44,44A44.05,44.05,0,0,0,68,128Zm0,72a28,28,0,1,1,28-28A28,28,0,0,1,68,200Z"/></svg>
           <span>Icons</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goGradients }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76ZM96,100A12,12,0,1,1,84,88,12,12,0,0,1,96,100Zm0,56a12,12,0,1,1-12-12A12,12,0,0,1,96,156Zm88-56a12,12,0,1,1-12-12A12,12,0,0,1,184,100Z"/></svg>
+          <span>Gradients</span>
         </button>
         <button type="button" class="menu-item" onClick="{{ goTeam }}">
           <svg viewBox="0 0 256 256" fill="currentColor"><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"/></svg>
@@ -1275,6 +1288,21 @@
       </div>
     </section>
 
+    <!-- ---------- GRADIENTS ---------- -->
+    <section class="section" id="gradients">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76ZM96,100A12,12,0,1,1,84,88,12,12,0,0,1,96,100Zm0,56a12,12,0,1,1-12-12A12,12,0,0,1,96,156Zm88-56a12,12,0,1,1-12-12A12,12,0,0,1,184,100Z"/></svg></span>
+        <h2 class="section-title">Gradients</h2>
+      </div>
+      <p class="section-intro">The gradient set is being expanded beyond the three carried in Color. Nothing here yet — check back once it's filled in.</p>
+
+      <div class="awaiting">
+        <p class="awaiting-tag"><span></span>Awaiting input</p>
+        <h4>No gradients added yet</h4>
+        <p>This section is a placeholder. The existing brand gradients still live under Color &mdash; this tab will hold the fuller set once it's ready.</p>
+      </div>
+    </section>
+
     <!-- ---------- TEAM ---------- -->
     <section class="section" id="team">
       <div class="section-head">
@@ -1404,7 +1432,8 @@ class Component extends DCLogic {
       const el = document.getElementById(id);
       if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
-    return { goLogo: go('logo'), goColor: go('color'), goType: go('type'), goFoundations: go('foundations'), goUi: go('ui') };
+    return { goLogo: go('logo'), goColor: go('color'), goType: go('type'), goFoundations: go('foundations'), goUi: go('ui'),
+      goForms: go('forms'), goIcons: go('icons'), goGradients: go('gradients'), goTeam: go('team') };
   }
 }
 </script>

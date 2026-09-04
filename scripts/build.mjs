@@ -254,7 +254,7 @@ const partPane = contentOf(partSrc).replace(/<img src="([^"]+\.svg)"/g, (m, f) =
 
 /* strip the canvas {{ hole }} bindings — this site wires its own handlers */
 const cleanNav = (html) => html.replace(/\s*onClick="\{\{\s*(\w+)\s*\}\}"/g, (_m, name) => {
-  const id = { goLogo: 'logo', goColor: 'color', goType: 'type', goFoundations: 'foundations', goUi: 'ui', goForms: 'forms', goIcons: 'icons', goTeam: 'team',
+  const id = { goLogo: 'logo', goColor: 'color', goType: 'type', goFoundations: 'foundations', goUi: 'ui', goForms: 'forms', goIcons: 'icons', goGradients: 'gradients', goTeam: 'team',
     goFormat: 'format', goLayouts: 'layouts', goSlideType: 'slide-type', goData: 'data', goBuilding: 'building',
     goProfile: 'profile', goBanner: 'linkedin-banner', goWebinar: 'webinar',
     goClients: 'clients', goPartners: 'partners' }[name];
