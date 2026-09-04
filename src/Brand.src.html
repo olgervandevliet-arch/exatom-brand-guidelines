@@ -175,7 +175,18 @@
 
     .gradient-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4); }
     .gradient-tile { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .gradient-fill { height: 176px; }
+    .gradient-fill { position: relative; height: 176px; overflow: hidden; }
+    .gradient-fill.oceanic-shimmer {
+      background-color: #123A6B;
+      background-image:
+        url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.215'/></svg>"),
+        radial-gradient(150% 48.4% at 41.58% 6%, rgba(234, 247, 251, 0.92) 0%, rgba(234, 247, 251, 0) 53%),
+        radial-gradient(150% 48.4% at 42.42% 33%, rgba(127, 198, 230, 0.92) 0%, rgba(127, 198, 230, 0) 53%),
+        radial-gradient(150% 48.4% at 51.19% 67%, rgba(46, 124, 192, 0.92) 0%, rgba(46, 124, 192, 0) 53%),
+        radial-gradient(150% 48.4% at 53.67% 94%, rgba(18, 58, 107, 0.92) 0%, rgba(18, 58, 107, 0) 53%);
+      background-size: 120px 120px, auto, auto, auto, auto;
+      background-blend-mode: overlay, normal, normal, normal, normal;
+    }
 
     .awaiting {
       border: 1px dashed var(--gray-300); border-radius: 6px; background: var(--white);
@@ -1294,12 +1305,21 @@
         <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M200.77,53.89A103.27,103.27,0,0,0,128,24h-1.07A104,104,0,0,0,24,128c0,43,26.58,79.06,69.36,94.17A32,32,0,0,0,136,192a16,16,0,0,1,16-16h46.21a31.81,31.81,0,0,0,31.2-24.88,104.43,104.43,0,0,0,2.59-24A103.28,103.28,0,0,0,200.77,53.89Zm13,93.71A15.89,15.89,0,0,1,198.21,160H152a32,32,0,0,0-32,32,16,16,0,0,1-21.31,15.07C62.49,194.3,40,164,40,128a88,88,0,0,1,87.09-88h.9a88.35,88.35,0,0,1,88,87.25A88.86,88.86,0,0,1,213.81,147.6ZM140,76a12,12,0,1,1-12-12A12,12,0,0,1,140,76ZM96,100A12,12,0,1,1,84,88,12,12,0,0,1,96,100Zm0,56a12,12,0,1,1-12-12A12,12,0,0,1,96,156Zm88-56a12,12,0,1,1-12-12A12,12,0,0,1,184,100Z"/></svg></span>
         <h2 class="section-title">Gradients</h2>
       </div>
-      <p class="section-intro">The gradient set is being expanded beyond the three carried in Color. Nothing here yet — check back once it's filled in.</p>
+      <p class="section-intro">The gradient set is being expanded beyond the three carried in Color. First entry below — more to come.</p>
 
-      <div class="awaiting">
-        <p class="awaiting-tag"><span></span>Awaiting input</p>
-        <h4>No gradients added yet</h4>
-        <p>This section is a placeholder. The existing brand gradients still live under Color &mdash; this tab will hold the fuller set once it's ready.</p>
+      <div class="gradient-grid">
+        <div class="gradient-tile">
+          <div class="gradient-fill oceanic-shimmer">
+            <svg aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.215; mix-blend-mode: overlay;">
+              <filter id="grain-oceanic-shimmer">
+                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"></feTurbulence>
+                <feColorMatrix type="saturate" values="0"></feColorMatrix>
+              </filter>
+              <rect width="100%" height="100%" filter="url(#grain-oceanic-shimmer)"></rect>
+            </svg>
+          </div>
+          <div class="tile-meta"><p class="tile-name">Oceanic Shimmer</p><p class="tile-sub">#123A6B, layered light + grain</p></div>
+        </div>
       </div>
     </section>
 
