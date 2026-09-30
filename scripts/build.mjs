@@ -256,6 +256,7 @@ const partPane = contentOf(partSrc).replace(/<img src="([^"]+\.svg)"/g, (m, f) =
 const cleanNav = (html) => html.replace(/\s*onClick="\{\{\s*(\w+)\s*\}\}"/g, (_m, name) => {
   const id = { goLogo: 'logo', goColor: 'color', goType: 'type', goFoundations: 'foundations', goUi: 'ui', goForms: 'forms', goIcons: 'icons', goGradients: 'gradients', goTeam: 'team',
     goFormat: 'format', goLayouts: 'layouts', goSlideType: 'slide-type', goData: 'data', goBuilding: 'building',
+    goStart: 'start', goPreview: 'preview', goHowto: 'howto', goRules: 'rules',
     goProfile: 'profile', goBanner: 'linkedin-banner', goWebinar: 'webinar',
     goClients: 'clients', goPartners: 'partners' }[name];
   if (!id) throw new Error('unmapped handler: ' + name);
@@ -390,8 +391,7 @@ const PAGES = [
   {
     id: 'presentations', file: 'presentations.html', href: '/presentations', name: 'Presentations',
     nav: cleanNav(navOf(presSrc)), pane: presPane, css: scope(guideCss(presSrc), '[data-guide="presentations"]'),
-    description: 'How an Exatom deck is built: slide format, margins, eight layouts, type and charts.',
-    soon: true,
+    description: 'How an Exatom deck looks and how you make one with Claude: the rules as one Markdown file, previews and a step-by-step guide.',
   },
   {
     id: 'social', file: 'social.html', href: '/social', name: 'Social media',
@@ -569,7 +569,22 @@ const md = brandMarkdown(brandSrc, {
       + "Every value here is the real brand value \u2014 copy it from this page, don't approximate. Presentations and "
       + 'social media build on it, on their own pages.',
 });
-writeFileSync(join(OUT, 'brand-guidelines.md'), md);
+/* the team rows are not leaves brand-md understands; list the line drawings by hand */
+const DRAWINGS = [['stephan', 'Stephan van den Bremer'], ['michael', 'Michaël Vaes'], ['filip', 'Filip Lauweres'],
+  ['bart', 'Bart de Fluiter'], ['oliver', 'Oliver Bath'], ['sander', 'Sander Heymans'], ['marcelo', 'Marcelo Bem'],
+  ['olger', 'Olger van de Vliet'], ['matthieu', 'Matthieu']];
+for (const [slug] of DRAWINGS) statSync(join(ROOT, 'assets', 'team', 'drawings', `${slug}.svg`));
+const drawingsMd = '\n### Line drawings\n\n'
+  + 'Black line art (SVG) of each team member. Used on the closing slide of every deck (the presenter, dark lines on Blue #2A5AE9) '
+  + 'and wherever a photo would be too heavy. Never recoloured apart from Dark or white, never filled in.\n\n'
+  + '| Person | File |\n|---|---|\n'
+  + DRAWINGS.map(([slug, name]) => `| ${name} | https://exatom-brand-guidelines.vercel.app/assets/team/drawings/${slug}.svg |`).join('\n') + '\n';
+writeFileSync(join(OUT, 'brand-guidelines.md'), md.trimEnd() + '\n' + drawingsMd);
+copyFileSync(join(ROOT, 'src', 'presentations.md'), join(OUT, 'presentations.md'));
+mkdirSync(join(OUT, 'slides'), { recursive: true });
+for (const f of readdirSync(join(ROOT, 'slides'))) {
+  if (f.endsWith('.webp')) copyFileSync(join(ROOT, 'slides', f), join(OUT, 'slides', f));
+}
 
 for (const f of readdirSync(join(ROOT, 'logo'))) {
   if (f.endsWith('.svg')) copyFileSync(join(ROOT, 'logo', f), join(OUT, 'logo', f));

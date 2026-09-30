@@ -478,6 +478,8 @@
     .team-row:first-child { border-top: none; }
     .team-photo { flex: 0 0 104px; width: 104px; height: 104px; border-radius: 8px; overflow: hidden; background: var(--warm-white); }
     .team-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .team-drawing { flex: 0 0 104px; width: 104px; height: 104px; border-radius: 8px; overflow: hidden; background: var(--blue-light); display: flex; align-items: flex-end; justify-content: center; }
+    .team-drawing img { width: 88%; height: 92%; object-fit: contain; object-position: bottom; display: block; }
     .team-info { flex: 1 1 auto; min-width: 0; }
     .team-name { font-size: 14px; font-weight: 600; letter-spacing: -0.02em; }
     .team-role { font-size: 13px; color: var(--blue); margin-top: 2px; }
@@ -1448,41 +1450,48 @@
         <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1-7.37-4.89,8,8,0,0,1,0-6.22A8,8,0,0,1,192,112a24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.84,8,57,57,0,0,0-98.16,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"/></svg></span>
         <h2 class="section-title">Team</h2>
       </div>
-      <p class="section-intro">The official set of headshots and bios &mdash; for LinkedIn, the about page, speaker bios, press. One row per person, one crop, one background.</p>
+      <p class="section-intro">The official set of headshots and bios &mdash; for LinkedIn, the about page, speaker bios, press. One row per person, one crop, one background. Next to each photo is the person's line drawing, the illustrated version for decks and visuals.</p>
 
       <div class="team-list">
         <div class="team-row">
           <div class="team-photo"><img src="stephan.jpg" alt="Stephan van den Bremer"></div>
+          <div class="team-drawing"><img alt="Line drawing of Stephan van den Bremer" src="assets/team/drawings/stephan.svg"></div>
           <div class="team-info">
             <p class="team-name">Stephan van den Bremer</p>
             <p class="team-role">CEO & Co-Founder</p>
             </div>
           <div class="team-dl">
             <a class="btn btn-secondary" href="assets/team/original/stephan.png" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Photo</span><span aria-hidden="true">Photo</span></span></a>
+            <a class="btn btn-secondary" href="assets/team/drawings/stephan.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Drawing</span><span aria-hidden="true">Drawing</span></span></a>
           </div>
         </div>
         <div class="team-row">
           <div class="team-photo"><img src="michael.jpg" alt="Michaël Vaes"></div>
+          <div class="team-drawing"><img alt="Line drawing of Michaël Vaes" src="assets/team/drawings/michael.svg"></div>
           <div class="team-info">
             <p class="team-name">Michaël Vaes</p>
             <p class="team-role">CTO & Co-Founder</p>
             </div>
           <div class="team-dl">
             <a class="btn btn-secondary" href="assets/team/original/michael.png" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Photo</span><span aria-hidden="true">Photo</span></span></a>
+            <a class="btn btn-secondary" href="assets/team/drawings/michael.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Drawing</span><span aria-hidden="true">Drawing</span></span></a>
           </div>
         </div>
         <div class="team-row">
           <div class="team-photo"><img src="filip.jpg" alt="Filip Lauweres"></div>
+          <div class="team-drawing"><img alt="Line drawing of Filip Lauweres" src="assets/team/drawings/filip.svg"></div>
           <div class="team-info">
             <p class="team-name">Filip Lauweres</p>
             <p class="team-role">Co-Founder & Chief of Staff</p>
             </div>
           <div class="team-dl">
             <a class="btn btn-secondary" href="assets/team/original/filip.png" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Photo</span><span aria-hidden="true">Photo</span></span></a>
+            <a class="btn btn-secondary" href="assets/team/drawings/filip.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Drawing</span><span aria-hidden="true">Drawing</span></span></a>
           </div>
         </div>
         <div class="team-row">
           <div class="team-photo"><img src="kurt.jpg" alt="Kurt Briers"></div>
+          <div class="team-drawing" aria-hidden="true"></div>
           <div class="team-info">
             <p class="team-name">Kurt Briers</p>
             <p class="team-role">Co-Founder (no active role)</p>
@@ -1493,62 +1502,74 @@
         </div>
         <div class="team-row">
           <div class="team-photo"><img src="bart.jpg" alt="Bart de Fluiter"></div>
+          <div class="team-drawing"><img alt="Line drawing of Bart de Fluiter" src="assets/team/drawings/bart.svg"></div>
           <div class="team-info">
             <p class="team-name">Bart de Fluiter</p>
             <p class="team-role">Sales Netherlands / Investor</p>
           </div>
           <div class="team-dl">
             <a class="btn btn-secondary" href="assets/team/original/bart.png" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Photo</span><span aria-hidden="true">Photo</span></span></a>
+            <a class="btn btn-secondary" href="assets/team/drawings/bart.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Drawing</span><span aria-hidden="true">Drawing</span></span></a>
           </div>
         </div>
         <div class="team-row">
           <div class="team-photo"><img src="oliver.jpg" alt="Oliver Bath"></div>
+          <div class="team-drawing"><img alt="Line drawing of Oliver Bath" src="assets/team/drawings/oliver.svg"></div>
           <div class="team-info">
             <p class="team-name">Oliver Bath</p>
             <p class="team-role">International Sales</p>
           </div>
           <div class="team-dl">
             <a class="btn btn-secondary" href="assets/team/original/oliver.png" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Photo</span><span aria-hidden="true">Photo</span></span></a>
+            <a class="btn btn-secondary" href="assets/team/drawings/oliver.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Drawing</span><span aria-hidden="true">Drawing</span></span></a>
           </div>
         </div>
         <div class="team-row">
           <div class="team-photo"><img src="sander.jpg" alt="Sander Heymans"></div>
+          <div class="team-drawing"><img alt="Line drawing of Sander Heymans" src="assets/team/drawings/sander.svg"></div>
           <div class="team-info">
             <p class="team-name">Sander Heymans</p>
             <p class="team-role">Customer Success</p>
           </div>
           <div class="team-dl">
             <a class="btn btn-secondary" href="assets/team/original/sander.png" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Photo</span><span aria-hidden="true">Photo</span></span></a>
+            <a class="btn btn-secondary" href="assets/team/drawings/sander.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Drawing</span><span aria-hidden="true">Drawing</span></span></a>
           </div>
         </div>
         <div class="team-row">
           <div class="team-photo"><img src="marcelo.jpg" alt="Marcelo Bem"></div>
+          <div class="team-drawing"><img alt="Line drawing of Marcelo Bem" src="assets/team/drawings/marcelo.svg"></div>
           <div class="team-info">
             <p class="team-name">Marcelo Bem</p>
             <p class="team-role">Development</p>
           </div>
           <div class="team-dl">
             <a class="btn btn-secondary" href="assets/team/original/marcelo.png" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Photo</span><span aria-hidden="true">Photo</span></span></a>
+            <a class="btn btn-secondary" href="assets/team/drawings/marcelo.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Drawing</span><span aria-hidden="true">Drawing</span></span></a>
           </div>
         </div>
         <div class="team-row">
           <div class="team-photo"><img src="olger.jpg" alt="Olger van de Vliet"></div>
+          <div class="team-drawing"><img alt="Line drawing of Olger van de Vliet" src="assets/team/drawings/olger.svg"></div>
           <div class="team-info">
             <p class="team-name">Olger van de Vliet</p>
             <p class="team-role">Marketing</p>
           </div>
           <div class="team-dl">
             <a class="btn btn-secondary" href="assets/team/original/olger.jpg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Photo</span><span aria-hidden="true">Photo</span></span></a>
+            <a class="btn btn-secondary" href="assets/team/drawings/olger.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Drawing</span><span aria-hidden="true">Drawing</span></span></a>
           </div>
         </div>
         <div class="team-row">
           <div class="team-photo"><img src="matthieu.jpg" alt="Matthieu"></div>
+          <div class="team-drawing"><img alt="Line drawing of Matthieu" src="assets/team/drawings/matthieu.svg"></div>
           <div class="team-info">
             <p class="team-name">Matthieu</p>
             <p class="team-role">Sales France</p>
           </div>
           <div class="team-dl">
             <a class="btn btn-secondary" href="assets/team/original/matthieu.png" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Photo</span><span aria-hidden="true">Photo</span></span></a>
+            <a class="btn btn-secondary" href="assets/team/drawings/matthieu.svg" download><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg><span class="btn-label"><span>Drawing</span><span aria-hidden="true">Drawing</span></span></a>
           </div>
         </div>
       </div>
@@ -1557,6 +1578,7 @@
         <div class="rule"><div class="rule-key">Crop</div><div class="rule-val">Square, head and shoulders, eyes at the same height across every row &mdash; no one photo wider, looser or lower than the rest.</div></div>
         <div class="rule"><div class="rule-key">Background</div><div class="rule-val">Plain and light. No office backdrops, no busy interiors &mdash; the person is the subject.</div></div>
         <div class="rule"><div class="rule-key">Photo download</div><div class="rule-val">The original file, as delivered &mdash; no re-crop, no re-export.</div></div>
+        <div class="rule"><div class="rule-key">Line drawing</div><div class="rule-val">Black line art (SVG) of the same person. Used on the closing slide of every deck (the presenter, dark lines on Blue) and wherever a photo would be too heavy. Never recoloured apart from Dark or white, never filled in.</div></div>
         <div class="rule"><div class="rule-key">Use</div><div class="rule-val">LinkedIn personal profile pictures, the about page, speaker decks and press requests. Never cropped tighter or looser than the version delivered here.</div></div>
       </div>
     </section>

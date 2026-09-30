@@ -9,49 +9,319 @@
 <helmet>
   <style>
     /* @guide-css */
-    .soon {
-      display: flex; flex-direction: column; align-items: flex-start;
-      border: 1px dashed var(--gray-300); border-radius: 8px;
-      padding: var(--s-8); max-width: 620px; background: var(--white);
+    .pr-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-4); max-width: 880px; }
+    .pr-option { display: flex; flex-direction: column; gap: var(--s-3); padding: var(--s-5); border-radius: 12px; border: 1px solid var(--gray-100); background: var(--white); }
+    .pr-option.is-main { background: var(--dark); border-color: var(--dark); color: var(--blue-light); }
+    .pr-option-icon { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; background: var(--blue-light); color: var(--blue); }
+    .pr-option.is-main .pr-option-icon { background: rgba(232, 238, 255, 0.1); color: var(--blue-light); }
+    .pr-option-icon svg { width: 22px; height: 22px; }
+    .pr-option-title { font-family: 'Instrument Sans', sans-serif; font-size: 20px; font-weight: 600; letter-spacing: -0.02em; }
+    .pr-option-text { font-size: 14px; line-height: 1.55; color: var(--gray-500); }
+    .pr-option.is-main .pr-option-text { color: rgba(232, 238, 255, 0.72); }
+    .pr-btn { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; margin-top: auto; height: 40px; padding: 0 18px; border-radius: 999px; border: 1px solid var(--gray-100); background: var(--white); color: var(--dark); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 600; letter-spacing: -0.01em; cursor: pointer; text-decoration: none; }
+    .pr-btn:hover { color: var(--dark); border-color: var(--gray-300); }
+    .pr-btn.primary { background: var(--blue); border-color: var(--blue); color: #FFFFFF; }
+    .pr-btn.primary:hover { color: #FFFFFF; background: #1E46C4; }
+    .pr-btn.on-dark { background: #FFFFFF; border-color: #FFFFFF; color: var(--dark); }
+    .pr-btn svg { width: 16px; height: 16px; }
+    .pr-btn .check { display: none; }
+    .pr-btn.is-done .check { display: inline; }
+    .pr-btn.is-done svg:not(.check) { display: none; }
+    .pr-contents { margin-top: var(--s-6); max-width: 880px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-2) var(--s-5); padding: var(--s-5); border-radius: 12px; background: var(--blue-light); font-size: 14px; line-height: 1.5; color: var(--gray-700); }
+    .pr-contents b { display: block; grid-column: 1 / -1; font-size: 14px; color: var(--dark); margin-bottom: var(--s-1); }
+
+    .pr-slides { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-6) var(--s-5); }
+    .pr-slide { margin: 0; display: flex; flex-direction: column; gap: var(--s-3); }
+    .pr-slide-frame { display: block; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: var(--blue-light); box-shadow: inset 0 0 0 1px rgba(24, 18, 45, 0.06); }
+    .pr-slide-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .pr-slide figcaption { display: flex; align-items: baseline; gap: var(--s-2); font-size: 14px; }
+    .pr-slide-n { color: var(--gray-500); font-variant-numeric: tabular-nums; }
+    .pr-slide-name { font-weight: 600; letter-spacing: -0.01em; }
+    .pr-slide-bg { margin-left: auto; font-size: 12px; color: var(--gray-500); }
+
+    .pr-steps { display: flex; flex-direction: column; max-width: 880px; border-top: 1px solid var(--gray-100); }
+    .pr-step { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: var(--s-4); padding: var(--s-5) 0; border-bottom: 1px solid var(--gray-100); }
+    .pr-step-n { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--blue-light); color: var(--blue); font-family: 'Instrument Sans', sans-serif; font-size: 17px; font-weight: 600; }
+    .pr-step-title { font-family: 'Instrument Sans', sans-serif; font-size: 19px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: var(--s-2); }
+    .pr-step-text { font-size: 15px; line-height: 1.6; color: var(--gray-700); max-width: 64ch; }
+    .pr-prompt { margin-top: var(--s-3); display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s-4); padding: var(--s-4); border-radius: 10px; background: var(--blue-light); font-size: 14px; line-height: 1.55; color: var(--dark); }
+    .pr-prompt .pr-btn { flex: 0 0 auto; margin-top: 0; height: 34px; }
+    .pr-tips { margin-top: var(--s-6); max-width: 880px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s-4); }
+    .pr-tip { padding: var(--s-4); border-radius: 12px; border: 1px solid var(--gray-100); font-size: 14px; line-height: 1.55; color: var(--gray-700); }
+    .pr-tip b { display: block; color: var(--dark); margin-bottom: var(--s-1); }
+
+    .pr-rules { display: flex; flex-direction: column; max-width: 880px; border-top: 1px solid var(--gray-100); }
+    .pr-rule { display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: var(--s-5); padding: var(--s-4) 0; border-bottom: 1px solid var(--gray-100); font-size: 15px; line-height: 1.55; }
+    .pr-rule-key { font-weight: 600; }
+    .pr-rule-val { color: var(--gray-700); }
+    .pr-swatches { display: inline-flex; gap: 6px; vertical-align: middle; margin-right: 8px; }
+    .pr-swatches i { width: 16px; height: 16px; border-radius: 4px; box-shadow: inset 0 0 0 1px rgba(24, 18, 45, 0.12); }
+
+    @media (max-width: 900px) {
+      .pr-options, .pr-slides, .pr-tips, .pr-contents { grid-template-columns: minmax(0, 1fr); }
+      .pr-rule { grid-template-columns: minmax(0, 1fr); gap: var(--s-1); }
     }
-    .soon-icon {
-      display: inline-flex; align-items: center; justify-content: center;
-      width: 48px; height: 48px; border-radius: 12px;
-      background: var(--blue-light); color: var(--blue); margin-bottom: var(--s-5);
-    }
-    .soon-icon svg { width: 26px; height: 26px; }
-    .soon-title {
-      font-family: 'Inter Tight', sans-serif; font-size: 24px; font-weight: 600;
-      letter-spacing: -0.02em; margin-bottom: var(--s-3);
-    }
-    .soon-text { font-size: 15px; line-height: 1.6; color: var(--gray-500); max-width: 52ch; }
   </style>
 </helmet>
 
 <div class="shell">
   <aside class="sidebar">
     <div class="sidebar-inner">
-      <nav class="menu"></nav>
+      <nav class="menu">
+        <button type="button" class="menu-item" onClick="{{ goStart }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg>
+          <span>Get the rules</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goPreview }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V96H40V56ZM40,112H96v88H40Zm176,88H112V112H216v88Z"/></svg>
+          <span>What a deck looks like</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goHowto }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z"/></svg>
+          <span>Making a deck in Claude</span>
+        </button>
+        <button type="button" class="menu-item" onClick="{{ goRules }}">
+          <svg viewBox="0 0 256 256" fill="currentColor"><path d="M200,80v32a8,8,0,0,1-16,0V88H160a8,8,0,0,1,0-16h32A8,8,0,0,1,200,80ZM96,168H72V144a8,8,0,0,0-16,0v32a8,8,0,0,0,8,8H96a8,8,0,0,0,0-16ZM232,56V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56ZM216,200V56H40V200H216Z"/></svg>
+          <span>The rules at a glance</span>
+        </button>
+      </nav>
     </div>
   </aside>
 
   <main class="content">
     <header class="masthead">
       <h1 class="display">Presentations</h1>
-      <p class="lede">How an Exatom deck is built — slide format, margins, layouts, type and charts.</p>
+      <p class="lede">How an Exatom deck looks and how you make one with Claude. Every rule lives in one Markdown file: give it to Claude with your content, and the deck comes out in the Exatom style.</p>
     </header>
 
-    <div class="soon">
-      <span class="soon-icon"><svg viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z"/></svg></span>
-      <p class="soon-title">Coming soon</p>
-      <p class="soon-text">The presentation guide is being written. Until it lands, take colour, typography, logo use and spacing straight from the brand guidelines; a slide follows the same rules as a page.</p>
-    </div>
+    <!-- ---------- GET THE RULES ---------- -->
+    <section class="section" id="start">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></span>
+        <h2 class="section-title">Get the rules</h2>
+      </div>
+      <p class="section-intro">presentations.md holds everything: the grid, the backgrounds and their roles, type, the slide types, how images are handled, the copy rules and the running orders. Pick the way that suits you.</p>
+
+      <div class="pr-options">
+        <div class="pr-option is-main">
+          <span class="pr-option-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg></span>
+          <p class="pr-option-title">Download the file</p>
+          <p class="pr-option-text">presentations.md, to attach to a Claude chat, a Design or a Project.</p>
+          <a class="pr-btn on-dark" href="presentations.md" download="exatom-presentations.md"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z"/></svg>Download presentations.md</a>
+        </div>
+        <div class="pr-option">
+          <span class="pr-option-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M137.54,186.36a8,8,0,0,1,0,11.31l-9.94,10A56,56,0,0,1,48.38,128.4L72.5,104.28A56,56,0,0,1,149.31,102a8,8,0,1,1-10.64,12,40,40,0,0,0-54.85,1.63L59.7,139.72a40,40,0,0,0,56.58,56.58l9.94-9.94A8,8,0,0,1,137.54,186.36Zm70.08-138a56.08,56.08,0,0,0-79.22,0l-9.94,9.95a8,8,0,0,0,11.32,11.31l9.94-9.94a40,40,0,0,1,56.58,56.58L172.18,140.4A40,40,0,0,1,117.33,142,8,8,0,1,0,106.69,154a56,56,0,0,0,76.81-2.26l24.12-24.12A56.08,56.08,0,0,0,207.62,48.38Z"/></svg></span>
+          <p class="pr-option-title">Link Claude to it</p>
+          <p class="pr-option-text">Paste the link in any Claude chat. It always points at the latest version, so you never work from an old copy.</p>
+          <button type="button" class="pr-btn" data-copy="https://exatom-brand-guidelines.vercel.app/presentations.md"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"/></svg><svg class="check" viewBox="0 0 256 256" fill="currentColor"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg>Copy link</button>
+        </div>
+        <div class="pr-option">
+          <span class="pr-option-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M208,144a15.78,15.78,0,0,1-10.42,14.94L146,178l-19,51.62a15.92,15.92,0,0,1-29.88,0L78,178l-51.62-19a15.92,15.92,0,0,1,0-29.88L78,110l19-51.62a15.92,15.92,0,0,1,29.88,0L146,110l51.62,19A15.78,15.78,0,0,1,208,144ZM152,48h16V64a8,8,0,0,0,16,0V48h16a8,8,0,0,0,0-16H184V16a8,8,0,0,0-16,0V32H152a8,8,0,0,0,0,16Zm88,32h-8V72a8,8,0,0,0-16,0v8h-8a8,8,0,0,0,0,16h8v8a8,8,0,0,0,16,0V96h8a8,8,0,0,0,0-16Z"/></svg></span>
+          <p class="pr-option-title">Open in Claude</p>
+          <p class="pr-option-text">Starts a new chat with the file already linked. Add your content and send.</p>
+          <a class="pr-btn primary" href="https://claude.ai/new?q=Build%20an%20Exatom%20presentation.%20Follow%20every%20rule%20in%20https%3A%2F%2Fexatom-brand-guidelines.vercel.app%2Fpresentations.md.%20The%20deck%20is%3A%20" target="_blank" rel="noopener">Open in Claude</a>
+        </div>
+        <div class="pr-option">
+          <span class="pr-option-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,72H131.31L104,44.69A15.86,15.86,0,0,0,92.69,40H40A16,16,0,0,0,24,56V200.62A15.4,15.4,0,0,0,39.38,216H216.89A15.13,15.13,0,0,0,232,200.89V88A16,16,0,0,0,216,72ZM40,56H92.69l16,16H40ZM216,200H40V88H216Z"/></svg></span>
+          <p class="pr-option-title">Keep it in a Claude Project</p>
+          <p class="pr-option-text">Create a Project called "Exatom decks" and add presentations.md to its knowledge. Every chat in it follows the rules without asking.</p>
+          <a class="pr-btn" href="https://claude.ai/projects" target="_blank" rel="noopener">Go to Projects</a>
+        </div>
+      </div>
+
+      <div class="pr-contents">
+        <b>What's in presentations.md</b>
+        <span>1. Using it with Claude</span><span>2. Format and grid</span><span>3. Backgrounds and their roles</span>
+        <span>4. Type</span><span>5. The label above a slide</span><span>6. Building blocks</span>
+        <span>7. Fourteen slide types</span><span>8. Images and screenshots</span><span>9. Copy</span>
+        <span>10. Deck orders</span><span>11. Checklist</span><span>12. The slide CSS</span>
+      </div>
+    </section>
+
+    <!-- ---------- PREVIEWS ---------- -->
+    <section class="section" id="preview">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H40A16,16,0,0,0,24,56V200a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,16V96H40V56ZM40,112H96v88H40Zm176,88H112V112H216v88Z"/></svg></span>
+        <h2 class="section-title">What a deck looks like</h2>
+      </div>
+      <p class="section-intro">The Exatom sales deck, all 28 slides, built with these rules. Client logos are shown as placeholders. Click a slide to open it full size.</p>
+
+      <div class="pr-slides">
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/01-cover.webp" target="_blank" rel="noopener"><img alt="Slide 01: Cover" src="slides/01-cover.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">01</span><span class="pr-slide-name">Cover</span><span class="pr-slide-bg">Dark</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/02-results-wall.webp" target="_blank" rel="noopener"><img alt="Slide 02: Results wall" src="slides/02-results-wall.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">02</span><span class="pr-slide-name">Results wall</span><span class="pr-slide-bg">Blue Light</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/03-problem-a-normal-conversion-rate.webp" target="_blank" rel="noopener"><img alt="Slide 03: Problem: a normal conversion rate" src="slides/03-problem-a-normal-conversion-rate.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">03</span><span class="pr-slide-name">Problem: a normal conversion rate</span><span class="pr-slide-bg">Blush</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/04-problem-20-friction-points.webp" target="_blank" rel="noopener"><img alt="Slide 04: Problem: 20+ friction points" src="slides/04-problem-20-friction-points.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">04</span><span class="pr-slide-name">Problem: 20+ friction points</span><span class="pr-slide-bg">Burgundy</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/05-untapped-potential.webp" target="_blank" rel="noopener"><img alt="Slide 05: Untapped potential" src="slides/05-untapped-potential.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">05</span><span class="pr-slide-name">Untapped potential</span><span class="pr-slide-bg">Blue Light</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/06-unique-data-points.webp" target="_blank" rel="noopener"><img alt="Slide 06: Unique data points" src="slides/06-unique-data-points.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">06</span><span class="pr-slide-name">Unique data points</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/07-applied-ai.webp" target="_blank" rel="noopener"><img alt="Slide 07: Platform" src="slides/07-applied-ai.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">07</span><span class="pr-slide-name">Platform</span><span class="pr-slide-bg">Dark</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/08-detailed-insights.webp" target="_blank" rel="noopener"><img alt="Slide 08: Detailed insights" src="slides/08-detailed-insights.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">08</span><span class="pr-slide-name">Detailed insights</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/09-how-it-works.webp" target="_blank" rel="noopener"><img alt="Slide 09: How it works" src="slides/09-how-it-works.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">09</span><span class="pr-slide-name">How it works</span><span class="pr-slide-bg">Blue Light</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/10-privacy-by-design.webp" target="_blank" rel="noopener"><img alt="Slide 10: Privacy by design" src="slides/10-privacy-by-design.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">10</span><span class="pr-slide-name">Privacy by design</span><span class="pr-slide-bg">Dark</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/11-need-our-help.webp" target="_blank" rel="noopener"><img alt="Slide 11: Need our help?" src="slides/11-need-our-help.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">11</span><span class="pr-slide-name">Need our help?</span><span class="pr-slide-bg">Dark</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/12-our-clients-say.webp" target="_blank" rel="noopener"><img alt="Slide 12: Reviews" src="slides/12-our-clients-say.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">12</span><span class="pr-slide-name">Reviews</span><span class="pr-slide-bg">Blue Light</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/13-chapter-smart-nudges.webp" target="_blank" rel="noopener"><img alt="Slide 13: Chapter: Smart Nudges" src="slides/13-chapter-smart-nudges.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">13</span><span class="pr-slide-name">Chapter: Smart Nudges</span><span class="pr-slide-bg">Dark</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/14-use-case-assist-visitors.webp" target="_blank" rel="noopener"><img alt="Slide 14: Use case: assist visitors" src="slides/14-use-case-assist-visitors.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">14</span><span class="pr-slide-name">Use case: assist visitors</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/15-use-case-create-account.webp" target="_blank" rel="noopener"><img alt="Slide 15: Use case: create account" src="slides/15-use-case-create-account.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">15</span><span class="pr-slide-name">Use case: create account</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/16-chapter-autofixes.webp" target="_blank" rel="noopener"><img alt="Slide 16: Chapter: Autofixes" src="slides/16-chapter-autofixes.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">16</span><span class="pr-slide-name">Chapter: Autofixes</span><span class="pr-slide-bg">Dark</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/17-use-case-mobile-keyboard.webp" target="_blank" rel="noopener"><img alt="Slide 17: Use case: mobile keyboard" src="slides/17-use-case-mobile-keyboard.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">17</span><span class="pr-slide-name">Use case: mobile keyboard</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/18-use-case-expected-input.webp" target="_blank" rel="noopener"><img alt="Slide 18: Use case: expected input" src="slides/18-use-case-expected-input.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">18</span><span class="pr-slide-name">Use case: expected input</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/19-use-case-autofill.webp" target="_blank" rel="noopener"><img alt="Slide 19: Use case: autofill" src="slides/19-use-case-autofill.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">19</span><span class="pr-slide-name">Use case: autofill</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/20-every-friction-type.webp" target="_blank" rel="noopener"><img alt="Slide 20: Every friction type" src="slides/20-every-friction-type.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">20</span><span class="pr-slide-name">Every friction type</span><span class="pr-slide-bg">Blue Light</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/21-chapter-insights.webp" target="_blank" rel="noopener"><img alt="Slide 21: Chapter: Insights" src="slides/21-chapter-insights.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">21</span><span class="pr-slide-name">Chapter: Insights</span><span class="pr-slide-bg">Dark</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/22-form-analytics.webp" target="_blank" rel="noopener"><img alt="Slide 22: Product: Form analytics" src="slides/22-form-analytics.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">22</span><span class="pr-slide-name">Product: Form analytics</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/23-benchmarking.webp" target="_blank" rel="noopener"><img alt="Slide 23: Product: Benchmarking" src="slides/23-benchmarking.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">23</span><span class="pr-slide-name">Product: Benchmarking</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/24-cro-pulse.webp" target="_blank" rel="noopener"><img alt="Slide 24: Product: CRO Pulse" src="slides/24-cro-pulse.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">24</span><span class="pr-slide-name">Product: CRO Pulse</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/25-session-replays.webp" target="_blank" rel="noopener"><img alt="Slide 25: Product: Session replays" src="slides/25-session-replays.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">25</span><span class="pr-slide-name">Product: Session replays</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/26-monitoring.webp" target="_blank" rel="noopener"><img alt="Slide 26: Product: Monitoring" src="slides/26-monitoring.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">26</span><span class="pr-slide-name">Product: Monitoring</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/27-smart-nudges.webp" target="_blank" rel="noopener"><img alt="Slide 27: Product: Smart Nudges" src="slides/27-smart-nudges.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">27</span><span class="pr-slide-name">Product: Smart Nudges</span><span class="pr-slide-bg">White</span></figcaption>
+        </figure>
+        <figure class="pr-slide">
+          <a class="pr-slide-frame" href="slides/28-let-s-start.webp" target="_blank" rel="noopener"><img alt="Slide 28: Closing" src="slides/28-let-s-start.webp" loading="lazy" width="1600" height="900"></a>
+          <figcaption><span class="pr-slide-n">28</span><span class="pr-slide-name">Closing</span><span class="pr-slide-bg">Blue</span></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ---------- HOW TO ---------- -->
+    <section class="section" id="howto">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,40H136V24a8,8,0,0,0-16,0V40H40A16,16,0,0,0,24,56V176a16,16,0,0,0,16,16H79.36L57.75,219a8,8,0,0,0,12.5,10l29.59-37h56.32l29.59,37a8,8,0,1,0,12.5-10l-21.61-27H216a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,136H40V56H216V176ZM104,120v24a8,8,0,0,1-16,0V120a8,8,0,0,1,16,0Zm32-16v40a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm32-16v56a8,8,0,0,1-16,0V88a8,8,0,0,1,16,0Z"/></svg></span>
+        <h2 class="section-title">Making a deck in Claude</h2>
+      </div>
+      <p class="section-intro">Five steps, from an old deck or a few notes to a finished Exatom deck. Claude builds each slide as a 1920 × 1080 artboard on a canvas, where you can review and comment.</p>
+
+      <div class="pr-steps">
+        <div class="pr-step"><span class="pr-step-n">1</span><div><p class="pr-step-title">Give Claude the rules</p><p class="pr-step-text">Start a Design in Claude (the Design template, /design) or a chat inside your "Exatom decks" Project. Attach presentations.md or paste its link.</p></div></div>
+        <div class="pr-step"><span class="pr-step-n">2</span><div><p class="pr-step-title">Add your material</p><p class="pr-step-text">An old .pptx or PDF, an outline or meeting notes. For a client deck also the client's logo, a photo of the client, screenshots of their real forms and the dashboard exports you want to show.</p></div></div>
+        <div class="pr-step"><span class="pr-step-n">3</span><div><p class="pr-step-title">Say what the deck is</p><p class="pr-step-text">A sales deck, a pitch or a client status meeting, who presents it and to whom. Claude picks the running order from the file.</p>
+          <div class="pr-prompt"><span>Rebuild the attached deck in the Exatom style. Follow presentations.md exactly. It is a status meeting for [client], presented by [name]. Keep the order and every figure.</span><button type="button" class="pr-btn" data-copy="Rebuild the attached deck in the Exatom style. Follow presentations.md exactly. It is a status meeting for [client], presented by [name]. Keep the order and every figure."><svg viewBox="0 0 256 256" fill="currentColor"><path d="M216,32H88a8,8,0,0,0-8,8V80H40a8,8,0,0,0-8,8V216a8,8,0,0,0,8,8H168a8,8,0,0,0,8-8V176h40a8,8,0,0,0,8-8V40A8,8,0,0,0,216,32ZM160,208H48V96H160Zm48-48H176V88a8,8,0,0,0-8-8H96V48H208Z"/></svg><svg class="check" viewBox="0 0 256 256" fill="currentColor"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"/></svg>Copy</button></div>
+        </div></div>
+        <div class="pr-step"><span class="pr-step-n">4</span><div><p class="pr-step-title">Review on the canvas</p><p class="pr-step-text">Every slide is its own artboard. Comment on a slide or tell Claude what to change ("take the results wall from the pitch deck", "make the client logo white"). Small text edits you can make directly in the canvas.</p></div></div>
+        <div class="pr-step"><span class="pr-step-n">5</span><div><p class="pr-step-title">Share or export</p><p class="pr-step-text">Share the canvas from its Share menu, or export the slides to present. The canvas stays private until you share it.</p></div></div>
+      </div>
+
+      <div class="pr-tips">
+        <div class="pr-tip"><b>Real screenshots stay real</b>A client's own forms and Exatom dashboard exports go in as images. Claude only redraws generic product visuals.</div>
+        <div class="pr-tip"><b>No invented figures</b>Claude takes numbers from your material or the case studies, and leaves [FIGURE] where one is missing.</div>
+        <div class="pr-tip"><b>New rule? Add it once</b>When you correct Claude on something that should always hold, add it to presentations.md so every deck gets it.</div>
+      </div>
+    </section>
+
+    <!-- ---------- RULES ---------- -->
+    <section class="section" id="rules">
+      <div class="section-head">
+        <span class="section-icon"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M200,80v32a8,8,0,0,1-16,0V88H160a8,8,0,0,1,0-16h32A8,8,0,0,1,200,80ZM96,168H72V144a8,8,0,0,0-16,0v32a8,8,0,0,0,8,8H96a8,8,0,0,0,0-16ZM232,56V200a16,16,0,0,1-16,16H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216A16,16,0,0,1,232,56ZM216,200V56H40V200H216Z"/></svg></span>
+        <h2 class="section-title">The rules at a glance</h2>
+      </div>
+      <p class="section-intro">The short version. The file has the detail.</p>
+
+      <div class="pr-rules">
+        <div class="pr-rule"><span class="pr-rule-key">Format</span><span class="pr-rule-val">1920 × 1080. 48 px margin, four columns of 432 px with 32 px gutters.</span></div>
+        <div class="pr-rule"><span class="pr-rule-key">Backgrounds</span><span class="pr-rule-val"><span class="pr-swatches"><i style="background: #E8EEFF;"></i><i style="background: #FFFFFF;"></i><i style="background: #18122D;"></i><i style="background: #2A5AE9;"></i><i style="background: #FEEFEF;"></i><i style="background: #440020;"></i></span>Blue Light for white cards, White for visuals on the blue gradient, Dark for cover and chapters, Blue for the closing, Blush and Burgundy for the problem. No Warm White, no landscapes.</span></div>
+        <div class="pr-rule"><span class="pr-rule-key">Type</span><span class="pr-rule-val">Instrument Sans SemiBold for headings and figures, Inter for text. Chapter 200 px, cover 120, statement 96, slide title 64, body 24.</span></div>
+        <div class="pr-rule"><span class="pr-rule-key">Label</span><span class="pr-rule-val">One eyebrow per slide, top left, the website's ink-tinted pill.</span></div>
+        <div class="pr-rule"><span class="pr-rule-key">Images</span><span class="pr-rule-val">Real screenshots are pasted in, generic visuals are rebuilt in brand style. Photos are never cropped awkwardly.</span></div>
+        <div class="pr-rule"><span class="pr-rule-key">Client decks</span><span class="pr-rule-val">The client's logo in white beside ours and their photo on the cover; the presenter's line drawing on the closing slide.</span></div>
+        <div class="pr-rule"><span class="pr-rule-key">Copy</span><span class="pr-rule-val">British spelling, prospects / buyers / visitors, Smart Nudges and Autofixes, no em dashes. Fixed figures: 87%, 20+, 23%.</span></div>
+      </div>
+    </section>
   </main>
 </div>
 </x-dc>
 <script data-dc-script>
 class Component extends DCLogic {
-  renderVals() { return {}; }
+  renderVals() {
+    const go = (id) => () => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    return {
+      goStart: go('start'),
+      goPreview: go('preview'),
+      goHowto: go('howto'),
+      goRules: go('rules'),
+    };
+  }
 }
 </script>
 </body>
