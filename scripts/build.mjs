@@ -581,6 +581,17 @@ const drawingsMd = '\n### Line drawings\n\n'
   + DRAWINGS.map(([slug, name]) => `| ${name} | https://exatom-brand-guidelines.vercel.app/assets/team/drawings/${slug}.svg |`).join('\n') + '\n';
 writeFileSync(join(OUT, 'brand-guidelines.md'), md.trimEnd() + '\n' + drawingsMd);
 copyFileSync(join(ROOT, 'src', 'presentations.md'), join(OUT, 'presentations.md'));
+/* the Claude skill: SKILL.md fetches the live rules; reference/ is the offline fallback */
+const presMd = readFileSync(join(ROOT, 'src', 'presentations.md'), 'utf8');
+const skillZip = zipDirectory(join(ROOT, 'skill'), {
+  mtime: new Date('2026-01-01T12:00:00Z'),
+  extra: [
+    { name: 'exatom-presentations/reference/presentations.md', data: presMd },
+    { name: 'exatom-presentations/reference/brand-guidelines.md', data: md.trimEnd() + '\n' + drawingsMd },
+  ],
+});
+writeFileSync(join(OUT, 'exatom-presentations-skill.zip'), skillZip.buffer);
+
 mkdirSync(join(OUT, 'slides'), { recursive: true });
 for (const f of readdirSync(join(ROOT, 'slides'))) {
   if (f.endsWith('.webp')) copyFileSync(join(ROOT, 'slides', f), join(OUT, 'slides', f));

@@ -1,5 +1,7 @@
 # Exatom presentations
 
+Updated: 30 September 2026
+
 The rules for every Exatom deck: sales decks, pitch decks and client status meetings. Written for people and for Claude. Give this file to Claude together with your content and it builds the deck in the Exatom style.
 
 Colours, type and logo come from the brand guidelines (https://exatom-brand-guidelines.vercel.app/brand-guidelines.md). This file only says how they land on a slide.
@@ -8,13 +10,20 @@ Colours, type and logo come from the brand guidelines (https://exatom-brand-guid
 
 ## 1. How to use this file with Claude
 
-1. Start a Design in Claude (the Design template, `/design`) or open a Claude Project that has this file in its knowledge.
-2. Attach this file, or paste its link: `https://exatom-brand-guidelines.vercel.app/presentations.md`.
-3. Add your material: an old `.pptx` or PDF, an outline, meeting notes, screenshots, the client's logo.
-4. Say what the deck is: a sales deck, a pitch, or a status meeting for a client, who presents it and for whom.
-5. Claude builds one artboard per slide (1920 x 1080). Review on the canvas, comment on a slide, ask for changes.
+The easiest way is the Claude skill `exatom-presentations` (download: https://exatom-brand-guidelines.vercel.app/exatom-presentations-skill.zip). Install it once; from then on Claude loads this file whenever someone asks for an Exatom deck, and always fetches the latest version from this address.
+
+Without the skill, paste the link `https://exatom-brand-guidelines.vercel.app/presentations.md` into the chat. A downloaded copy of this file does not update, so avoid it unless Claude cannot reach the web.
+
+Then:
+
+1. Start a Design in Claude (the Design template, `/design`) for a slide canvas, or a normal chat.
+2. Add your material: an old `.pptx` or PDF, an outline, meeting notes, screenshots, the client's logo.
+3. Say what the deck is: a sales deck, a pitch, or a status meeting for a client, who presents it and for whom.
+4. Claude builds one artboard per slide (1920 x 1080). Review on the canvas, comment on a slide, ask for changes.
 
 When Claude builds from an existing deck, it keeps the order and the content, and restyles everything with the rules below. It never invents figures.
+
+**Changing a rule.** Edit `src/presentations.md` in the brand guidelines repository, update the date at the top and push. Within a minute every Claude using the skill or the link works from the new version; nobody has to reinstall anything.
 
 ---
 
