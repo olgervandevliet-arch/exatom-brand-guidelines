@@ -1,0 +1,323 @@
+{
+  "base": "https://exatom-brand-guidelines.vercel.app",
+  "slides": [
+    {
+      "file": "01-cover.html",
+      "n": "01",
+      "title": "Cover",
+      "type": "Cover",
+      "background": "Dark",
+      "use": "Opening slide. For a client deck add the white client logo beside ours and a client photo behind the visual."
+    },
+    {
+      "file": "02-results-wall.html",
+      "n": "02",
+      "title": "Results wall",
+      "type": "Results wall",
+      "background": "Blue Light",
+      "use": "Customer results as 4 x 2 cards: logo, figure, label."
+    },
+    {
+      "file": "03-problem-a-normal-conversion-rate.html",
+      "n": "03",
+      "title": "Problem: a normal conversion rate",
+      "type": "Problem (funnel)",
+      "background": "Blush",
+      "use": "The pitch deck funnel: brands accept a conversion rate under 20%."
+    },
+    {
+      "file": "04-problem-20-friction-points.html",
+      "n": "04",
+      "title": "Problem: 20+ friction points",
+      "type": "Problem (friction)",
+      "background": "Burgundy",
+      "use": "The pitch deck form with 20+ friction points."
+    },
+    {
+      "file": "05-untapped-potential.html",
+      "n": "05",
+      "title": "Untapped potential",
+      "type": "Two cards with photos",
+      "background": "Blue Light",
+      "use": "A contrast in two white cards, each with a photo and tags."
+    },
+    {
+      "file": "06-unique-data-points.html",
+      "n": "06",
+      "title": "Unique data points",
+      "type": "Visual across four columns",
+      "background": "White",
+      "use": "A title and one wide stage on the gradient with rebuilt UI cards."
+    },
+    {
+      "file": "07-applied-ai.html",
+      "n": "07",
+      "title": "Applied AI",
+      "type": "Platform",
+      "background": "Dark",
+      "use": "One platform: three visuals with a numbered caption each."
+    },
+    {
+      "file": "08-detailed-insights.html",
+      "n": "08",
+      "title": "Detailed insights",
+      "type": "Text plus visual",
+      "background": "White",
+      "use": "Title and body in column 1, a dashboard mock-up in a stage in columns 2 to 4."
+    },
+    {
+      "file": "09-how-it-works.html",
+      "n": "09",
+      "title": "How it works",
+      "type": "Steps",
+      "background": "Blue Light",
+      "use": "Three numbered cards with a duration chip: how it works."
+    },
+    {
+      "file": "10-privacy-by-design.html",
+      "n": "10",
+      "title": "Privacy by design",
+      "type": "Statement with seal",
+      "background": "Dark",
+      "use": "Privacy by design: statement, ticks and the ISO seal on a low-opacity panel."
+    },
+    {
+      "file": "11-need-our-help.html",
+      "n": "11",
+      "title": "Need our help?",
+      "type": "Services timeline",
+      "background": "Dark",
+      "use": "A phased plan: set-up, analysis, optimisation."
+    },
+    {
+      "file": "12-our-clients-say.html",
+      "n": "12",
+      "title": "Our clients say",
+      "type": "Reviews",
+      "background": "Blue Light",
+      "use": "2 x 2 review cards: logo, quote with key words in Dark, photo, name and role."
+    },
+    {
+      "file": "13-chapter-smart-nudges.html",
+      "n": "13",
+      "title": "Chapter: Smart Nudges",
+      "type": "Chapter",
+      "background": "Dark",
+      "use": "Chapter opener: title and number at 200 px, contents list."
+    },
+    {
+      "file": "14-use-case-assist-visitors.html",
+      "n": "14",
+      "title": "Use case: assist visitors",
+      "type": "Use case",
+      "background": "White",
+      "use": "Labelled blocks left, visual right, result chips at the bottom."
+    },
+    {
+      "file": "15-use-case-create-account.html",
+      "n": "15",
+      "title": "Use case: create account",
+      "type": "Use case",
+      "background": "White",
+      "use": "Labelled blocks left, the Smart Nudge editor right."
+    },
+    {
+      "file": "16-chapter-autofixes.html",
+      "n": "16",
+      "title": "Chapter: Autofixes",
+      "type": "Chapter",
+      "background": "Dark",
+      "use": "Chapter opener."
+    },
+    {
+      "file": "17-use-case-mobile-keyboard.html",
+      "n": "17",
+      "title": "Use case: mobile keyboard",
+      "type": "Use case",
+      "background": "White",
+      "use": "Labelled blocks left, product mock-up right."
+    },
+    {
+      "file": "18-use-case-expected-input.html",
+      "n": "18",
+      "title": "Use case: expected input",
+      "type": "Use case (before and after phones)",
+      "background": "White",
+      "use": "Two phones, before and after, rebuilt in HTML."
+    },
+    {
+      "file": "19-use-case-autofill.html",
+      "n": "19",
+      "title": "Use case: autofill",
+      "type": "Use case (before and after phones)",
+      "background": "White",
+      "use": "Two phones, before and after, rebuilt in HTML."
+    },
+    {
+      "file": "20-every-friction-type.html",
+      "n": "20",
+      "title": "Every friction type",
+      "type": "Card grid",
+      "background": "Blue Light",
+      "use": "Eight small cards with an icon, a title and two lines."
+    },
+    {
+      "file": "21-chapter-insights.html",
+      "n": "21",
+      "title": "Chapter: Insights",
+      "type": "Chapter",
+      "background": "Dark",
+      "use": "Chapter opener."
+    },
+    {
+      "file": "22-form-analytics.html",
+      "n": "22",
+      "title": "Form analytics",
+      "type": "Product",
+      "background": "White",
+      "use": "Feature tabs on top, title left, a rebuilt dashboard in a stage."
+    },
+    {
+      "file": "23-benchmarking.html",
+      "n": "23",
+      "title": "Benchmarking",
+      "type": "Product",
+      "background": "White",
+      "use": "Feature tabs, title left, product mock-up image in a stage."
+    },
+    {
+      "file": "24-cro-pulse.html",
+      "n": "24",
+      "title": "CRO Pulse",
+      "type": "Product",
+      "background": "White",
+      "use": "Feature tabs, title left, product mock-up image in a stage."
+    },
+    {
+      "file": "25-session-replays.html",
+      "n": "25",
+      "title": "Session replays",
+      "type": "Product",
+      "background": "White",
+      "use": "Feature tabs, title left, product mock-up image in a stage."
+    },
+    {
+      "file": "26-monitoring.html",
+      "n": "26",
+      "title": "Monitoring",
+      "type": "Product",
+      "background": "White",
+      "use": "Feature tabs, title left, product mock-up image in a stage."
+    },
+    {
+      "file": "27-smart-nudges.html",
+      "n": "27",
+      "title": "Smart Nudges",
+      "type": "Product",
+      "background": "White",
+      "use": "Feature tabs, title left, rebuilt editor and phone in a stage."
+    },
+    {
+      "file": "28-let-s-start.html",
+      "n": "28",
+      "title": "Let's start",
+      "type": "Closing",
+      "background": "Blue",
+      "use": "Let's start: the presenter's line drawing and the contact list."
+    }
+  ],
+  "images": [
+    {
+      "file": "cover-visual.webp",
+      "what": "Cover visual of the sales deck: Eureka setting up a Smart Nudge, +23% conversions"
+    },
+    {
+      "file": "face-jean-philippe-pottier.jpg",
+      "what": "Reviewer photo: Jean-Philippe Pottier, Kia Germany"
+    },
+    {
+      "file": "face-jesse-lee.jpg",
+      "what": "Reviewer photo: Jesse Lee, Brooks Running EMEA"
+    },
+    {
+      "file": "face-jochen-fischer.jpg",
+      "what": "Reviewer photo: Jochen Fischer, Hyundai Motor Europe"
+    },
+    {
+      "file": "face-menno-damste.jpg",
+      "what": "Reviewer photo: Menno Damsté, Toyota/Lexus Netherlands"
+    },
+    {
+      "file": "g2-badges.png",
+      "what": "G2 High Performer badges, transparent, for the cover"
+    },
+    {
+      "file": "g2-rating.png",
+      "what": "G2 mark with five stars, for the rating line"
+    },
+    {
+      "file": "iso-27001-badge.webp",
+      "what": "ISO 27001 certification seal"
+    },
+    {
+      "file": "mock-autofix-keyboard.webp",
+      "what": "Product mock-up: Eureka proposes an Autofix that opens the numeric keypad"
+    },
+    {
+      "file": "mock-benchmarking.webp",
+      "what": "Product mock-up: benchmarking, a test-drive form against automotive peers"
+    },
+    {
+      "file": "mock-cro-pulse.webp",
+      "what": "Product mock-up: CRO Pulse overlay on a live test-drive form"
+    },
+    {
+      "file": "mock-monitoring.webp",
+      "what": "Product mock-up: monitoring alerts across all forms"
+    },
+    {
+      "file": "mock-session-replay.webp",
+      "what": "Product mock-up: session replay with a Friction Score of 8.4"
+    },
+    {
+      "file": "mock-smart-nudge-editor.webp",
+      "what": "Product mock-up: the Smart Nudge editor with trigger, placement and live preview"
+    },
+    {
+      "file": "mock-smart-nudge-triggers.webp",
+      "what": "Product mock-up: Smart Nudge triggers"
+    },
+    {
+      "file": "photo-desk.webp",
+      "what": "Photo: a developer at a desk (fictional person)"
+    },
+    {
+      "file": "photo-florist.webp",
+      "what": "Photo: a florist filling in a form on a tablet (fictional person)"
+    },
+    {
+      "file": "pitch-friction-cards.webp",
+      "what": "Problem slide (Burgundy): session card and Form Score 3.2 with friction signals"
+    },
+    {
+      "file": "pitch-friction-form.webp",
+      "what": "Problem slide (Burgundy): a registration form with its friction points marked"
+    },
+    {
+      "file": "pitch-funnel.webp",
+      "what": "Problem slide (Blush): the funnel from campaigns to sales, 13% converts"
+    },
+    {
+      "file": "platform-activation.webp",
+      "what": "Platform slide, visual 3: Activation, a form before and after with a Smart Nudge and a numeric keyboard"
+    },
+    {
+      "file": "platform-agent.webp",
+      "what": "Platform slide, visual 2: AI CRO agent, Eureka proposing a Smart Nudge"
+    },
+    {
+      "file": "platform-sense.webp",
+      "what": "Platform slide, visual 1: Sense, the dashboard with the conversion path of a form"
+    }
+  ]
+}

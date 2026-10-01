@@ -581,13 +581,88 @@ const drawingsMd = '\n### Line drawings\n\n'
   + DRAWINGS.map(([slug, name]) => `| ${name} | https://exatom-brand-guidelines.vercel.app/assets/team/drawings/${slug}.svg |`).join('\n') + '\n';
 writeFileSync(join(OUT, 'brand-guidelines.md'), md.trimEnd() + '\n' + drawingsMd);
 copyFileSync(join(ROOT, 'src', 'presentations.md'), join(OUT, 'presentations.md'));
-/* the Claude skill: SKILL.md fetches the live rules; reference/ is the offline fallback */
+/* the deck kit: the full slide CSS, the sales deck's 28 slides as HTML templates, the
+   images they use and the review texts. Published under /kit/ and bundled in the skill.
+   Each template is also served as .txt with absolute URLs, because an AI that fetches
+   an .html page usually gets the extracted text, not the markup. */
+const KIT = join(ROOT, 'kit');
+const SITE = 'https://exatom-brand-guidelines.vercel.app';
+const kit = JSON.parse(readFileSync(join(KIT, 'kit.json'), 'utf8'));
+const kitFiles = walk(KIT).filter((f) => f.rel !== 'kit.json');
+const absolute = (html) => html
+  .replace(/(href|src)="\.\.\/\.\.\//g, `$1="${SITE}/`)
+  .replace(/(href|src)="\.\.\//g, `$1="${SITE}/kit/`);
+const kitShared = new Set(); // logos and assets outside kit/ that the templates point at
+for (const f of kitFiles) {
+  const dest = join(OUT, 'kit', f.rel);
+  mkdirSync(join(dest, '..'), { recursive: true });
+  copyFileSync(join(KIT, f.rel), dest);
+  if (f.rel.startsWith('slides/') && f.rel.endsWith('.html')) {
+    const html = readFileSync(join(KIT, f.rel), 'utf8');
+    for (const m of html.matchAll(/(?:href|src)="\.\.\/\.\.\/([^"]+)"/g)) kitShared.add(m[1]);
+    writeFileSync(dest.replace(/\.html$/, '.txt'), absolute(html));
+  }
+}
+for (const rel of kitShared) statSync(join(ROOT, rel)); // fail the build on a dead reference
+
+const kitMd = `# Exatom deck kit
+
+The building blocks for an Exatom deck. The rules are in ${SITE}/presentations.md; this file lists what to build with.
+Start from a template, keep its structure and classes, and replace only the content.
+
+## Slide CSS
+
+${SITE}/kit/deck.css : the complete stylesheet every slide uses (1920 x 1080, 48 px margin, 4 columns). Load it as it is; do not rewrite it.
+
+Fonts: Instrument Sans (500, 600) and Inter (400, 500, 600) from Google Fonts.
+
+## Slide templates
+
+The Exatom sales deck, 28 slides. Each template is a complete HTML page. Open the .html link to see the slide; fetch the .txt link to get the markup (same file, with absolute URLs).
+
+| # | Slide | Type | Background | Use it for | Markup |
+|---|---|---|---|---|---|
+${kit.slides.map((sl) => `| ${sl.n} | ${sl.title} | ${sl.type} | ${sl.background} | ${sl.use} | ${SITE}/kit/slides/${sl.file.replace(/\.html$/, '.txt')} |`).join('\n')}
+
+To view a slide, replace .txt with .html in its link.
+
+## Images
+
+All under ${SITE}/kit/img/. Use them as they are; never redraw or crop them differently.
+
+| File | What it is |
+|---|---|
+${kit.images.map((im) => `| ${SITE}/kit/img/${im.file} | ${im.what} |`).join('\n')}
+
+## Logos and people
+
+- Exatom logos: ${SITE}/logo/ (exatom-logo-coloricon-whitetext.svg on Dark, exatom-logo-full-color.svg on light, exatom-logo-full-white.svg on Blue, exatom-icon-white.svg, exatom-icon-full-color.svg).
+- Client and partner logos: ${SITE}/assets/partners/<group>/<name>-logo.svg (colour) and <name>-logo-black.svg; see ${SITE}/partners for the full set. On a cover the client's logo is always white.
+- Team line drawings: ${SITE}/assets/team/drawings/<first name>.svg (stephan, michael, filip, bart, oliver, sander, marcelo, olger, matthieu).
+
+## Reviews
+
+${SITE}/kit/reviews.md : every G2 review and website testimonial, word for word. Quote them unchanged.
+
+## What is not in the kit
+
+A client's own material: their logo if it is not on the Partners page, a photo of the client, screenshots of their forms and Exatom dashboard exports with their data. Ask the person for these.
+`;
+writeFileSync(join(OUT, 'deck-kit.md'), kitMd);
+
+/* the Claude skill: SKILL.md fetches the live rules; reference/ and kit/ are the bundled copy */
 const presMd = readFileSync(join(ROOT, 'src', 'presentations.md'), 'utf8');
+const inSkill = (name, data) => ({ name: `exatom-presentations/${name}`, data });
 const skillZip = zipDirectory(join(ROOT, 'skill'), {
   mtime: new Date('2026-01-01T12:00:00Z'),
   extra: [
-    { name: 'exatom-presentations/reference/presentations.md', data: presMd },
-    { name: 'exatom-presentations/reference/brand-guidelines.md', data: md.trimEnd() + '\n' + drawingsMd },
+    inSkill('reference/presentations.md', presMd),
+    inSkill('reference/brand-guidelines.md', md.trimEnd() + '\n' + drawingsMd),
+    inSkill('reference/deck-kit.md', kitMd),
+    ...kitFiles.map((f) => inSkill(`kit/${f.rel.split('\\').join('/')}`, readFileSync(join(KIT, f.rel)))),
+    ...[...kitShared].sort().map((rel) => inSkill(rel, readFileSync(join(ROOT, rel)))),
+    ...DRAWINGS.filter(([slug]) => !kitShared.has(`assets/team/drawings/${slug}.svg`))
+      .map(([slug]) => inSkill(`assets/team/drawings/${slug}.svg`, readFileSync(join(ROOT, 'assets', 'team', 'drawings', `${slug}.svg`)))),
   ],
 });
 writeFileSync(join(OUT, 'exatom-presentations-skill.zip'), skillZip.buffer);
