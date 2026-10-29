@@ -1,6 +1,6 @@
 # Exatom presentations
 
-Updated: 30 September 2026
+Updated: 29 October 2026
 
 The rules for every Exatom deck: sales decks, pitch decks and client status meetings. Written for people and for Claude. Give this file to Claude together with your content and it builds the deck in the Exatom style.
 
@@ -23,6 +23,10 @@ Then:
 
 When Claude builds from an existing deck, it keeps the order and the content, and restyles everything with the rules below. It never invents figures.
 
+**Work in two steps for analysis decks** (A&R, status meetings): first the analysis, as a plain document (Markdown or Word, no layout) that you and Claude refine together, then the deck. Do not ask for the analysis and the slides in one prompt.
+
+**Give Claude a reference deck.** The best way to get a deck that looks the way you present is your last approved deck of the same type: "Build this A&R deck for <client> in the style of <reference deck>, with the content from <analysis>." Claude then copies how that deck shows funnels, screenshots and tables. Ask to *create a new deck from these guidelines and import the content* of an old deck, not to *update* the old deck.
+
 **Changing a rule.** Edit `src/presentations.md` in the brand guidelines repository, update the date at the top and push. Within a minute every Claude using the skill or the link works from the new version; nobody has to reinstall anything.
 
 ---
@@ -35,7 +39,7 @@ When Claude builds from an existing deck, it keeps the order and the content, an
 | Margin | 48 px on all four sides |
 | Columns | 4 columns of 432 px, 32 px gutters |
 | Content area | starts at y 112 (under the eyebrow), ends 96 px above the bottom |
-| Footer | "© 2026 Exatom B.V." bottom left, slide number bottom right, 16 px, 40 px from the bottom |
+| Footer | "© 2026 Exatom B.V." bottom left, slide number bottom right, 16 px, 40 px from the bottom. In PowerPoint the slide number is a slide-number field, never typed. |
 
 Layouts use the columns: a title in column 1 with content in columns 2 to 4, or a title on top with content across all four, or text in columns 1 to 2 with a visual in columns 3 to 4.
 
@@ -76,6 +80,8 @@ Instrument Sans SemiBold for headings and figures, Inter for everything you read
 
 Two-tone text is allowed for statements and quotes: the key words in full Dark, the rest in `#747181`.
 
+Every title, chapter title and big figure is Instrument Sans SemiBold, never bold Instrument Sans and never Calibri; slide titles are the same size on every slide. Install Instrument Sans and Inter on the computer that presents (or embed the fonts in the .pptx); otherwise PowerPoint shows a fallback font.
+
 ---
 
 ## 5. The label above a slide
@@ -89,6 +95,8 @@ One eyebrow per slide, top left at 48 / 48: the website's ink-tinted pill.
 ```
 
 It names the section ("Results", "The platform", "Insurance funnel"). Never a two-part breadcrumb.
+
+In a deck with numbered chapters (A&R, status meetings) the eyebrow is the section number and name from the chapter slide: "3.4 Gewenste datum". A slide that belongs to a chapter but to no section shows the chapter: "01 Management summary". Readers of a long PDF always know where they are.
 
 ---
 
@@ -106,9 +114,9 @@ It names the section ("Results", "The platform", "Insurance funnel"). Never a tw
 
 ## 7. Slide types
 
-1. **Cover**: Dark. Exatom logo with the Blue icon top left. Title, a short line, and G2 badges without a background bottom left. Right: the visual in a stage. For a client deck: the client's logo, always in white, next to Exatom's (thin divider) and a photo of the client (their product, their building) as the background behind the visual.
-2. **Agenda**: Dark, title in column 1, numbered hairline list in columns 2 to 3.
-3. **Chapter**: Dark. Title 200 px top left, number 200 px top right, a short intro bottom left, the chapter's contents as a numbered list bottom right, the Exatom icon bottom right.
+1. **Cover**: Dark. Exatom logo with the Blue icon top left. Title, a short line, and G2 badges without a background bottom left. Right: the visual in a stage. For a client deck: the client's logo, always in white, next to Exatom's (thin divider) and a photo of the client (their product, their building, with their logo in view) with 8 px rounded corners. A client deck has no G2 badges: bottom left, ending level with the photo, a hairline list with "Date" and "Presented by" (label left in Inter, Blue Light at 72%; value right in Instrument Sans SemiBold, Blue Light). The hairlines are subtle: white at 8% over Dark, written as the solid colour `#2B253E` because PowerPoint's PDF export ignores line transparency.
+2. **Agenda**: Dark, title in column 1, numbered hairline list in columns 2 to 3: chapter number and name on the left ("03  Proefrit"), the slide where the chapter starts on the right. The chapter numbers match the chapter slides.
+3. **Chapter**: Dark. Title 200 px top left, number 200 px top right (the same number as in the agenda), a short intro bottom left, the chapter's contents as a numbered list bottom right, the Exatom icon bottom right. The list reads like a table of contents: section number and name on the left ("3.1  Form engagement"), the slide where it starts on the right; only sections that have a visible slide, named after what that slide shows. The top of the title's capitals sits at least 1 cm below the top edge; the title box is anchored at the top so a second line grows downwards.
 4. **Statement**: one sentence. Two-tone on White or Blue Light, or white on Blue.
 5. **Problem**: the pitch deck's two slides, built from templates 03 and 04 in the deck kit with their images. Blush with the funnel ("Brands consider a conversion rate of <20% ... as normal. We don't.") and Burgundy with the form full of friction points ("The average online form contains 20+ friction points").
 6. **Results wall**: template 02, the pitch deck's "And it works!" on Blue Light, 4 x 2 result cards, the sectors on the right of the title.
@@ -128,6 +136,7 @@ A complete example, the 28-slide sales deck built with these rules, is on https:
 ## 8. Images
 
 - **Real screenshots are pasted in.** A client's own web form, phone screen or configurator, and Exatom dashboard exports with client data (conversion paths, field tables), go in as images, framed in a white card or a phone on the gradient. Never rebuild a client's real interface.
+- **Dashboard screenshots must be readable in a meeting.** One screenshot per slide: when a slide compares two (desktop and mobile, two browsers), duplicate the slide, keep the same text on the left and show one screenshot on each, as large as columns 2 to 4 allow. A dense table or field list may drop the blue stage so it can be bigger.
 - **Generic product visuals come from the deck kit** (section 12) when it has one. Otherwise they are rebuilt as HTML mock-ups in brand style: white card, 16 px radius, Inter, small caps labels, Blue for the active element, Coral only for loss, green pills for results.
 - **Photos keep their aspect ratio.** Never crop a group photo into a tighter box. Case covers are photos of the company itself.
 - **The presenter** appears as a line drawing (dark lines on Blue), never as a regular photo on the closing slide. Use the official SVG, never redraw or crop it into a circle:
@@ -144,7 +153,7 @@ A complete example, the 28-slide sales deck built with these rules, is on https:
 | Olger van de Vliet | https://exatom-brand-guidelines.vercel.app/assets/team/drawings/olger.svg |
 | Matthieu | https://exatom-brand-guidelines.vercel.app/assets/team/drawings/matthieu.svg |
 
-  The drawing stands on the bottom edge of the slide, about 640 px high, left of centre; lines stay Dark `#18122D` (or white on Dark).
+  The drawing stands on the bottom edge of the slide, about 640 px high, left of centre; lines stay Dark `#18122D` (or white on Dark). The drawings are cut at chest height and keep their shoulders and arms; never crop them narrower. With two presenters, give both drawings the same scale (equal heads) and keep a gap between their arms and clear of the footer.
 - **Logos**: client logos from the brand guidelines' Partners page; on the cover the client's logo is always white; the Exatom logo variants from the Brand page.
 
 ---
@@ -173,12 +182,15 @@ A complete example, the 28-slide sales deck built with these rules, is on https:
 
 ## 11. Checklist before sharing
 
-- Every slide has one eyebrow, a title and a footer with the slide number.
+- Every slide has one eyebrow, a title and a footer with the slide number (a field, not typed text).
+- In a chaptered deck: the agenda and the chapter slides use the same numbers, each list item shows the slide it points to, and every eyebrow carries its section number.
+- All titles are Instrument Sans SemiBold at the same size.
+- Every dashboard screenshot is readable at presentation size; one per slide when comparing.
 - Backgrounds follow section 3; the gradient only sits behind visuals.
 - No Warm White, no landscapes, no shadows, no left-border cards, no emoji.
 - Real screenshots are pasted in, not redrawn; photos are not cropped awkwardly.
 - Figures are sourced; copy is British and uses the product names.
-- The cover carries the client's logo and photo when the deck is for a client.
+- The cover carries the client's logo and photo when the deck is for a client, the date and the presenters, and no G2 badges.
 - The closing slide shows the presenter's line drawing and contact details.
 
 ---
